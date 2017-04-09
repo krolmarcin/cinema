@@ -2,7 +2,7 @@ package pl.com.bottega.cms.shared;
 
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
-import pl.com.bottega.cms.model.CreateMovieCommand;
+import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.Movie;
 
 import java.util.Arrays;
