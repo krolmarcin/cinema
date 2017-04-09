@@ -1,7 +1,5 @@
 package pl.com.bottega.cms.model.commands;
 
-import pl.com.bottega.cms.model.Cinema;
-import pl.com.bottega.cms.model.Movie;
 
 import java.time.LocalDateTime;
 
@@ -10,26 +8,26 @@ import java.time.LocalDateTime;
  */
 public class CreateShowingsCommand {
 
-    private Movie movie;
+    private Long movieId;
 
-    private Cinema cinema;
+    private Long cinemaId;
 
     private LocalDateTime beginsAt;
 
-    public Movie getMovie() {
-        return movie;
+    public Long getMovieId() {
+        return movieId;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
     }
 
-    public Cinema getCinema() {
-        return cinema;
+    public Long getCinemaId() {
+        return cinemaId;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setCinemaId(Long cinemaId) {
+        this.cinemaId = cinemaId;
     }
 
     public void setBeginsAt(LocalDateTime beginsAt) {

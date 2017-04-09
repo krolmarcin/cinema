@@ -62,11 +62,6 @@ public class Stubs {
         return createCinemaCommand;
     }
 
-    public static Showing initShowing0() {
-        Showing showing = new Showing(TEST_CREATE_SHOWING_COMMAND_0);
-        return showing;
-    }
-
     public static Cinema initTestCinema0() {
         Cinema cinema = new Cinema(TEST_CREATE_CINEMA_COMMAND_0);
         cinema.setId(TEST_LONG_0);
@@ -92,8 +87,18 @@ public class Stubs {
 
     public static CreateShowingsCommand initCreateShowingCommand() {
         CreateShowingsCommand createShowingsCommand = new CreateShowingsCommand();
+        createShowingsCommand.setMovieId(TEST_LONG_0);
+        createShowingsCommand.setCinemaId(TEST_LONG_1);
         createShowingsCommand.setBeginsAt(TEST_LOCAL_DATE_TIME_0);
         return createShowingsCommand;
+    }
+
+    public static Showing initShowing0() {
+        Showing showing = new Showing();
+        showing.setMovie(TEST_MOVIE_0);
+        showing.setCinema(TEST_CINEMA_0);
+        showing.setId(TEST_LONG_0);
+        return showing;
     }
 
     public static Set<String> initTestStringSet0() {

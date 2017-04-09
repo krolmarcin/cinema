@@ -29,7 +29,7 @@ public class Configuration {
 
     @Bean
     public CinemaCatalog cinemaCatalog() {
-        return new JPACinemaCatalog();
+        return null;
     }
 
     @Bean

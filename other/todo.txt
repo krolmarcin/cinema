@@ -1,2 +1,3 @@
 - usunac w swoim czasie .gitkeep
 - mozna by zrobic enuma do gatunkow
+- mozliwe, ze showingsfactory trzeba bedzie zrobic singletonem
