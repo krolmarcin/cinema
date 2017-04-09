@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.model.Cinema;
 
 import static pl.com.bottega.cms.shared.Stubs.*;
+import pl.com.bottega.cms.application.AdminPanel;
 
 /**
  * Created by ogurekk on 2017-04-09.
