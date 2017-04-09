@@ -34,9 +34,9 @@ public class Stubs {
     public static final String TEST_STRING_2 = "test string 2";
     public static final String TEST_STRING_3 = "test string 3";
     public static final String TEST_STRING_4 = "test string 4";
-    public static final String TEST_STRING_5 = "test string 4";
-    public static final String TEST_STRING_6 = "test string 4";
-    public static final String TEST_STRING_7 = "test string 4";
+    public static final String TEST_STRING_5 = "test string 5";
+    public static final String TEST_STRING_6 = "test string 6";
+    public static final String TEST_STRING_7 = "test string 7";
 
     public static final Set<String> TEST_STRING_SET_0 = initTestStringSet0();
     public static final Set<String> TEST_STRING_SET_1 = initTestStringSet1();

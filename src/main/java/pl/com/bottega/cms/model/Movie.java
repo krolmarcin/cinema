@@ -2,6 +2,8 @@ package pl.com.bottega.cms.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+
+import org.hibernate.annotations.Cascade;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 
 import javax.persistence.Entity;
@@ -17,8 +19,13 @@ public class Movie {
     private Long id;
     private String title;
     private String description;
+
+    @ElementCollection
     private Set<String> actors;
+
+    @ElementCollection
     private Set<String> genres;
+
     private int minAge;
     private int length;
 
