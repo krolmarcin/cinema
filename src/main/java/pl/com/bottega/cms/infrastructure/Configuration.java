@@ -23,8 +23,8 @@ public class Configuration {
     }
 
     @Bean
-    public AdminPanel adminPanel(CinemaRepository cinemaRepository) {
-        return new StandardAdminPanel(cinemaRepository);
+    public AdminPanel adminPanel() {
+        return new StandardAdminPanel();
     }
 
     @Bean
