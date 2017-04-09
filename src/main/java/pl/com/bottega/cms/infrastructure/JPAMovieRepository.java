@@ -3,13 +3,19 @@ package pl.com.bottega.cms.infrastructure;
 import pl.com.bottega.cms.model.Movie;
 import pl.com.bottega.cms.model.MovieRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 /**
  * Created by maciek on 09.04.2017.
  */
 public class JPAMovieRepository implements MovieRepository {
-    @Override
-    public void put(Movie m) {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public void put(Movie m) {entityManager.persist(m);
     }
 
     @Override
