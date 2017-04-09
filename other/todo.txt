@@ -1,3 +1,2 @@
 - usunac w swoim czasie .gitkeep
 - mozna by zrobic enuma do gatunkow
-- zmienic CreateShowingsCommand na CreateShowingCommand -> bo nazwy bez "s" uzywamy wszedzie
