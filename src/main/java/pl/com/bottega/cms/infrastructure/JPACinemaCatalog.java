@@ -22,10 +22,9 @@ public class JPACinemaCatalog implements CinemaCatalog {
 
     @Override
     public List<CinemaDto> getCinemas() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Cinema> criteriaQuery = criteriaBuilder.createQuery(Cinema.class);
-        Query query = entityManager.createQuery(criteriaQuery);
-        List<Cinema> cinemas = query.getResultList();
+        CriteriaQuery<Cinema> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(Cinema.class);
+        criteriaQuery.select(criteriaQuery.from(Cinema.class));
+        List<Cinema> cinemas = entityManager.createQuery(criteriaQuery).getResultList();
         List<CinemaDto> cinemaDtos = new LinkedList<>();
         for (Cinema cinema : cinemas) {
             cinemaDtos.add(CinemaToCinemaDto(cinema));

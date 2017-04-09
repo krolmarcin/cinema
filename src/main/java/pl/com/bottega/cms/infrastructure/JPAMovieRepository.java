@@ -20,6 +20,10 @@ public class JPAMovieRepository implements MovieRepository {
 
     @Override
     public Movie get(Long id) {
-        return null;
+        Movie movie = entityManager.find(Movie.class, id);
+        if (movie == null) {
+            throw new MovieNotFoundException(String.format("Movie id %s not exists", id));
+        }
+        return movie;
     }
 }
