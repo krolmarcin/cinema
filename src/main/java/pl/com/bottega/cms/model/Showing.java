@@ -17,8 +17,12 @@ public class Showing {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movieId")
     private Movie movie;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cinemaId")
     private Cinema cinema;
 
     private LocalDateTime beginsAt;
