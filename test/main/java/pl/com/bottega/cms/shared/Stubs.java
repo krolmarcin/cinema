@@ -1,5 +1,8 @@
 package pl.com.bottega.cms.shared;
 
+import pl.com.bottega.cms.model.Cinema;
+import pl.com.bottega.cms.model.CreateCinemaCommand;
+
 /**
  * Created by ogurekk on 2017-04-09.
  */
@@ -20,6 +23,7 @@ public class Stubs {
         createCinemaCommand.setName(TEST_NAME_0);
         createCinemaCommand.setCity(TEST_NAME_1);
         Cinema cinema = new Cinema(createCinemaCommand);
+        cinema.setId(TEST_ID_0);
         return cinema;
     }
 
