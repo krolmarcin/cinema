@@ -93,4 +93,19 @@ public class Movie {
     public void setLength(int length) {
         this.length = length;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (this == null || obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Movie)) {
+            return false;
+        }
+        Movie other = (Movie) obj;
+        return (this.id == other.id);
+    }
 }

@@ -23,13 +23,7 @@ public class Showing {
 
     private LocalDateTime beginsAt;
 
-    Showing(){}
-
-    public Showing(CreateShowingsCommand cmd){
-        this.movie = cmd.getMovie();
-        this.cinema = cmd.getCinema();
-        this.beginsAt = cmd.getBeginsAt();
-    }
+    public Showing(){}
 
 
     public Long getId() {

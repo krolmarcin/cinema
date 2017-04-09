@@ -2,6 +2,7 @@ package pl.com.bottega.cms.shared;
 
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.Showing;
+import pl.com.bottega.cms.model.ShowingsFactory;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.Movie;
@@ -62,11 +63,6 @@ public class Stubs {
         return createCinemaCommand;
     }
 
-    public static Showing initShowing0() {
-        Showing showing = new Showing(TEST_CREATE_SHOWING_COMMAND_0);
-        return showing;
-    }
-
     public static Cinema initTestCinema0() {
         Cinema cinema = new Cinema(TEST_CREATE_CINEMA_COMMAND_0);
         cinema.setId(TEST_LONG_0);
@@ -94,6 +90,13 @@ public class Stubs {
         CreateShowingsCommand createShowingsCommand = new CreateShowingsCommand();
         createShowingsCommand.setBeginsAt(TEST_LOCAL_DATE_TIME_0);
         return createShowingsCommand;
+    }
+
+    public static Showing initShowing0() {
+        ShowingsFactory showingsFactory = new ShowingsFactory();
+        Showing showing = showingsFactory.createShowings(TEST_MOVIE_0, TEST_CINEMA_0, TEST_CREATE_SHOWING_COMMAND_0);
+        showing.setId(TEST_LONG_0);
+        return showing;
     }
 
     public static Set<String> initTestStringSet0() {

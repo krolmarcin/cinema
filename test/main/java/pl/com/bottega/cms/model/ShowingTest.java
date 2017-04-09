@@ -5,8 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static pl.com.bottega.cms.shared.Stubs.TEST_CINEMA_0;
-import static pl.com.bottega.cms.shared.Stubs.TEST_LONG_0;
+import static pl.com.bottega.cms.shared.Stubs.*;
 
 /**
  * Created by ogurekk on 2017-04-09.
@@ -16,8 +15,23 @@ public class ShowingTest {
 
     @Test
     public void shouldRememberIdOnCreate() {
-        Cinema cinema = TEST_CINEMA_0;
+        Showing showing = TEST_SHOWING_0;
 
-        assertEquals(TEST_LONG_0, cinema.getId());
+        assertEquals(TEST_LONG_0, showing.getId());
     }
+
+    @Test
+    public void shouldRememberMovieOnCreate() {
+        Showing showing = TEST_SHOWING_0;
+
+        assertEquals(TEST_MOVIE_0, showing.getMovie());
+    }
+
+    @Test
+    public void shouldRememberCinemaOnCreate() {
+        Showing showing = TEST_SHOWING_0;
+
+        assertEquals(TEST_CINEMA_0, showing.getCinema());
+    }
+
 }

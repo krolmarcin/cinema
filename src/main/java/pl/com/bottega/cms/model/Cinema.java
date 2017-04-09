@@ -63,6 +63,6 @@ public class Cinema {
             return false;
         }
         Cinema other = (Cinema) obj;
-        return (this.city == other.city) && (this.name == other.name);
+        return (this.id == other.id);
     }
 }
