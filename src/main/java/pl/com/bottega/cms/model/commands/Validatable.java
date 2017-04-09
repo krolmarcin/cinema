@@ -1,9 +1,6 @@
 package pl.com.bottega.cms.model.commands;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public interface Validatable {
 
@@ -12,6 +9,19 @@ public interface Validatable {
     default boolean isEmpty(String s) {
         return s == null || s.isEmpty();
     }
+
+    default boolean isEmpty(Collection<String> collections) {
+        if (collections == null || collections.isEmpty())
+            return false;
+        else
+            for (String collection : collections) {
+                if (isEmpty(collection) || collection == null) {
+                    return false;
+                }
+            }
+        return true;
+    }
+
 
     class ValidationErrors {
 

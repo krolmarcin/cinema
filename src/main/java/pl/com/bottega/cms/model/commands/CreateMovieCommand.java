@@ -65,10 +65,10 @@ public class CreateMovieCommand implements Validatable{
             errors.add("title", "can't be blank");
         if (isEmpty(description))
             errors.add("description", "can't be blank");
-        if (actors == null)
-            errors.add("actors", "can't be blank");
-        if (genres == null)
-            errors.add("genres", "can't be blank");
+        if (isEmpty(actors))
+            errors.add("actors", "can't be blank or actors field can't contain blank fields or can't be empty");
+        if (isEmpty(genres))
+            errors.add("genres", "can't be blank or genres field can't contain blank fields or can't be empty");
         if (minAge == null || !(minAge instanceof Integer) || minAge <= 0)
             errors.add("minAge", "can't be blank, and must be number > 0");
         if (length == null || !(length instanceof Integer) || length <= 0)
