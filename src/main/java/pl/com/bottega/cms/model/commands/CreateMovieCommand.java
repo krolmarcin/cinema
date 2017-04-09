@@ -2,14 +2,14 @@ package pl.com.bottega.cms.model.commands;
 
 import java.util.Set;
 
-public class CreateMovieCommand {
+public class CreateMovieCommand implements Validatable{
 
     private String title;
     private String description;
     private Set<String> actors;
     private Set<String> genres;
-    private int minAge;
-    private int length;
+    private Integer minAge;
+    private Integer length;
 
     public String getTitle() {
         return title;
@@ -57,5 +57,23 @@ public class CreateMovieCommand {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    @Override
+    public void validate(Validatable.ValidationErrors errors) {
+        if (isEmpty(title))
+            errors.add("title", "can't be blank");
+        if (isEmpty(description))
+            errors.add("description", "can't be blank");
+        if (actors == null)
+            errors.add("actors", "can't be blank");
+        if (genres == null)
+            errors.add("genres", "can't be blank");
+        if (minAge == null || !(minAge instanceof Integer))
+            errors.add("minAge", "can't be blank, and must be number");
+        if (length == null || !(minAge instanceof Integer))
+            errors.add("length", "can't be blank, and must be number");
+
+
     }
 }
