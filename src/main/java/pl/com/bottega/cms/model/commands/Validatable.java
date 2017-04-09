@@ -1,9 +1,7 @@
 package pl.com.bottega.cms.model.commands;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalTime;
+import java.util.*;
 
 public interface Validatable {
 
@@ -11,6 +9,20 @@ public interface Validatable {
 
     default boolean isEmpty(String s) {
         return s == null || s.isEmpty();
+    }
+
+
+    default boolean isEmpty(Collection c) {
+        if (c != null && c.size() != 0) {
+            Boolean allRecordsAreNull = true;
+            for (Object o : c) {
+                allRecordsAreNull = allRecordsAreNull && (o == null);
+                if (!allRecordsAreNull) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     class ValidationErrors {
