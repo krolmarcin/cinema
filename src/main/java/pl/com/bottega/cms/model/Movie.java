@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Movie {
@@ -12,17 +13,16 @@ public class Movie {
     private int minAge;
     private int length;
 
-    public Movie() {
+    Movie() {
     }
 
     public Movie(CreateMovieCommand cmd) {
-        this.id = id;
         this.title = cmd.getTitle();
         this.description = cmd.getDescription();
-        this.actors = cmd.getActors();
-        this.genres = cmd.getGenres();
+        this.actors = new HashSet<>();
+        this.genres = new HashSet<>();
         this.minAge = cmd.getMinAge();
-        this.length = cmd.getLenght();
+        this.length = cmd.getLength();
     }
 
     public Long getId() {
