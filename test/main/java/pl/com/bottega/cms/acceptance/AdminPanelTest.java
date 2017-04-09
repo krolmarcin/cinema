@@ -13,7 +13,6 @@ import pl.com.bottega.cms.model.Cinema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.TEST_ROLLBACK;
 import static pl.com.bottega.cms.shared.Stubs.*;
 import pl.com.bottega.cms.application.AdminPanel;
 
@@ -25,7 +24,6 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback(TEST_ROLLBACK)
 public class AdminPanelTest {
 
     @Autowired

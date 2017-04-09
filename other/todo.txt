@@ -1,3 +1,4 @@
 - usunac w swoim czasie .gitkeep
 - mozna by zrobic enuma do gatunkow
 - mozliwe, ze showingsfactory trzeba bedzie zrobic singletonem
+- trzeba bedzie mozliwe wyjatki Cinema/Movie/Showing NotFoundException przerobic na jeden generyczny np. Resource not found exception i przekazywac w parametrze typ resource'u, ktorego nie znaleziono
