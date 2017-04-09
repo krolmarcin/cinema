@@ -3,7 +3,7 @@ package pl.com.bottega.cms.model.commands;
 /**
  * Created by maciek on 09.04.2017.
  */
-public class CreateCinemaCommand {
+public class CreateCinemaCommand implements Validatable{
     public String name;
     public String city;
 
