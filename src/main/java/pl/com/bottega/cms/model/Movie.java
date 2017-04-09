@@ -22,7 +22,7 @@ public class Movie {
         this.actors = new HashSet<>();
         this.genres = new HashSet<>();
         this.minAge = cmd.getMinAge();
-        this.length = cmd.getLenght();
+        this.length = cmd.getLength();
     }
 
     public Long getId() {

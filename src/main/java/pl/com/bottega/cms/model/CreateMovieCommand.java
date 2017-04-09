@@ -9,7 +9,7 @@ public class CreateMovieCommand {
     private Set<String> actors;
     private Set<String> genres;
     private int minAge;
-    private int lenght;
+    private int length;
 
     public String getTitle() {
         return title;
@@ -51,11 +51,11 @@ public class CreateMovieCommand {
         this.minAge = minAge;
     }
 
-    public int getLenght() {
-        return lenght;
+    public int getLength() {
+        return length;
     }
 
-    public void setLenght(int lenght) {
-        this.lenght = lenght;
+    public void setLength(int length) {
+        this.length = length;
     }
 }
