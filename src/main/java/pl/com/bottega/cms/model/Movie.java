@@ -1,10 +1,16 @@
 package pl.com.bottega.cms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
     private String description;
@@ -19,8 +25,8 @@ public class Movie {
     public Movie(CreateMovieCommand cmd) {
         this.title = cmd.getTitle();
         this.description = cmd.getDescription();
-        this.actors = new HashSet<>();
-        this.genres = new HashSet<>();
+        this.actors = cmd.getActors();
+        this.genres = cmd.getGenres();
         this.minAge = cmd.getMinAge();
         this.length = cmd.getLength();
     }

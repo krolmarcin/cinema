@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.model;
+package pl.com.bottega.cms.model.commands;
 
 /**
  * Created by maciek on 09.04.2017.

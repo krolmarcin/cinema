@@ -8,6 +8,7 @@ import pl.com.bottega.cms.model.Movie;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 
 /**
  * Created by ogurekk on 2017-04-09.
