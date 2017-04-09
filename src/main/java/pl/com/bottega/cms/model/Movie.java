@@ -1,10 +1,16 @@
 package pl.com.bottega.cms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
     private String description;
