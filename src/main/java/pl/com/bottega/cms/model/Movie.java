@@ -23,7 +23,6 @@ public class Movie {
         this.genres = cmd.getGenres();
         this.minAge = cmd.getMinAge();
         this.length = cmd.getLenght();
-
     }
 
     public Long getId() {
