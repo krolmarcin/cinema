@@ -2,6 +2,11 @@ package pl.com.bottega.cms.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import pl.com.bottega.cms.model.commands.CreateMovieCommand;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Set;
 
 @Entity

@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.model;
+package pl.com.bottega.cms.model.commands;
 
 import java.util.Set;
 

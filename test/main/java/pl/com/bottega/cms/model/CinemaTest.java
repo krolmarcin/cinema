@@ -20,21 +20,21 @@ public class CinemaTest {
     public void shouldRememberIdOnCreate() {
         Cinema cinema = TEST_CINEMA_0;
 
-        assertEquals(TEST_ID_0, cinema.getId());
+        assertEquals(TEST_LONG_0, cinema.getId());
     }
 
     @Test
     public void shouldRememberNameOnCreate() {
         Cinema cinema = TEST_CINEMA_0;
 
-        assertEquals(TEST_NAME_0, cinema.getName());
+        assertEquals(TEST_STRING_0, cinema.getName());
     }
 
     @Test
     public void shouldRememberCityOnCreate() {
         Cinema cinema = TEST_CINEMA_0;
 
-        assertEquals(TEST_NAME_1, cinema.getCity());
+        assertEquals(TEST_STRING_1, cinema.getCity());
     }
 
 }
