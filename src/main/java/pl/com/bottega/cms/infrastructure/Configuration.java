@@ -18,13 +18,13 @@ import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
 public class Configuration {
 
     @Bean
-    public AdminPanel adminPanel() {
-        return new StandardAdminPanel();
+    public CinemaRepository cinemaRepository() {
+        return new JPACinemaRepository();
     }
 
     @Bean
-    public CinemaRepository cinemaRepository() {
-        return new JPACinemaRepository();
+    public AdminPanel adminPanel(CinemaRepository cinemaRepository) {
+        return new StandardAdminPanel(cinemaRepository);
     }
 
     @Bean
