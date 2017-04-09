@@ -6,6 +6,7 @@ import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.application.CinemaDto;
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
+import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
 import java.util.List;
 
@@ -25,12 +26,18 @@ public class CinemaController {
     }
 
     @PutMapping
-    public void create(@RequestBody CreateCinemaCommand cmd){
+    public void create(@RequestBody CreateCinemaCommand cmd) {
         adminPanel.createCinema(cmd);
     }
 
     @GetMapping
-    public List<CinemaDto> showAll(){
+    public List<CinemaDto> showAll() {
         return cinemaCatalog.getCinemas();
+    }
+
+    @PutMapping("/{cinemaId}/shows")
+    public void createShowings(@PathVariable String cinemaId, @RequestBody CreateShowingsCommand cmd) {
+        cmd.setCinemaId(cinemaId);
+        adminPanel.createShowings(cmd);
     }
 }
