@@ -22,4 +22,12 @@ public class CreateCinemaCommand {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public void validate(ValidationErrors errors) {
+        if (isEmpty(name))
+            errors.add("name", "can't be blank");
+        if (isEmpty(city))
+            errors.add("city", "can't be blank");
+    }
 }
