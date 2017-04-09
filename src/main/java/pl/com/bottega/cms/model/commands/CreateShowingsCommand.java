@@ -10,7 +10,7 @@ public class CreateShowingsCommand {
 
     private LocalDateTime beginsAt;
 
-    private String cinemaId;
+    private Long cinemaId;
 
 
     public void setBeginsAt(LocalDateTime beginsAt) {
@@ -21,11 +21,11 @@ public class CreateShowingsCommand {
         return beginsAt;
     }
 
-    public void setCinemaId(String cinemaId) {
+    public void setCinemaId(Long cinemaId) {
         this.cinemaId = cinemaId;
     }
 
-    public String getCinemaId() {
+    public Long getCinemaId() {
         return cinemaId;
     }
 
