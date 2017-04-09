@@ -69,11 +69,9 @@ public class CreateMovieCommand implements Validatable{
             errors.add("actors", "can't be blank");
         if (genres == null)
             errors.add("genres", "can't be blank");
-        if (minAge == null || !(minAge instanceof Integer))
-            errors.add("minAge", "can't be blank, and must be number");
-        if (length == null || !(minAge instanceof Integer))
-            errors.add("length", "can't be blank, and must be number");
-
-
+        if (minAge == null || !(minAge instanceof Integer) || minAge <= 0)
+            errors.add("minAge", "can't be blank, and must be number > 0");
+        if (length == null || !(length instanceof Integer) || length <= 0)
+            errors.add("length", "can't be blank, and must be number > 0");
     }
 }
