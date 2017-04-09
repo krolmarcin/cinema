@@ -3,6 +3,7 @@ package pl.com.bottega.cms.infrastructure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import pl.com.bottega.cms.application.AdminPanel;
+import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.model.CinemaRepository;
 import pl.com.bottega.cms.model.MovieRepository;
 import pl.com.bottega.cms.model.ShowingRepository;
@@ -24,6 +25,11 @@ public class Configuration {
     @Bean
     public CinemaRepository cinemaRepository() {
         return new JPACinemaRepository();
+    }
+
+    @Bean
+    public CinemaCatalog cinemaCatalog() {
+        return new JPACinemaCatalog();
     }
 
     @Bean

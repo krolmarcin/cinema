@@ -62,4 +62,19 @@ public class Cinema {
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (this == null || obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Cinema)) {
+            return false;
+        }
+        Cinema other = (Cinema) obj;
+        return (this.city == other.city) && (this.name == other.name);
+    }
 }
