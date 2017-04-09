@@ -1,8 +1,6 @@
 package pl.com.bottega.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +16,10 @@ public class Movie {
     private Set<String> genres;
     private int minAge;
     private int length;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cinemaId")
+    private Set<Cinema> cinemas;
 
     Movie() {
     }
