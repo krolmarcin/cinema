@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.infrastructure;
 
 import pl.com.bottega.cms.model.Cinema;
+import pl.com.bottega.cms.model.CinemaNotFoundException;
 import pl.com.bottega.cms.model.CinemaRepository;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ public class JPACinemaRepository implements CinemaRepository {
     public Cinema get(Long id) {
         Cinema cinema = entityManager.find(Cinema.class, id);
         if (cinema == null) {
-            //todo: exception
+            throw new CinemaNotFoundException(String.format("Cinema id %s not exists", id));
         }
         return cinema;
     }
