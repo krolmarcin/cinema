@@ -18,18 +18,14 @@ public class Cinema {
     private String name;
     private String city;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movieId")
-    private Set<Movie> movies;
-
 
     Cinema(){}
+
 
     public Cinema(CreateCinemaCommand cmd){
         this.name = cmd.getName();
         this.city = cmd.getCity();
-        this.movies = new HashSet<>();
-    }
+     }
 
     public Long getId() {
         return id;
@@ -53,14 +49,6 @@ public class Cinema {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Set<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
     }
 
     @Override

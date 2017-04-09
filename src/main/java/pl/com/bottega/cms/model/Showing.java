@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
 import javax.persistence.Entity;
