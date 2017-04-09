@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
  */
 public class CreateShowingsCommand {
 
-
     private LocalDateTime beginsAt;
+
+    private Long cinemaId;
 
 
     public void setBeginsAt(LocalDateTime beginsAt) {
@@ -19,4 +20,13 @@ public class CreateShowingsCommand {
     public LocalDateTime getBeginsAt() {
         return beginsAt;
     }
+
+    public void setCinemaId(Long cinemaId) {
+        this.cinemaId = cinemaId;
+    }
+
+    public Long getCinemaId() {
+        return cinemaId;
+    }
+
 }

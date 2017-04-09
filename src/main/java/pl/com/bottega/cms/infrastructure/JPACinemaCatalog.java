@@ -35,6 +35,7 @@ public class JPACinemaCatalog implements CinemaCatalog {
             cinemaDtos.add(CinemaToCinemaDto(cinema));
         }
         return cinemaDtos;
+
     }
 
     private CinemaDto CinemaToCinemaDto(Cinema cinema) {
