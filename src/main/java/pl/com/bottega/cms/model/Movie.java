@@ -22,10 +22,6 @@ public class Movie {
     private int minAge;
     private int length;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cinemaId")
-    private Set<Cinema> cinemas;
-
     Movie() {
     }
 
