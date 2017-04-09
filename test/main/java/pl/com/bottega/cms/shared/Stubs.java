@@ -2,6 +2,7 @@ package pl.com.bottega.cms.shared;
 
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.Showing;
+import pl.com.bottega.cms.model.ShowingsFactory;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.Movie;
@@ -87,16 +88,13 @@ public class Stubs {
 
     public static CreateShowingsCommand initCreateShowingCommand() {
         CreateShowingsCommand createShowingsCommand = new CreateShowingsCommand();
-        createShowingsCommand.setMovieId(TEST_LONG_0);
-        createShowingsCommand.setCinemaId(TEST_LONG_1);
         createShowingsCommand.setBeginsAt(TEST_LOCAL_DATE_TIME_0);
         return createShowingsCommand;
     }
 
     public static Showing initShowing0() {
-        Showing showing = new Showing();
-        showing.setMovie(TEST_MOVIE_0);
-        showing.setCinema(TEST_CINEMA_0);
+        ShowingsFactory showingsFactory = new ShowingsFactory();
+        Showing showing = showingsFactory.createShowings(TEST_MOVIE_0, TEST_CINEMA_0, TEST_CREATE_SHOWING_COMMAND_0);
         showing.setId(TEST_LONG_0);
         return showing;
     }

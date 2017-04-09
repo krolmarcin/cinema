@@ -10,21 +10,13 @@ import java.time.LocalDateTime;
  */
 public class ShowingsFactory {
 
-    @Autowired
-    MovieRepository movieRepository;
-
-    @Autowired
-    CinemaRepository cinemaRepository;
-
     public ShowingsFactory(){
 
     }
 
-    public Showing createShowings(CreateShowingsCommand cmd){
+    public Showing createShowings(Movie movie, Cinema cinema, CreateShowingsCommand cmd){
         Showing showing = new Showing();
-        Movie movie = movieRepository.get(cmd.getMovieId());
         showing.setMovie(movie);
-        Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
         showing.setCinema(cinema);
         LocalDateTime beginsAt = cmd.getBeginsAt();
         showing.setBeginsAt(beginsAt);
