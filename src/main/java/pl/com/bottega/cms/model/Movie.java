@@ -25,8 +25,8 @@ public class Movie {
     public Movie(CreateMovieCommand cmd) {
         this.title = cmd.getTitle();
         this.description = cmd.getDescription();
-        this.actors = new HashSet<>();
-        this.genres = new HashSet<>();
+        this.actors = cmd.getActors();
+        this.genres = cmd.getGenres();
         this.minAge = cmd.getMinAge();
         this.length = cmd.getLength();
     }
