@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model;
 
+import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,8 @@ public class Cinema {
     private String name;
     private String city;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movieId")
     private Set<Movie> movies;
 
 

@@ -1,7 +1,7 @@
 package pl.com.bottega.cms.shared;
 
 import pl.com.bottega.cms.model.Cinema;
-import pl.com.bottega.cms.model.CreateCinemaCommand;
+import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 
 /**
  * Created by ogurekk on 2017-04-09.
