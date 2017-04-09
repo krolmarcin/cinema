@@ -9,4 +9,6 @@ public class GlobalParamsAndUtils {
 
     public static final DateTimeFormatter LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    public static final Boolean TEST_ROLLBACK = false;
+
 }

@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.CinemaCatalog;
@@ -12,6 +13,7 @@ import pl.com.bottega.cms.model.Cinema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.TEST_ROLLBACK;
 import static pl.com.bottega.cms.shared.Stubs.*;
 import pl.com.bottega.cms.application.AdminPanel;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
+@Rollback(TEST_ROLLBACK)
 public class AdminPanelTest {
 
     @Autowired
