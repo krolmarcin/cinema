@@ -1,13 +1,17 @@
 package pl.com.bottega.cms.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
  */
+@Entity
 public class Cinema {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String city;
