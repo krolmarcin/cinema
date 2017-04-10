@@ -1,6 +1,8 @@
 package pl.com.bottega.cms.model.commands;
 
 
+import pl.com.bottega.cms.model.ShowingsArranger;
+
 import java.time.LocalDateTime;
 
 /**
@@ -11,6 +13,8 @@ public class CreateShowingsCommand {
     private LocalDateTime beginsAt;
 
     private Long cinemaId;
+
+    private ShowingsArranger calendar;
 
 
     public void setBeginsAt(LocalDateTime beginsAt) {
@@ -29,4 +33,11 @@ public class CreateShowingsCommand {
         return cinemaId;
     }
 
+    public ShowingsArranger getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(ShowingsArranger calendar) {
+        this.calendar = calendar;
+    }
 }

@@ -1,19 +1,22 @@
 package pl.com.bottega.cms.shared;
 
-import pl.com.bottega.cms.model.Cinema;
-import pl.com.bottega.cms.model.Showing;
-import pl.com.bottega.cms.model.ShowingsFactory;
+import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
-import pl.com.bottega.cms.model.Movie;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
+import static java.time.DayOfWeek.*;
+import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_FORMATTER;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_TIME_FORMATTER;
 
 /**
@@ -42,6 +45,20 @@ public class Stubs {
     public static final Set<String> TEST_STRING_SET_1 = initTestStringSet1();
 
     public static final LocalDateTime TEST_LOCAL_DATE_TIME_0 = LocalDateTime.parse("2015/05/06 12:30", LOCAL_DATE_TIME_FORMATTER);
+
+    public static final LocalDate TEST_LOCAL_DATE_0 = LocalDate.parse("2017/04/09", LOCAL_DATE_FORMATTER);
+    public static final LocalDate TEST_LOCAL_DATE_1 = LocalDate.parse("2017/04/20", LOCAL_DATE_FORMATTER);
+
+    public static final LocalTime TEST_LOCAL_TIME_0 = LocalTime.parse("15:40");
+    public static final LocalTime TEST_LOCAL_TIME_1 = LocalTime.parse("13:20");
+    public static final LocalTime TEST_LOCAL_TIME_2 = LocalTime.parse("18:47");
+
+    public static final List<LocalTime> TEST_LOCAL_TIME_LIST_0 = Arrays.asList(new LocalTime[] {TEST_LOCAL_TIME_0, TEST_LOCAL_TIME_1, TEST_LOCAL_TIME_2});
+
+    public static final List<DayOfWeek> TEST_DAY_OF_WEEK_LIST_0 = Arrays.asList(new DayOfWeek[] {SUNDAY});
+    public static final List<DayOfWeek> TEST_DAY_OF_WEEK_LIST_1 = Arrays.asList(new DayOfWeek[] {TUESDAY, THURSDAY});
+
+    public static final ShowingsArranger TEST_SHOWINGS_ARRANGER_0 = initShowingArranger();
 
     public static final CreateCinemaCommand TEST_CREATE_CINEMA_COMMAND_0 = initCreateCinemaCommand0();
 
@@ -97,6 +114,15 @@ public class Stubs {
         Showing showing = showingsFactory.createShowings(TEST_MOVIE_0, TEST_CINEMA_0, TEST_CREATE_SHOWING_COMMAND_0);
         showing.setId(TEST_LONG_0);
         return showing;
+    }
+
+    public static ShowingsArranger initShowingArranger() {
+        ShowingsArranger showingsArranger = new ShowingsArranger();
+        showingsArranger.setFromDate(TEST_LOCAL_DATE_0);
+        showingsArranger.setUntilDate(TEST_LOCAL_DATE_1);
+        showingsArranger.setHours(TEST_LOCAL_TIME_LIST_0);
+        showingsArranger.setWeekDays(TEST_DAY_OF_WEEK_LIST_1);
+        return showingsArranger;
     }
 
     public static Set<String> initTestStringSet0() {

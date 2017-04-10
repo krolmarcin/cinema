@@ -8,6 +8,10 @@ import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by maciek on 09.04.2017.
  */
@@ -38,6 +42,23 @@ public class StandardAdminPanel implements AdminPanel {
 
     @Override
     public void createShowings(CreateShowingsCommand cmd) {
-
+        ShowingsArranger calendar = cmd.getCalendar();
+        LocalDateTime beginsAt = cmd.getBeginsAt();
+        List<Showing> showings = new LinkedList<>();
+        // ify takie, bo tylko jedna z dwoch opcji moze byc -> jak oba sa null lub oba sa nie null to wyjatek
+        if (calendar == null && beginsAt != null) {
+            Showing showing = new Showing();
+            showing.setBeginsAt(beginsAt);
+            showings.add(showing);
+        }
+        else if (calendar != null && beginsAt == null) {
+            showings.addAll(calendar.getShowings());
+        }
+        else {
+            throw new IncompatibleInputException("CreateShowingsCommand");
+        }
+        for (Showing showing : showings) {
+            showingRepository.put(showing);
+        }
     }
 }

@@ -72,11 +72,8 @@ public class ShowingsArranger implements Validatable {
         while (actualDate.compareTo(untilDate) <= 0) {
             DayOfWeek dayOfWeek = actualDate.getDayOfWeek();
             if (weekDays.contains(dayOfWeek)) {
-                System.out.println("from date " + fromDate.toString());
-                System.out.println(actualDate.toString());
                 for (LocalTime hour : hours) {
                     Showing showing = new Showing();
-                    System.out.println(actualDate + " " + hour);
                     showing.setBeginsAt(LocalDateTime.parse(actualDate + " " + hour, STANDARD_LOCAL_DATE_TIME_FORMATTER));
                     showings.add(showing);
                 }
