@@ -60,7 +60,7 @@ public class CreateMovieCommand implements Validatable {
     }
 
     @Override
-    public void validate(Validatable.ValidationErrors errors) {
+    public void validate(ValidationErrors errors) {
         if (isEmpty(title))
             errors.add("title", "can't be blank");
         if (isEmpty(description))
