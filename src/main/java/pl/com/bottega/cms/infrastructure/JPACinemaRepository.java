@@ -3,9 +3,18 @@ package pl.com.bottega.cms.infrastructure;
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.CinemaNotFoundException;
 import pl.com.bottega.cms.model.CinemaRepository;
+import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -24,14 +33,22 @@ public class JPACinemaRepository implements CinemaRepository {
     public Cinema get(Long id) {
         Cinema cinema = entityManager.find(Cinema.class, id);
         if (cinema == null) {
-            throw new CinemaNotFoundException(String.format("Cinema id %s not exists", id));
+            throw new CinemaNotFoundException(String.format("Cinema id: '%s' does not exist", id));
         }
         return cinema;
     }
 
     @Override
     public boolean exists(String name, String city) {
-        return false;
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Cinema> criteriaQuery = criteriaBuilder.createQuery(Cinema.class);
+        Root<Cinema> root = criteriaQuery.from(Cinema.class);
+        Set<Predicate> predicates = new HashSet<>();
+        predicates.add(criteriaBuilder.equal(root.get("name"), name));
+        predicates.add(criteriaBuilder.equal(root.get("city"), city));
+        criteriaQuery.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<Cinema> query = entityManager.createQuery(criteriaQuery);
+        return !query.getResultList().isEmpty();
     }
 
 }
