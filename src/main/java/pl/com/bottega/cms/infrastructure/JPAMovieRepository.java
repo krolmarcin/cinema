@@ -23,7 +23,7 @@ public class JPAMovieRepository implements MovieRepository {
     public Movie get(Long id) {
         Movie movie = entityManager.find(Movie.class, id);
         if (movie == null) {
-            throw new MovieNotFoundException(String.format("Movie id %s not exists", id));
+            throw new MovieNotFoundException(String.format("Movie id %s does not exist", id));
         }
         return movie;
     }
