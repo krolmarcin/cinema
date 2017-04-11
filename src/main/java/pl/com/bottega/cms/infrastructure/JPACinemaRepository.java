@@ -47,10 +47,7 @@ public class JPACinemaRepository implements CinemaRepository {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Cinema> criteriaQuery = criteriaBuilder.createQuery(Cinema.class);
         Root<Cinema> root = criteriaQuery.from(Cinema.class);
-        Set<Predicate> predicates = new HashSet<>();
-        predicates.add(criteriaBuilder.equal(root.get("name"), name));
-        predicates.add(criteriaBuilder.equal(root.get("city"), city));
-        criteriaQuery.where(predicates.toArray(new Predicate[]{}));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("name"), name), criteriaBuilder.equal(root.get("city"), city));
         TypedQuery<Cinema> query = entityManager.createQuery(criteriaQuery);
         return !query.getResultList().isEmpty();
     }
