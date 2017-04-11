@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.model.commands;
 
+import java.time.LocalTime;
 import java.util.*;
 
 public interface Validatable {
@@ -10,18 +11,19 @@ public interface Validatable {
         return s == null || s.isEmpty();
     }
 
-    default boolean isEmpty(Collection<String> collections) {
-        if (collections == null || collections.isEmpty())
-            return false;
-        else
-            for (String collection : collections) {
-                if (isEmpty(collection) || collection == null) {
+
+    default boolean isEmpty(Collection c) {
+        if (c != null && c.size() != 0) {
+            Boolean allRecordsAreNull = true;
+            for (Object o : c) {
+                allRecordsAreNull = allRecordsAreNull && (o == null);
+                if (!allRecordsAreNull) {
                     return false;
                 }
             }
+        }
         return true;
     }
-
 
     class ValidationErrors {
 

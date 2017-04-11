@@ -41,7 +41,7 @@ public class Stubs {
     public static final Set<String> TEST_STRING_SET_0 = initTestStringSet0();
     public static final Set<String> TEST_STRING_SET_1 = initTestStringSet1();
 
-    public static final LocalDateTime TEST_LOCAL_DATE_TIME_0 = LocalDateTime.parse("2015-05-06 12:30", LOCAL_DATE_TIME_FORMATTER);
+    public static final LocalDateTime TEST_LOCAL_DATE_TIME_0 = LocalDateTime.parse("2015/05/06 12:30", LOCAL_DATE_TIME_FORMATTER);
 
     public static final CreateCinemaCommand TEST_CREATE_CINEMA_COMMAND_0 = initCreateCinemaCommand0();
 

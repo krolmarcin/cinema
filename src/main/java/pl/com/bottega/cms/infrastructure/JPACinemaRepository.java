@@ -28,4 +28,10 @@ public class JPACinemaRepository implements CinemaRepository {
         }
         return cinema;
     }
+
+    @Override
+    public boolean exists(String name, String city) {
+        return false;
+    }
+
 }
