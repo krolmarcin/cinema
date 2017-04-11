@@ -5,5 +5,6 @@ package pl.com.bottega.cms.model;
  */
 public interface MovieRepository {
     void put(Movie m);
+
     Movie get(Long id);
 }

@@ -16,7 +16,8 @@ public class JPAMovieRepository implements MovieRepository {
     private EntityManager entityManager;
 
     @Override
-    public void put(Movie m) {entityManager.persist(m);
+    public void put(Movie m) {
+        entityManager.persist(m);
     }
 
     @Override

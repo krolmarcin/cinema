@@ -24,7 +24,7 @@ public class JPACinemaCatalog implements CinemaCatalog {
 
     @Override
     public List<CinemaDto> getCinemas() {
-        CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Cinema> criteriaQuery = criteriaBuilder.createQuery(Cinema.class);
         Root<Cinema> rootEntry = criteriaQuery.from(Cinema.class);
         CriteriaQuery<Cinema> all = criteriaQuery.select(rootEntry);

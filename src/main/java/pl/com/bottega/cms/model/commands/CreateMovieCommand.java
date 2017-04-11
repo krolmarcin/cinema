@@ -2,7 +2,7 @@ package pl.com.bottega.cms.model.commands;
 
 import java.util.Set;
 
-public class CreateMovieCommand implements Validatable{
+public class CreateMovieCommand implements Validatable {
 
     private String title;
     private String description;

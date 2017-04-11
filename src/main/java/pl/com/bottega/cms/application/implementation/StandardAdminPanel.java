@@ -38,7 +38,6 @@ public class StandardAdminPanel implements AdminPanel {
     public void createMovie(CreateMovieCommand cmd) {
         Movie movie = new Movie(cmd);
         movieRepository.put(movie);
-
     }
 
     @Override

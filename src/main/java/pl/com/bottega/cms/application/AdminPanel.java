@@ -9,6 +9,8 @@ import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
  */
 public interface AdminPanel {
     void createCinema(CreateCinemaCommand cmd);
+
     void createMovie(CreateMovieCommand cmd);
+
     void createShowings(CreateShowingsCommand cmd);
 }
