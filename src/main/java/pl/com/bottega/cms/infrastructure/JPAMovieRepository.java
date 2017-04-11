@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.infrastructure;
 
 import pl.com.bottega.cms.model.Movie;
+import pl.com.bottega.cms.model.MovieNotFoundException;
 import pl.com.bottega.cms.model.MovieRepository;
 
 import javax.persistence.EntityManager;

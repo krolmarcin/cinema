@@ -5,9 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
 import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.model.*;
-import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
-import pl.com.bottega.cms.model.commands.CreateMovieCommand;
-import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
+import pl.com.bottega.cms.model.commands.*;
 
 import java.util.List;
 
@@ -28,8 +26,12 @@ public class StandardAdminPanel implements AdminPanel {
 
     @Override
     public void createCinema(CreateCinemaCommand cmd) {
-        Cinema cinema = new Cinema(cmd);
-        cinemaRepository.put(cinema);
+        if (cinemaRepository.exists(cmd.getName(), cmd.getCity())) {
+            throw new InvalidActionException(String.format("Cinema '%s' in '%s' has already been created", cmd.getName(), cmd.getCity()));
+        } else {
+            Cinema cinema = new Cinema(cmd);
+            cinemaRepository.put(cinema);
+        }
     }
 
     @Override
@@ -43,4 +45,5 @@ public class StandardAdminPanel implements AdminPanel {
     public void createShowings(CreateShowingsCommand cmd) {
 
     }
+
 }
