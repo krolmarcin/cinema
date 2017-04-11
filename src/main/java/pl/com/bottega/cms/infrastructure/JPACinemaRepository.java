@@ -3,6 +3,7 @@ package pl.com.bottega.cms.infrastructure;
 import pl.com.bottega.cms.model.Cinema;
 import pl.com.bottega.cms.model.CinemaNotFoundException;
 import pl.com.bottega.cms.model.CinemaRepository;
+import pl.com.bottega.cms.model.InvalidActionException;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 
 import javax.persistence.EntityManager;
@@ -26,6 +27,9 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public void put(Cinema c) {
+        if (exists(c.getName(), c.getCity())) {
+            throw new InvalidActionException(String.format("Cinema '%s' in '%s' has already been created", c.getName(), c.getCity()));
+        }
         entityManager.persist(c);
     }
 
