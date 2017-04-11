@@ -11,16 +11,14 @@ public interface Validatable {
         return s == null || s.isEmpty();
     }
 
-
     default boolean isEmpty(Collection c) {
         if (c != null && c.size() != 0) {
-            Boolean allRecordsAreNull = true;
             for (Object o : c) {
-                allRecordsAreNull = allRecordsAreNull && (o == null);
-                if (!allRecordsAreNull) {
-                    return false;
+                if (o == null || isEmpty((String) o)) {
+                    return true;
                 }
             }
+            return false;
         }
         return true;
     }
