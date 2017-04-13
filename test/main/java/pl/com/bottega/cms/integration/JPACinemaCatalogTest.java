@@ -25,9 +25,9 @@ public class JPACinemaCatalogTest {
     @Test
     @Sql("/fixtures/cinemaCatalog.sql")
     public void shouldFindAllCinemas(){
-        List<CinemaDto> cinemaDtoList = catalog.getCinemas();
+        List<CinemaDto> cinemas = catalog.getCinemas();
 
-        assertThat(cinemaDtoList.size()).isEqualTo(3);
+        assertThat(cinemas.size()).isEqualTo(3);
     }
 
 }
