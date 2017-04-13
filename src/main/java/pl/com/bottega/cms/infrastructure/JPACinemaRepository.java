@@ -1,21 +1,15 @@
 package pl.com.bottega.cms.infrastructure;
 
 import pl.com.bottega.cms.model.Cinema;
-import pl.com.bottega.cms.model.CinemaNotFoundException;
+import pl.com.bottega.cms.model.EntityNotFoundException;
 import pl.com.bottega.cms.model.CinemaRepository;
-import pl.com.bottega.cms.model.InvalidActionException;
-import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -27,9 +21,6 @@ public class JPACinemaRepository implements CinemaRepository {
 
     @Override
     public void put(Cinema c) {
-        if (exists(c.getName(), c.getCity())) {
-            throw new InvalidActionException(String.format("Cinema '%s' in '%s' has already been created", c.getName(), c.getCity()));
-        }
         entityManager.persist(c);
     }
 
@@ -37,7 +28,7 @@ public class JPACinemaRepository implements CinemaRepository {
     public Cinema get(Long id) {
         Cinema cinema = entityManager.find(Cinema.class, id);
         if (cinema == null) {
-            throw new CinemaNotFoundException(String.format("Cinema id: '%s' does not exist", id));
+            throw new EntityNotFoundException(String.format("Cinema id: '%s' does not exist", id));
         }
         return cinema;
     }

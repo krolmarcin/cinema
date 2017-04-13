@@ -27,6 +27,9 @@ public class StandardAdminPanel implements AdminPanel {
     @Override
     public void createCinema(CreateCinemaCommand cmd) {
         Cinema cinema = new Cinema(cmd);
+        if (cinemaRepository.exists(cinema.getName(), cinema.getCity())) {
+            throw new InvalidActionException(String.format("Cinema '%s' in '%s' has already been created", cinema.getName(), cinema.getCity()));
+        }
         cinemaRepository.put(cinema);
     }
 
