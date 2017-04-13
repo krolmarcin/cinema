@@ -6,6 +6,7 @@ import pl.com.bottega.cms.model.Cinema;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -23,12 +24,8 @@ public class JPACinemaCatalog implements CinemaCatalog {
 
     @Override
     public List<CinemaDto> getCinemas() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Cinema> criteriaQuery = criteriaBuilder.createQuery(Cinema.class);
-        Root<Cinema> rootEntry = criteriaQuery.from(Cinema.class);
-        CriteriaQuery<Cinema> all = criteriaQuery.select(rootEntry);
-        TypedQuery<Cinema> allQuery = entityManager.createQuery(all);
-        List<Cinema> cinemas = allQuery.getResultList();
+        Query query = entityManager.createQuery("FROM Cinema c");
+        List<Cinema> cinemas = query.getResultList();
         List<CinemaDto> cinemaDtos = new LinkedList<>();
         for (Cinema cinema : cinemas) {
             cinemaDtos.add(cinemaToCinemaDto(cinema));

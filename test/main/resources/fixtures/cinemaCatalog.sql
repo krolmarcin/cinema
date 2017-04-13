@@ -1,0 +1,8 @@
+INSERT INTO CINEMA(ID, CITY, NAME)
+VALUES ('1', 'Lublin', 'Felicity');
+
+INSERT INTO CINEMA(ID, CITY, NAME)
+VALUES ('2', 'Lublin', 'Plaza');
+
+INSERT INTO CINEMA(ID, CITY, NAME)
+VALUES ('3', 'Lublin', 'Olimp');
