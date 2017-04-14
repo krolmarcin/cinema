@@ -28,6 +28,9 @@ public class JPACinemaCatalogTest {
         List<CinemaDto> cinemas = catalog.getCinemas();
 
         assertThat(cinemas.size()).isEqualTo(3);
+        assertThat(cinemas.get(0).getId()).isEqualTo(1);
+        assertThat(cinemas.get(0).getCity()).isEqualTo("Lublin");
+        assertThat(cinemas.get(2).getName()).isEqualTo("Olimp");
     }
 
 }
