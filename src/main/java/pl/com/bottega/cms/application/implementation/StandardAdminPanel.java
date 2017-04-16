@@ -3,10 +3,11 @@ package pl.com.bottega.cms.application.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
+import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.model.*;
-import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
-import pl.com.bottega.cms.model.commands.CreateMovieCommand;
-import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
+import pl.com.bottega.cms.model.commands.*;
+
+import java.util.List;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -30,6 +31,9 @@ public class StandardAdminPanel implements AdminPanel {
     @Override
     public void createCinema(CreateCinemaCommand cmd) {
         Cinema cinema = new Cinema(cmd);
+        if (cinemaRepository.exists(cinema.getName(), cinema.getCity())) {
+            throw new InvalidActionException(String.format("Cinema '%s' in '%s' has already been created", cinema.getName(), cinema.getCity()));
+        }
         cinemaRepository.put(cinema);
     }
 
@@ -37,7 +41,6 @@ public class StandardAdminPanel implements AdminPanel {
     public void createMovie(CreateMovieCommand cmd) {
         Movie movie = new Movie(cmd);
         movieRepository.put(movie);
-
     }
 
     @Override
@@ -61,4 +64,5 @@ public class StandardAdminPanel implements AdminPanel {
             showingRepository.put(showing);
         }
     }
+
 }

@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
  */
 public class ShowingsFactory {
 
-    public ShowingsFactory(){
+    public ShowingsFactory() {
 
     }
 
-    public Showing createShowings(Movie movie, Cinema cinema, CreateShowingsCommand cmd){
+    public Showing createShowings(Movie movie, Cinema cinema, CreateShowingsCommand cmd) {
         Showing showing = new Showing();
         showing.setMovie(movie);
         showing.setCinema(cinema);

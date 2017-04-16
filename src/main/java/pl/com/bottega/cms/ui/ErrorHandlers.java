@@ -5,27 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.com.bottega.cms.model.CinemaNotFoundException;
-import pl.com.bottega.cms.model.MovieNotFoundException;
+import pl.com.bottega.cms.model.EntityNotFoundException;
+import pl.com.bottega.cms.model.InvalidActionException;
 import pl.com.bottega.cms.model.commands.CommandInvalidException;
 import pl.com.bottega.cms.model.commands.Validatable;
 
 @ControllerAdvice
 public class ErrorHandlers {
 
-    @ExceptionHandler(CinemaNotFoundException.class)
-    public ResponseEntity<String> handleCinemaNotFoundException(CinemaNotFoundException ex) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
-        return new ResponseEntity<String>(
-                String.format("{\"error\": \"%s\"}", ex.getMessage()),
-                headers,
-                HttpStatus.NOT_FOUND
-        );
-    }
-
-    @ExceptionHandler(MovieNotFoundException.class)
-    public ResponseEntity<String> handleMovieNotFoundException(MovieNotFoundException ex) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
         return new ResponseEntity<String>(
@@ -41,6 +30,17 @@ public class ErrorHandlers {
         headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
         return new ResponseEntity<Validatable.ValidationErrors>(
                 ex.getErrors(),
+                headers,
+                HttpStatus.UNPROCESSABLE_ENTITY
+        );
+    }
+
+    @ExceptionHandler(InvalidActionException.class)
+    public ResponseEntity<String> handleInvalidActionException(InvalidActionException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        return new ResponseEntity<String>(
+                String.format("{\"error\": \"%s\"}", ex.getMessage()),
                 headers,
                 HttpStatus.UNPROCESSABLE_ENTITY
         );

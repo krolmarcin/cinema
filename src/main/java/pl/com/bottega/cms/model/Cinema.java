@@ -19,13 +19,14 @@ public class Cinema {
     private String city;
 
 
-    Cinema(){}
+    Cinema() {
+    }
 
 
-    public Cinema(CreateCinemaCommand cmd){
+    public Cinema(CreateCinemaCommand cmd) {
         this.name = cmd.getName();
         this.city = cmd.getCity();
-     }
+    }
 
     public Long getId() {
         return id;

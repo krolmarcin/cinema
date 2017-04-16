@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.model;
 
 import javax.persistence.*;
+
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
 import javax.persistence.Entity;
@@ -27,7 +28,8 @@ public class Showing {
 
     private LocalDateTime beginsAt;
 
-    public Showing(){}
+    public Showing() {
+    }
 
 
     public Long getId() {
