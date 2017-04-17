@@ -1,7 +1,6 @@
 package pl.com.bottega.cms.model;
 
 import pl.com.bottega.cms.model.commands.CreateTicketPriceCommand;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
