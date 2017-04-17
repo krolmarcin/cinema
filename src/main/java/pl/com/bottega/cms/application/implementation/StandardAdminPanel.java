@@ -3,11 +3,8 @@ package pl.com.bottega.cms.application.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
-import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.*;
-
-import java.util.List;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -44,4 +41,14 @@ public class StandardAdminPanel implements AdminPanel {
 
     }
 
+    @Override
+    public void createTicketPrice(CreateTicketPriceCommand cmd) {
+        Movie movie = movieRepository.get(cmd.getMovieId());
+        TicketPrice ticketPrice = new TicketPrice(movie, cmd);
+        if (movieRepository.checkIfExistPriceFor(movie))
+            movieRepository.updateTicketPrice(ticketPrice);
+        else {
+            movieRepository.putTicketPrice(ticketPrice);
+        }
+    }
 }
