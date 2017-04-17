@@ -45,6 +45,8 @@ public class Stubs {
     public static final Set<String> TEST_STRING_SET_1 = initTestStringSet1();
 
     public static final LocalDateTime TEST_LOCAL_DATE_TIME_0 = LocalDateTime.parse("2015/05/06 12:30", LOCAL_DATE_TIME_FORMATTER);
+    public static final LocalDateTime TEST_LOCAL_DATE_TIME_1 = LocalDateTime.parse("2015/06/01 16:31", LOCAL_DATE_TIME_FORMATTER);
+    public static final LocalDateTime TEST_LOCAL_DATE_TIME_2 = LocalDateTime.parse("2014/07/02 13:32", LOCAL_DATE_TIME_FORMATTER);
 
     public static final LocalDate TEST_LOCAL_DATE_0 = LocalDate.parse("2017/04/09", LOCAL_DATE_FORMATTER);
     public static final LocalDate TEST_LOCAL_DATE_1 = LocalDate.parse("2017/04/20", LOCAL_DATE_FORMATTER);
@@ -53,10 +55,12 @@ public class Stubs {
     public static final LocalTime TEST_LOCAL_TIME_1 = LocalTime.parse("13:20");
     public static final LocalTime TEST_LOCAL_TIME_2 = LocalTime.parse("18:47");
 
+    public static final List<LocalDateTime> TEST_LOCAL_DATE_TIME_LIST_0 = Arrays.asList(new LocalDateTime[] {TEST_LOCAL_DATE_TIME_0, TEST_LOCAL_DATE_TIME_1, TEST_LOCAL_DATE_TIME_2});
+
     public static final List<LocalTime> TEST_LOCAL_TIME_LIST_0 = Arrays.asList(new LocalTime[] {TEST_LOCAL_TIME_0, TEST_LOCAL_TIME_1, TEST_LOCAL_TIME_2});
 
-    public static final List<DayOfWeek> TEST_DAY_OF_WEEK_LIST_0 = Arrays.asList(new DayOfWeek[] {SUNDAY});
-    public static final List<DayOfWeek> TEST_DAY_OF_WEEK_LIST_1 = Arrays.asList(new DayOfWeek[] {TUESDAY, THURSDAY});
+    public static final List<String> TEST_DAY_OF_WEEK_LIST_0 = Arrays.asList(new String[] {SUNDAY.toString()});
+    public static final List<String> TEST_DAY_OF_WEEK_LIST_1 = Arrays.asList(new String[] {TUESDAY.toString(), THURSDAY.toString()});
 
     public static final ShowingsArranger TEST_SHOWINGS_ARRANGER_0 = initShowingArranger();
 
@@ -70,7 +74,9 @@ public class Stubs {
 
     public static final CreateShowingsCommand TEST_CREATE_SHOWING_COMMAND_0 = initCreateShowingCommand();
 
-    public static final Showing TEST_SHOWING_0 = initShowing0();
+    public static final List<Showing> TEST_SHOWING_LIST_0 = initShowings0();
+
+    public static final Showing TEST_SHOWING_0 = TEST_SHOWING_LIST_0.get(0);
 
 
     public static CreateCinemaCommand initCreateCinemaCommand0() {
@@ -105,21 +111,23 @@ public class Stubs {
 
     public static CreateShowingsCommand initCreateShowingCommand() {
         CreateShowingsCommand createShowingsCommand = new CreateShowingsCommand();
-        createShowingsCommand.setBeginsAt(TEST_LOCAL_DATE_TIME_0);
+        createShowingsCommand.setDatesLocalDateTime(TEST_LOCAL_DATE_TIME_LIST_0);
         return createShowingsCommand;
     }
 
-    public static Showing initShowing0() {
+    public static List<Showing> initShowings0() {
         ShowingsFactory showingsFactory = new ShowingsFactory();
-        Showing showing = showingsFactory.createShowings(TEST_MOVIE_0, TEST_CINEMA_0, TEST_CREATE_SHOWING_COMMAND_0);
-        showing.setId(TEST_LONG_0);
-        return showing;
+        List<Showing> showings = showingsFactory.createShowings(TEST_MOVIE_0, TEST_CINEMA_0, TEST_CREATE_SHOWING_COMMAND_0);
+        showings.get(0).setId(TEST_LONG_0);
+        showings.get(1).setId(TEST_LONG_1);
+        showings.get(2).setId(TEST_LONG_2);
+        return showings;
     }
 
     public static ShowingsArranger initShowingArranger() {
         ShowingsArranger showingsArranger = new ShowingsArranger();
-        showingsArranger.setFromDate(TEST_LOCAL_DATE_0);
-        showingsArranger.setUntilDate(TEST_LOCAL_DATE_1);
+        showingsArranger.setFromDate(TEST_LOCAL_DATE_TIME_0.toString());
+        showingsArranger.setUntilDate(TEST_LOCAL_DATE_TIME_1.toString());
         showingsArranger.setHours(TEST_LOCAL_TIME_LIST_0);
         showingsArranger.setWeekDays(TEST_DAY_OF_WEEK_LIST_1);
         return showingsArranger;

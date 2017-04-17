@@ -12,6 +12,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -46,23 +47,18 @@ public class StandardAdminPanel implements AdminPanel {
     @Override
     public void createShowings(CreateShowingsCommand cmd) {
         ShowingsArranger calendar = cmd.getCalendar();
-        LocalDateTime beginsAt = cmd.getBeginsAt();
-        List<Showing> showings = new LinkedList<>();
-        // ify takie, bo tylko jedna z dwoch opcji moze byc -> jak oba sa null lub oba sa nie null to wyjatek
-        if (calendar == null && beginsAt != null) {
+        List<LocalDateTime> dates = cmd.getDates();
+        if (calendar != null) {
+            dates = calendar.getDates();
+        }
+        Long movieId = cmd.getMovieId();
+        for (LocalDateTime date : dates) {
             Showing showing = new Showing();
-            showing.setBeginsAt(beginsAt);
-            showings.add(showing);
-        }
-        else if (calendar != null && beginsAt == null) {
-            showings.addAll(calendar.getShowings());
-        }
-        else {
-            throw new IncompatibleInputException("CreateShowingsCommand");
-        }
-        for (Showing showing : showings) {
+            showing.setBeginsAt(date);
+            showing.setMovie(movieRepository.get(movieId));
             showingRepository.put(showing);
         }
     }
+
 
 }
