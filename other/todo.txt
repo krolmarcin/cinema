@@ -2,3 +2,5 @@
 - mozna by zrobic enuma do gatunkow
 - mozliwe, ze showingsfactory trzeba bedzie zrobic singletonem
 - trzeba bedzie mozliwe wyjatki Cinema/Movie/Showing NotFoundException przerobic na jeden generyczny np. Resource not found exception i przekazywac w parametrze typ resource'u, ktorego nie znaleziono
+- uspojnienie wyjatkow ( w tym abstrakcja standardowych komunikatow do jakiegos enuma lub konfiguracji enumow)
+- poprawa metody isEmpty (prawdopodobnie na object -> i uspojnienie)

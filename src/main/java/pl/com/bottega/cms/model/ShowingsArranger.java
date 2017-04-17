@@ -9,46 +9,48 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_FORMATTER;
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_TIME_FORMATTER;
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.STANDARD_LOCAL_DATE_TIME_FORMATTER;
+import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.*;
 
 /**
  * Created by ogurekk on 2017-04-09.
  */
-public class ShowingsArranger implements Validatable {
+public class ShowingsArranger {
 
-    private LocalDate fromDate;
-    private LocalDate untilDate;
+    private LocalDateTime fromDate;
+    private LocalDateTime untilDate;
 
     private List<DayOfWeek> weekDays;
     private List<LocalTime> hours;
 
-    private List<Showing> showings;
+    private List<LocalDateTime> dates;
 
 
-    public LocalDate getFromDate() {
+    public LocalDateTime getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
+    public void setFromDate(String fromDate) {
+        this.fromDate = parseStringToLocalDateTime(fromDate);
     }
 
-    public LocalDate getUntilDate() {
+    public LocalDateTime getUntilDate() {
         return untilDate;
     }
 
-    public void setUntilDate(LocalDate untilDate) {
-        this.untilDate = untilDate;
+    public void setUntilDate(String untilDate) {
+        this.untilDate = parseStringToLocalDateTime(untilDate);
     }
 
     public List<DayOfWeek> getWeekDays() {
         return weekDays;
     }
 
-    public void setWeekDays(List<DayOfWeek> weekDays) {
-        this.weekDays = weekDays;
+    public void setWeekDays(List<String> weekDays) {
+        List<DayOfWeek> weekDaysEnumList = new LinkedList<>();
+        for (String s : weekDays) {
+            weekDaysEnumList.add(DayOfWeek.valueOf(s.toUpperCase()));
+        }
+        this.weekDays = weekDaysEnumList;
     }
 
     public List<LocalTime> getHours() {
@@ -59,42 +61,33 @@ public class ShowingsArranger implements Validatable {
         this.hours = hours;
     }
 
-    public List<Showing> getShowings() {
-        if (showings == null) {
-            calculateShowings();
+    public List<LocalDateTime> getDates() {
+        if (dates == null) {
+            calculateDates();
         }
-        return showings;
+        return dates;
     }
 
-    private void calculateShowings() {
-        showings = new LinkedList<>();
-        LocalDate actualDate = fromDate;
-        while (actualDate.compareTo(untilDate) <= 0) {
+    private void calculateDates() {
+        dates = new LinkedList<>();
+        LocalDateTime actualDate = fromDate;
+        while (actualDate.compareTo(untilDate) < 0) {
             DayOfWeek dayOfWeek = actualDate.getDayOfWeek();
             if (weekDays.contains(dayOfWeek)) {
-                System.out.println("from date " + fromDate.toString());
-                System.out.println(actualDate.toString());
                 for (LocalTime hour : hours) {
-                    Showing showing = new Showing();
-                    System.out.println(actualDate + " " + hour);
-                    showing.setBeginsAt(LocalDateTime.parse(actualDate + " " + hour, STANDARD_LOCAL_DATE_TIME_FORMATTER));
-                    showings.add(showing);
+                    dates.add(LocalDateTime.parse(actualDate.toString().substring(0,10) + " " + hour.toString(), STANDARD_LOCAL_DATE_TIME_FORMATTER));
                 }
+
             }
             actualDate = actualDate.plusDays(1);
         }
-    }
-
-    @Override
-    public void validate(ValidationErrors errors) {
-        if (fromDate == null)
-            errors.add("fromDate", "can't be blank");
-        if (untilDate == null)
-            errors.add("untilDate", "can't be blank");
-        if (isEmpty(weekDays))
-            errors.add("weekDays", "can't be blank");
-        if (isEmpty(hours))
-            errors.add("hours", "can't be blank");
+        if (actualDate.compareTo(untilDate) == 0) {
+            for (LocalTime hour : hours) {
+                if (("" + actualDate.getHour() + actualDate.getMinute()).compareTo("" + hour.getHour() + hour.getMinute()) >= 0) {
+                    dates.add(LocalDateTime.parse(actualDate.toString().substring(0,10) + " " + hour.toString(), STANDARD_LOCAL_DATE_TIME_FORMATTER));
+                }
+            }
+        }
     }
 
 

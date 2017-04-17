@@ -3,8 +3,16 @@ package pl.com.bottega.cms.application.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
+import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.*;
+
+import java.util.List;
+
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -38,7 +46,18 @@ public class StandardAdminPanel implements AdminPanel {
 
     @Override
     public void createShowings(CreateShowingsCommand cmd) {
-
+        ShowingsArranger calendar = cmd.getCalendar();
+        List<LocalDateTime> dates = cmd.getDates();
+        if (calendar != null) {
+            dates = calendar.getDates();
+        }
+        Long movieId = cmd.getMovieId();
+        for (LocalDateTime date : dates) {
+            Showing showing = new Showing();
+            showing.setBeginsAt(date);
+            showing.setMovie(movieRepository.get(movieId));
+            showingRepository.put(showing);
+        }
     }
 
     @Override
