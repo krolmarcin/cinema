@@ -7,6 +7,7 @@ import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,10 @@ public class Movie {
     private int minAge;
     private int length;
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "movieId")
+    private Set<TicketPrice> ticketPrices;
+
     Movie() {
     }
 
@@ -37,6 +42,7 @@ public class Movie {
         this.genres = cmd.getGenres();
         this.minAge = cmd.getMinAge();
         this.length = cmd.getLength();
+        this.ticketPrices = new HashSet<>();
     }
 
     public Long getId() {
@@ -93,6 +99,14 @@ public class Movie {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public Set<TicketPrice> getTicketPrices() {
+        return ticketPrices;
+    }
+
+    public void setTicketPrices(Set<TicketPrice> ticketPrices) {
+        this.ticketPrices = ticketPrices;
     }
 
     @Override

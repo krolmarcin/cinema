@@ -5,6 +5,7 @@ import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 import pl.com.bottega.cms.model.commands.CreateTicketPriceCommand;
 
+
 /**
  * Created by maciek on 09.04.2017.
  */
@@ -15,5 +16,5 @@ public interface AdminPanel {
 
     void createShowings(CreateShowingsCommand cmd);
 
-    void createTicketPrice(CreateTicketPriceCommand cmd);
+    void createTicketPrices(CreateTicketPriceCommand cmd);
 }

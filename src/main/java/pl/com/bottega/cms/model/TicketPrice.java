@@ -13,23 +13,14 @@ public class TicketPrice {
     @Id
     @GeneratedValue
     private Long id;
-    private BigDecimal regular;
-    private BigDecimal student;
-    private BigDecimal school;
-    private BigDecimal children;
-
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "movieId")
-    private Movie movie;
+    private String kind;
+    private BigDecimal unitPrice;
 
     TicketPrice(){}
 
-    public TicketPrice(Movie movie, CreateTicketPriceCommand cmd){
-        this.regular = cmd.getRegular();
-        this.student = cmd.getStudent();
-        this.school = cmd.getSchool();
-        this.children = cmd.getChildren();
-        this.movie = movie;
+    public TicketPrice(String kind, BigDecimal unitPrice){
+        this.kind = kind;
+        this.unitPrice = unitPrice;
     }
 
     public Long getId() {
@@ -40,43 +31,19 @@ public class TicketPrice {
         this.id = id;
     }
 
-    public BigDecimal getRegular() {
-        return regular;
+    public String getKind() {
+        return kind;
     }
 
-    public void setRegular(BigDecimal regular) {
-        this.regular = regular;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
-    public BigDecimal getStudent() {
-        return student;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setStudent(BigDecimal student) {
-        this.student = student;
-    }
-
-    public BigDecimal getSchool() {
-        return school;
-    }
-
-    public void setSchool(BigDecimal school) {
-        this.school = school;
-    }
-
-    public BigDecimal getChildren() {
-        return children;
-    }
-
-    public void setChildren(BigDecimal children) {
-        this.children = children;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

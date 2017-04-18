@@ -1,48 +1,24 @@
 package pl.com.bottega.cms.model.commands;
 
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by maciek on 15.04.2017.
  */
-public class CreateTicketPriceCommand implements Validatable{
+public class CreateTicketPriceCommand implements Validatable {
 
-    private BigDecimal regular;
-    private BigDecimal student;
-    private BigDecimal school;
-    private BigDecimal children;
+    private Map<String, BigDecimal> ticketPrices;
     private Long movieId;
 
-    public BigDecimal getRegular() {
-        return regular;
+
+    public Map<String, BigDecimal> getTicketPrices() {
+        return ticketPrices;
     }
 
-    public void setRegular(BigDecimal regular) {
-        this.regular = regular;
-    }
-
-    public BigDecimal getStudent() {
-        return student;
-    }
-
-    public void setStudent(BigDecimal student) {
-        this.student = student;
-    }
-
-    public BigDecimal getSchool() {
-        return school;
-    }
-
-    public void setSchool(BigDecimal school) {
-        this.school = school;
-    }
-
-    public BigDecimal getChildren() {
-        return children;
-    }
-
-    public void setChildren(BigDecimal children) {
-        this.children = children;
+    public void setTicketPrices(Map<String, BigDecimal> ticketPrices) {
+        this.ticketPrices = ticketPrices;
     }
 
     public Long getMovieId() {
@@ -55,11 +31,23 @@ public class CreateTicketPriceCommand implements Validatable{
 
     @Override
     public void validate(ValidationErrors errors) {
-        if (regular == null || regular.signum() < 0)
-            errors.add("regular", "can't be blank and can't be less than 0");
-        if (student == null || student.signum() < 0)
-            errors.add("student", "can't be blank and can't be less than 0");
+        if (ticketPrices == null || ticketPrices.size() == 0)
+            errors.add("ticketPrices", "can't be empty");
+        if (!ticketPrices.containsKey("regular"))
+            errors.add("regular", "is required field");
+        if (!ticketPrices.containsKey("student"))
+            errors.add("student", "is required field");
+        if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("regular").toString()))
+            errors.add("regular", "must be number of structure 999.99 and can't be less than 0");
+        if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", ticketPrices.get("student").toString()))
+            errors.add("student", "must be number of structure 999.99 and can't be less than 0");
+        if (ticketPrices.containsKey("school")) {
+            if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("school").toString()))
+                errors.add("school", "must be number of structure 999.99 and can't be less than 0");
+        }
+        if (ticketPrices.containsKey("children")) {
+            if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("children").toString()))
+                errors.add("children", "must be number of structure 999.99 and can't be less than 0");
+        }
     }
-
-
 }

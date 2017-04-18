@@ -8,11 +8,4 @@ public interface MovieRepository {
 
     Movie get(Long id);
 
-    void putTicketPrice(TicketPrice ticketPrice);
-
-    void updateTicketPrice(TicketPrice ticketPrice);
-
-    TicketPrice getTicketPriceFor(Movie movie);
-
-    boolean checkIfExistPriceFor(Movie movie);
 }
