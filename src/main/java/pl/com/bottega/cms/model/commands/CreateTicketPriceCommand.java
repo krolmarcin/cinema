@@ -35,11 +35,11 @@ public class CreateTicketPriceCommand implements Validatable {
             errors.add("ticketPrices", "can't be empty");
         if (!ticketPrices.containsKey("regular"))
             errors.add("regular", "is required field");
+        else if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("regular").toString()))
+            errors.add("regular", "must be number of structure 999.99 and can't be less than 0");
         if (!ticketPrices.containsKey("student"))
             errors.add("student", "is required field");
-        if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("regular").toString()))
-            errors.add("regular", "must be number of structure 999.99 and can't be less than 0");
-        if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", ticketPrices.get("student").toString()))
+        else if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", ticketPrices.get("student").toString()))
             errors.add("student", "must be number of structure 999.99 and can't be less than 0");
         if (ticketPrices.containsKey("school")) {
             if (!Pattern.matches("\\d+\\.\\d{2}", ticketPrices.get("school").toString()))

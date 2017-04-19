@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.application.implementation;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;

@@ -28,7 +28,7 @@ public class Movie {
     private int minAge;
     private int length;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "movieId")
     private Set<TicketPrice> ticketPrices;
 
