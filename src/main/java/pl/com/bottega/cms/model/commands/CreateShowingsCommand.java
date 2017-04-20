@@ -11,6 +11,8 @@ import java.util.Set;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_TIME_FORMATTER;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.STANDARD_LOCAL_DATE_TIME_FORMATTER;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.parseStringToLocalDateTime;
+import static pl.com.bottega.cms.model.commands.ValidationError.ONE_AND_ONLY_ONE;
+import static pl.com.bottega.cms.model.commands.ValidationError.REQUIRED;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -70,30 +72,25 @@ public class CreateShowingsCommand implements Validatable{
 
     @Override
     public void validate(ValidationErrors errors) {
-        if (isEmpty(dates) == isEmpty(calendar))
-            errors.add("dates, calendar", "one and only one has to be filled");
+        if (areEquallyEmpty(dates, calendar))
+            errors.add("dates, calendar", ONE_AND_ONLY_ONE.getValMsg());
         if (!isEmpty(calendar)) {
             if (isEmpty(calendar.getFromDate())) {
-                errors.add("calendar.fromDate", "can't be empty");
-            }
-            if (isEmpty(calendar.getDates())) {
-                errors.add("calendar.dates", "can't be empty");
+                errors.add("calendar.fromDate", REQUIRED.getValMsg());
             }
             if (isEmpty(calendar.getHours())) {
-                errors.add("calendar.hours", "can't be empty");
+                errors.add("calendar.hours", REQUIRED.getValMsg());
             }
             if (isEmpty(calendar.getUntilDate())) {
-                errors.add("calendar.untilDate", "can't be empty");
+                errors.add("calendar.untilDate", REQUIRED.getValMsg());
             }
             if (isEmpty(calendar.getWeekDays())) {
-                errors.add("calendar.weekDays", "can't be empty");
+                errors.add("calendar.weekDays", REQUIRED.getValMsg());
             }
         }
         if (isEmpty(cinemaId))
-            errors.add("cinemaId", "can't be blank");
-        if (isEmpty(calendar) && !isEmpty(dates))
-            errors.add("calendar", "can't be blank");
+            errors.add("cinemaId", REQUIRED.getValMsg());
         if (isEmpty(movieId))
-            errors.add("movieId", "can't be blank");
+            errors.add("movieId", REQUIRED.getValMsg());
     }
 }

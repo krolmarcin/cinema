@@ -28,7 +28,7 @@ public class JPACinemaRepository implements CinemaRepository {
     public Cinema get(Long id) {
         Cinema cinema = entityManager.find(Cinema.class, id);
         if (cinema == null) {
-            throw new EntityNotFoundException(String.format("Cinema id: '%s' does not exist", id));
+            throw new EntityNotFoundException("Cinema", id);
         }
         return cinema;
     }

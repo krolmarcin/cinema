@@ -2,6 +2,8 @@ package pl.com.bottega.cms.model.commands;
 
 import java.util.Set;
 
+import static pl.com.bottega.cms.model.commands.ValidationError.*;
+
 public class CreateMovieCommand implements Validatable {
 
     private String title;
@@ -62,16 +64,16 @@ public class CreateMovieCommand implements Validatable {
     @Override
     public void validate(ValidationErrors errors) {
         if (isEmpty(title))
-            errors.add("title", "can't be blank");
+            errors.add("title", REQUIRED.getValMsg());
         if (isEmpty(description))
-            errors.add("description", "can't be blank");
+            errors.add("description", REQUIRED.getValMsg());
         if (isEmpty(actors))
-            errors.add("actors", "can't be blank or actors field can't contain blank fields or can't be empty");
+            errors.add("actors", REQUIRED.getValMsg() + NOT_EMPTY.getValMsg()+ NOT_NULL_VALUES.getValMsg());
         if (isEmpty(genres))
-            errors.add("genres", "can't be blank or genres field can't contain blank fields or can't be empty");
-        if (minAge == null || !(minAge instanceof Integer) || minAge <= 0)
-            errors.add("minAge", "can't be blank, and must be number > 0");
-        if (length == null || !(length instanceof Integer) || length <= 0)
-            errors.add("length", "can't be blank, and must be number > 0");
+            errors.add("genres", REQUIRED.getValMsg() + NOT_EMPTY.getValMsg()+ NOT_NULL_VALUES.getValMsg());
+        if (isEmpty(minAge) || isNotGreaterThanZero(minAge))
+            errors.add("minAge", REQUIRED.getValMsg() + GREATER_THAN_ZERO.getValMsg());
+        if (isEmpty(length) || isNotGreaterThanZero(length))
+            errors.add("length", REQUIRED.getValMsg() + GREATER_THAN_ZERO.getValMsg());
     }
 }

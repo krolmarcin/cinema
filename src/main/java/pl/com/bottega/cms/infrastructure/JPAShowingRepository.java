@@ -18,4 +18,5 @@ public class JPAShowingRepository implements ShowingRepository {
     public void put(Showing s) {
         entityManager.persist(s);
     }
+
 }

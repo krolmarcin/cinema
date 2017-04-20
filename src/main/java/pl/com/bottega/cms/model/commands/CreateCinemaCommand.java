@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.commands;
 
+import static pl.com.bottega.cms.model.commands.ValidationError.REQUIRED;
+
 /**
  * Created by maciek on 09.04.2017.
  */
@@ -26,8 +28,8 @@ public class CreateCinemaCommand implements Validatable {
     @Override
     public void validate(ValidationErrors errors) {
         if (isEmpty(name))
-            errors.add("name", "can't be blank");
+            errors.add("name", REQUIRED.getValMsg());
         if (isEmpty(city))
-            errors.add("city", "can't be blank");
+            errors.add("city", REQUIRED.getValMsg());
     }
 }

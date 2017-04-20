@@ -5,4 +5,5 @@ package pl.com.bottega.cms.model;
  */
 public interface ShowingRepository {
     void put(Showing s);
+
 }

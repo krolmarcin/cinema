@@ -53,10 +53,12 @@ public class StandardAdminPanel implements AdminPanel {
             dates = calendar.getDates();
         }
         Long movieId = cmd.getMovieId();
+        Long cinemaId = cmd.getCinemaId();
         for (LocalDateTime date : dates) {
             Showing showing = new Showing();
             showing.setBeginsAt(date);
             showing.setMovie(movieRepository.get(movieId));
+            //showing.setCinema(cinemaRepository.get(cinemaId));
             showingRepository.put(showing);
         }
     }

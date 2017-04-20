@@ -10,36 +10,28 @@ public interface Validatable {
 
     void validate(ValidationErrors errors);
 
-    default boolean isEmpty(String s) {
-        return s == null || s.isEmpty();
+    default boolean isEmpty(Object o) {
+        return (o == null || o.toString().isEmpty());
     }
 
-    default boolean isEmpty(Long l) {
-        return l == null;
+    default boolean areEquallyEmpty(Object o1, Object o2) {
+        return isEmpty(o1) == isEmpty(o2);
     }
 
-    default boolean isEmpty(LocalDateTime ldt) {
-        return ldt == null;
-    }
-
-    default boolean isEmpty(LocalTime lt) {
-        return lt == null;
-    }
-
-    default boolean isEmpty(ShowingsArranger sa) {
-        return sa == null;
+    default boolean isNotGreaterThanZero(Object o) {
+        return !(o instanceof Integer && (Integer) o > 0);
     }
 
     default boolean isEmpty(Collection c) {
-        if (c != null && c.size() != 0) {
-            for (Object o : c) {
-                if (o == null || isEmpty(o.toString())) {
-                    return true;
-                }
-            }
-            return false;
+        if (c == null || c.size() == 0) {
+            return true;
         }
-        return true;
+        for (Object o : c) {
+            if (isEmpty(o)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     class ValidationErrors {
