@@ -27,9 +27,7 @@ public class CreateCinemaCommand implements Validatable {
 
     @Override
     public void validate(ValidationErrors errors) {
-        if (isEmpty(name))
-            errors.add("name", REQUIRED.getValMsg());
-        if (isEmpty(city))
-            errors.add("city", REQUIRED.getValMsg());
+        ensureNotEmpty(name, "name", errors);
+        ensureNotEmpty(city, "city", errors);
     }
 }

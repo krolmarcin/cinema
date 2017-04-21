@@ -72,25 +72,14 @@ public class CreateShowingsCommand implements Validatable{
 
     @Override
     public void validate(ValidationErrors errors) {
-        if (areEquallyEmpty(dates, calendar))
-            errors.add("dates, calendar", ONE_AND_ONLY_ONE.getValMsg());
+        ensureNotEquallyEmpty(new Object[] {dates, calendar}, new String[] {"dates", "calendar"}, errors);
         if (!isEmpty(calendar)) {
-            if (isEmpty(calendar.getFromDate())) {
-                errors.add("calendar.fromDate", REQUIRED.getValMsg());
-            }
-            if (isEmpty(calendar.getHours())) {
-                errors.add("calendar.hours", REQUIRED.getValMsg());
-            }
-            if (isEmpty(calendar.getUntilDate())) {
-                errors.add("calendar.untilDate", REQUIRED.getValMsg());
-            }
-            if (isEmpty(calendar.getWeekDays())) {
-                errors.add("calendar.weekDays", REQUIRED.getValMsg());
-            }
+            ensureNotEmpty(calendar.getFromDate(), "calendar.fromDate", errors);
+            ensureNotEmpty(calendar.getHours(), "calendar.hours", errors);
+            ensureNotEmpty(calendar.getUntilDate(), "calendar.untilDate", errors);
+            ensureNotEmpty(calendar.getWeekDays(), "calendar.weekDays", errors);
         }
-        if (isEmpty(cinemaId))
-            errors.add("cinemaId", REQUIRED.getValMsg());
-        if (isEmpty(movieId))
-            errors.add("movieId", REQUIRED.getValMsg());
+        ensureNotEmpty(cinemaId, "cinemaId", errors);
+        ensureNotEmpty(movieId, "movieId", errors);
     }
 }

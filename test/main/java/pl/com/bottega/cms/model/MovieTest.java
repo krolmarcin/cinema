@@ -63,5 +63,5 @@ public class MovieTest {
 
         assertEquals(TEST_INT_1, movie.getLength());
     }
-    
+
 }

@@ -1,10 +1,9 @@
 package pl.com.bottega.cms.model.commands;
 
-import pl.com.bottega.cms.model.ShowingsArranger;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
+
+import static pl.com.bottega.cms.model.commands.ValidationError.*;
+
 
 public interface Validatable {
 
@@ -14,24 +13,44 @@ public interface Validatable {
         return (o == null || o.toString().isEmpty());
     }
 
-    default boolean areEquallyEmpty(Object o1, Object o2) {
-        return isEmpty(o1) == isEmpty(o2);
-    }
-
-    default boolean isNotGreaterThanZero(Object o) {
-        return !(o instanceof Integer && (Integer) o > 0);
-    }
-
-    default boolean isEmpty(Collection c) {
-        if (c == null || c.size() == 0) {
-            return true;
+    default void ensureNotEmpty(Object o, String name, ValidationErrors errors) {
+        if (isEmpty(o)) {
+            errors.add(name, REQUIRED.getValMsg());
         }
-        for (Object o : c) {
-            if (isEmpty(o)) {
-                return true;
+    }
+
+    default void ensureNotEquallyEmpty(Object[] objects, String[] names, ValidationErrors errors) {
+        int size = objects.length;
+        for (int i=0; i<size; i++) {
+            for (int j=i+1;j<size; j++) {
+                if (isEmpty(objects[i]) == isEmpty(objects[j])) {
+                    errors.add(names[i] + ", " + names[j], ONE_AND_ONLY_ONE.getValMsg());
+                }
             }
         }
-        return false;
+    }
+
+    default void ensureGreaterThanZero(Object o, String name, ValidationErrors errors) {
+        if (!(o instanceof Integer && (Integer) o > 0)) {
+            errors.add(name, GREATER_THAN_ZERO.getValMsg());
+        }
+    }
+
+    default void ensureNotEmpty(Collection c, String name, ValidationErrors errors) {
+        if (isEmpty(c)) {
+            errors.add(name, REQUIRED.getValMsg());
+        }
+        else if (c.size() == 0) {
+            errors.add(name, NOT_EMPTY.getValMsg());
+        }
+        else {
+            for (Object o : c) {
+                if (isEmpty(o)) {
+                    errors.add(name, NOT_NULL_VALUES.getValMsg());
+                    return;
+                }
+            }
+        }
     }
 
     class ValidationErrors {
