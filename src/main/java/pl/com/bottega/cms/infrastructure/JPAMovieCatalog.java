@@ -9,7 +9,7 @@ import pl.com.bottega.cms.model.Showing;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
 
 public class JPAMovieCatalog implements MovieCatalog {
@@ -18,19 +18,19 @@ public class JPAMovieCatalog implements MovieCatalog {
     private EntityManager entityManager;
 
     @Override
-    public List<MovieDto> listAvailableMovies(Long cinemaId, LocalDateTime startHour, LocalDateTime endHour) {
+    public List<MovieDto> listAvailableMovies(Long cinemaId, LocalDate date) {
 
         String queryMovie = "SELECT DISTINCT m FROM Movie m " +
                 "LEFT JOIN FETCH m.showings s " +
                 "LEFT JOIN FETCH s.cinema c " +
                 "WHERE c.id = :cinemaId " +
-                "AND s.beginsAt BETWEEN :startHour AND :endHour " +
+                "AND s.beginsAt BETWEEN :startHourOfDay AND :endHourOfDay " +
                 "ORDER BY m.title ASC";
 
         Query query = entityManager.createQuery(queryMovie);
         query.setParameter("cinemaId", cinemaId);
-        query.setParameter("startHour", startHour);
-        query.setParameter("endHour", endHour);
+        query.setParameter("startHourOfDay", date.atStartOfDay());
+        query.setParameter("endHourOfDay", date.atStartOfDay().plusDays(1));
 
         List<Movie> movies = query.getResultList();
 

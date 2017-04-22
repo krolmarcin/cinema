@@ -1,10 +1,10 @@
 package pl.com.bottega.cms.application;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MovieCatalog {
 
-    List<MovieDto> listAvailableMovies(Long cinemaId, LocalDateTime startHour, LocalDateTime endHour);
+    List<MovieDto> listAvailableMovies(Long cinemaId, LocalDate date);
 
 }

@@ -1,12 +1,12 @@
 package pl.com.bottega.cms.ui;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.*;
-import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -43,11 +43,8 @@ public class CinemaController {
     }
 
     @GetMapping("/{cinemaId}/movies")
-    public List<MovieDto> showAvailableMoviesOnGivenDate(@PathVariable Long cinemaId, @RequestParam("date") String date) {
-        GlobalParamsAndUtils globalParamsAndUtils = new GlobalParamsAndUtils();
-        LocalDateTime startHour = globalParamsAndUtils.parseStringToLocalDateTime(date + "T00:00");
-        LocalDateTime endHour = globalParamsAndUtils.parseStringToLocalDateTime(date + "T23:59");
-        return movieCatalog.listAvailableMovies(cinemaId, startHour, endHour);
+    public List<MovieDto> getShowings(@PathVariable Long cinemaId, @RequestParam("date") @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDate date) {
+        return movieCatalog.listAvailableMovies(cinemaId, date);
     }
 
 }
