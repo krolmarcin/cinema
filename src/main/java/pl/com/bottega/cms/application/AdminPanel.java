@@ -3,7 +3,7 @@ package pl.com.bottega.cms.application;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
-import pl.com.bottega.cms.model.commands.CreateTicketPriceCommand;
+import pl.com.bottega.cms.model.commands.DefineTicketPriceCommand;
 
 
 /**
@@ -16,5 +16,5 @@ public interface AdminPanel {
 
     void createShowings(CreateShowingsCommand cmd);
 
-    void createTicketPrices(CreateTicketPriceCommand cmd);
+    void defineTicketPrices(DefineTicketPriceCommand cmd);
 }

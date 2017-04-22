@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * Created by maciek on 15.04.2017.
  */
-public class CreateTicketPriceCommand implements Validatable {
+public class DefineTicketPriceCommand implements Validatable {
 
     private Map<String, BigDecimal> ticketPrices;
     private Long movieId;

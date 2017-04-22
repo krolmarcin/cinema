@@ -1,6 +1,5 @@
 package pl.com.bottega.cms.application.implementation;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
@@ -65,7 +64,7 @@ public class StandardAdminPanel implements AdminPanel {
     }
 
     @Override
-    public void createTicketPrices(CreateTicketPriceCommand cmd) {
+    public void defineTicketPrices(DefineTicketPriceCommand cmd) {
         Movie movie = movieRepository.get(cmd.getMovieId());
         Set<TicketPrice> ticketPrices = new HashSet<>();
         for (Map.Entry<String, BigDecimal> ticketPrice : cmd.getTicketPrices().entrySet()){
