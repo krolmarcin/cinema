@@ -8,12 +8,8 @@ import javax.persistence.Id;
  * Created by ogurekk on 2017-04-21.
  */
 
-@Entity
 public class DetailedSeat {
 
-    @Id
-    @GeneratedValue
-    private int id;
 
     private Integer row;
     private Integer seat;

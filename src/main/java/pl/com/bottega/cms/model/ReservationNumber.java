@@ -13,5 +13,5 @@ import java.io.Serializable;
 public class ReservationNumber implements Serializable{
 
     @GeneratedValue
-    private int id;
+    private int number;
 }

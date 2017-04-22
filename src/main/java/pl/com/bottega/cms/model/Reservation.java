@@ -12,7 +12,6 @@ import java.util.Set;
 public class Reservation {
 
     @GeneratedValue
-    @Column(name = "reservation_id")
     private Integer id;
 
     @EmbeddedId
@@ -24,8 +23,7 @@ public class Reservation {
     @ElementCollection
     private List<String> ticketTypeList;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reservation_id")
+    @Transient
     private Set<DetailedSeat> detailedSeats;
 
     @Embedded
