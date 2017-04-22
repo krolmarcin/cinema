@@ -33,6 +33,6 @@ public class MovieController {
         DefineTicketPriceCommand cmd = new DefineTicketPriceCommand();
         cmd.setTicketPrices(ticketPrices);
         cmd.setMovieId(movieId);
-        adminPanel.defineTicketPrices(cmd);
+        adminPanel.createTicketPrices(cmd);
     }
 }
