@@ -18,6 +18,11 @@ public class DetailedSeat {
     private Integer row;
     private Integer seat;
 
+    public DetailedSeat(int row, int seat) {
+        this.row = row;
+        this.seat = seat;
+    }
+
     public Integer getRow() {
         return row;
     }

@@ -12,7 +12,7 @@ import java.util.Set;
 public class Reservation {
 
     @GeneratedValue
-    @Column(name = "resevration_id")
+    @Column(name = "reservation_id")
     private Integer id;
 
     @EmbeddedId
@@ -26,7 +26,7 @@ public class Reservation {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id")
-    private Set<DetailedSeat> seats;
+    private Set<DetailedSeat> detailedSeats;
 
     @Embedded
     private Customer customer;
@@ -63,12 +63,12 @@ public class Reservation {
         this.ticketTypeList = ticketTypeList;
     }
 
-    public Set<DetailedSeat> getSeats() {
-        return seats;
+    public Set<DetailedSeat> getDetailedSeats() {
+        return detailedSeats;
     }
 
-    public void setSeats(Set<DetailedSeat> seats) {
-        this.seats = seats;
+    public void setDetailedSeats(Set<DetailedSeat> detailedSeats) {
+        this.detailedSeats = detailedSeats;
     }
 
     public Customer getCustomer() {

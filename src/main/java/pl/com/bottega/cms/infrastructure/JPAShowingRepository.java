@@ -1,10 +1,17 @@
 package pl.com.bottega.cms.infrastructure;
 
+import pl.com.bottega.cms.model.EntityNotFoundException;
+import pl.com.bottega.cms.model.Reservation;
 import pl.com.bottega.cms.model.Showing;
 import pl.com.bottega.cms.model.ShowingRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -17,6 +24,26 @@ public class JPAShowingRepository implements ShowingRepository {
     @Override
     public void put(Showing s) {
         entityManager.persist(s);
+    }
+
+    @Override
+    public Showing get(Long id) {
+        Showing showing = entityManager.find(Showing.class, id);
+        if (showing == null) {
+            throw new EntityNotFoundException("Showing", id);
+        }
+        return showing;
+    }
+
+    @Override
+    public List<Reservation> getReservations(Long showingId) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
+        Root<Reservation> root = criteriaQuery.from(Reservation.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("showing_id"), showingId));
+        TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
+        List<Reservation> reservations = query.getResultList();
+        return reservations;
     }
 
 }

@@ -59,6 +59,7 @@ public class StandardAdminPanel implements AdminPanel {
             showing.setBeginsAt(date);
             showing.setMovie(movieRepository.get(movieId));
             showing.setCinema(cinemaRepository.get(cinemaId));
+            showing.setReservations(cmd.getReservations());
             showingRepository.put(showing);
         }
     }

@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.model.commands;
 
 
+import pl.com.bottega.cms.model.Reservation;
 import pl.com.bottega.cms.model.ShowingsArranger;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,8 @@ public class CreateShowingsCommand implements Validatable{
     private ShowingsArranger calendar;
 
     private Long movieId;
+
+    private Set<Reservation> reservations;
 
     public List<LocalDateTime> getDates() {
         if (calendar != null) {
@@ -68,6 +71,14 @@ public class CreateShowingsCommand implements Validatable{
 
     public void setMovieId(Long movieId) {
         this.movieId = movieId;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override

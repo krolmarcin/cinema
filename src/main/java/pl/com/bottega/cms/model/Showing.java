@@ -7,6 +7,8 @@ import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -27,6 +29,10 @@ public class Showing {
     private Cinema cinema;
 
     private LocalDateTime beginsAt;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_id")
+    private Set<Reservation> reservations;
 
     public Showing() {
     }
@@ -62,5 +68,13 @@ public class Showing {
 
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

@@ -5,9 +5,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import pl.com.bottega.cms.application.AdminPanel;
 import pl.com.bottega.cms.application.CinemaCatalog;
 import pl.com.bottega.cms.application.MovieCatalog;
-import pl.com.bottega.cms.model.CinemaRepository;
-import pl.com.bottega.cms.model.MovieRepository;
-import pl.com.bottega.cms.model.ShowingRepository;
+import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
 
 /**
