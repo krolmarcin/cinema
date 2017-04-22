@@ -21,8 +21,7 @@ public class Reservation {
 
     private ReservationStatus reservationStatus;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resevration_id")
+    @ElementCollection
     private List<String> ticketTypeList;
 
     @OneToMany(cascade = CascadeType.ALL)
