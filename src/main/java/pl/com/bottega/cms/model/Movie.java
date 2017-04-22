@@ -3,11 +3,11 @@ package pl.com.bottega.cms.model;
 import javax.persistence.*;
 
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
+import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,9 +28,9 @@ public class Movie {
     private int minAge;
     private int length;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movieId")
-    private Set<TicketPrice> ticketPrices;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pricing pricing;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "movieId")
@@ -46,7 +46,7 @@ public class Movie {
         this.genres = cmd.getGenres();
         this.minAge = cmd.getMinAge();
         this.length = cmd.getLength();
-        this.ticketPrices = new HashSet<>();
+        this.pricing = new Pricing();
     }
 
     public Long getId() {
@@ -105,14 +105,6 @@ public class Movie {
         this.length = length;
     }
 
-    public Set<TicketPrice> getTicketPrices() {
-        return ticketPrices;
-    }
-
-    public void setTicketPrices(Set<TicketPrice> ticketPrices) {
-        this.ticketPrices = ticketPrices;
-    }
-
     public Set<Showing> getShowings() {
         return showings;
     }
@@ -120,6 +112,20 @@ public class Movie {
     public void setShowings(Set<Showing> showings) {
         this.showings = showings;
     }
+
+    public Pricing getPricing() {
+        return pricing;
+    }
+
+    public void definePrices(DefineMoviePricesCommand dmpc){
+        if (getPricing() == null){
+            pricing = new Pricing(dmpc);
+        }
+        else
+            pricing.updatePrices(dmpc);
+    }
+
+
 
     @Override
     public boolean equals(Object obj) {

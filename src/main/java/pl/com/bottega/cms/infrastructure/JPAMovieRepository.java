@@ -3,16 +3,9 @@ package pl.com.bottega.cms.infrastructure;
 import pl.com.bottega.cms.model.EntityNotFoundException;
 import pl.com.bottega.cms.model.Movie;
 import pl.com.bottega.cms.model.MovieRepository;
-import pl.com.bottega.cms.model.TicketPrice;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
-import java.util.List;
 
 /**
  * Created by maciek on 09.04.2017.

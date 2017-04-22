@@ -10,12 +10,16 @@ import pl.com.bottega.cms.model.commands.Validatable;
 @Aspect
 public class ValidationAspect {
 
-    @Before("execution(* pl.com.bottega.cms.application..*.*(..)) && args(validatable)")
+    @Before("execution(* pl.com.bottega.cms.application..*.*(..)) " +
+            "&& args(pl.com.bottega.cms.model.commands.Validatable)" +
+            "&& args(validatable)")
     public void setCinemaId(Validatable validatable) {
         Validatable.ValidationErrors errors = new Validatable.ValidationErrors();
         validatable.validate(errors);
         if (!errors.isValid())
             throw new CommandInvalidException(errors);
     }
+
+
 
 }

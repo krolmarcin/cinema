@@ -3,16 +3,13 @@ package pl.com.bottega.cms.application.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.AdminPanel;
+import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
 import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.*;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
 
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -64,12 +61,8 @@ public class StandardAdminPanel implements AdminPanel {
     }
 
     @Override
-    public void defineTicketPrices(DefineTicketPriceCommand cmd) {
-        Movie movie = movieRepository.get(cmd.getMovieId());
-        Set<TicketPrice> ticketPrices = new HashSet<>();
-        for (Map.Entry<String, BigDecimal> ticketPrice : cmd.getTicketPrices().entrySet()){
-            ticketPrices.add(new TicketPrice(ticketPrice.getKey(), ticketPrice.getValue()));
-        }
-        movie.setTicketPrices(ticketPrices);
+    public void defineMoviePrices(Long movieId, DefineMoviePricesCommand prices) {
+        Movie movie = movieRepository.get(movieId);
+        movie.definePrices(prices);
     }
 }
