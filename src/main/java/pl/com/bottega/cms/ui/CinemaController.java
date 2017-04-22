@@ -1,13 +1,12 @@
 package pl.com.bottega.cms.ui;
 
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.application.AdminPanel;
-import pl.com.bottega.cms.application.CinemaCatalog;
-import pl.com.bottega.cms.application.CinemaDto;
-import pl.com.bottega.cms.model.Cinema;
+import pl.com.bottega.cms.application.*;
+import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,11 +17,13 @@ import java.util.List;
 public class CinemaController {
 
     private CinemaCatalog cinemaCatalog;
+    private MovieCatalog movieCatalog;
     private AdminPanel adminPanel;
 
-    public CinemaController(CinemaCatalog cinemaCatalog, AdminPanel adminPanel) {
+    public CinemaController(CinemaCatalog cinemaCatalog, AdminPanel adminPanel, MovieCatalog movieCatalog) {
         this.cinemaCatalog = cinemaCatalog;
         this.adminPanel = adminPanel;
+        this.movieCatalog = movieCatalog;
     }
 
     @PutMapping
@@ -40,4 +41,13 @@ public class CinemaController {
         cmd.setCinemaId(cinemaId);
         adminPanel.createShowings(cmd);
     }
+
+    @GetMapping("/{cinemaId}/movies")
+    public List<MovieDto> showAvailableMoviesOnGivenDate(@PathVariable Long cinemaId, @RequestParam("date") String date) {
+        GlobalParamsAndUtils globalParamsAndUtils = new GlobalParamsAndUtils();
+        LocalDateTime startHour = globalParamsAndUtils.parseStringToLocalDateTime(date + "T00:00");
+        LocalDateTime endHour = globalParamsAndUtils.parseStringToLocalDateTime(date + "T23:59");
+        return movieCatalog.listAvailableMovies(cinemaId, startHour, endHour);
+    }
+
 }

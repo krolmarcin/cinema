@@ -4,7 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import pl.com.bottega.cms.application.AdminPanel;
 import pl.com.bottega.cms.application.CinemaCatalog;
-import pl.com.bottega.cms.model.*;
+import pl.com.bottega.cms.application.MovieCatalog;
+import pl.com.bottega.cms.model.CinemaRepository;
+import pl.com.bottega.cms.model.MovieRepository;
+import pl.com.bottega.cms.model.ShowingRepository;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
 
 /**
@@ -42,6 +45,11 @@ public class Configuration {
     @Bean
     public ReservationNumberGenerator revervationNumberGenerator() {
         return new StandardReservationNumberGenerator();
+    }
+
+    @Bean
+    public MovieCatalog movieCatalog() {
+        return new JPAMovieCatalog();
     }
 
 }
