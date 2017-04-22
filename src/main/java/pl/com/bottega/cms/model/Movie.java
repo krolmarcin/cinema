@@ -32,6 +32,10 @@ public class Movie {
     @JoinColumn(name = "movieId")
     private Set<TicketPrice> ticketPrices;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movieId")
+    private Set<Showing> showings;
+
     Movie() {
     }
 
@@ -107,6 +111,14 @@ public class Movie {
 
     public void setTicketPrices(Set<TicketPrice> ticketPrices) {
         this.ticketPrices = ticketPrices;
+    }
+
+    public Set<Showing> getShowings() {
+        return showings;
+    }
+
+    public void setShowings(Set<Showing> showings) {
+        this.showings = showings;
     }
 
     @Override

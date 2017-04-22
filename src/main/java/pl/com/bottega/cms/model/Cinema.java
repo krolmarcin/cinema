@@ -19,9 +19,8 @@ public class Cinema {
     private String city;
 
 
-    Cinema() {
+    public Cinema() {
     }
-
 
     public Cinema(CreateCinemaCommand cmd) {
         this.name = cmd.getName();

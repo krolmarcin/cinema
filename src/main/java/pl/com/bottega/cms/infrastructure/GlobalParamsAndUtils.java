@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.infrastructure;//tu bedziemy przechowywac statyczne metody/pola finalowe, z ktorych bedzie korzystac aplikacja
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
