@@ -23,7 +23,20 @@ public class JPAShowingRepository implements ShowingRepository {
 
     @Override
     public void put(Showing s) {
-        entityManager.persist(s);
+        if (s.getId() != null) {
+            Showing showing = entityManager.find(Showing.class, s.getId());
+            if (showing == null) {
+                entityManager.persist(s);
+            }
+            else {
+                entityManager.merge(s);
+            }
+        }
+        else {
+            entityManager.persist(s);
+        }
+
+
     }
 
     @Override

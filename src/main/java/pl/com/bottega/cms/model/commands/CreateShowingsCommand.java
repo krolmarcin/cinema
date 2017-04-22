@@ -28,8 +28,6 @@ public class CreateShowingsCommand implements Validatable{
 
     private Long movieId;
 
-    private Set<Reservation> reservations;
-
     public List<LocalDateTime> getDates() {
         if (calendar != null) {
             return calendar.getDates();
@@ -73,13 +71,6 @@ public class CreateShowingsCommand implements Validatable{
         this.movieId = movieId;
     }
 
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 
     @Override
     public void validate(ValidationErrors errors) {

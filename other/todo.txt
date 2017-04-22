@@ -5,3 +5,4 @@
 - DONE 50% / uspojnienie wyjatkow ( w tym abstrakcja standardowych komunikatow do jakiegos enuma lub konfiguracji enumow)
 - DONE / poprawa metody isEmpty (prawdopodobnie na object -> i uspojnienie)
 - poprawa walidacji -> to znaczy w argumencie bedziemy przekazywac caly obiekt i switch/case po typach obiektow aby sprawdzac odpowiednie cechy danego obiektu
+- pohashowac reservationnumber

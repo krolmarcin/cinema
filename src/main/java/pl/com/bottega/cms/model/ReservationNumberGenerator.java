@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
  */
 public interface ReservationNumberGenerator {
 
-    public String generate(Showing showing);
+    public String generate(Long cinemaId, Long movieId, LocalDateTime date, int id);
 }

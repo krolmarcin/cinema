@@ -10,13 +10,16 @@ import javax.persistence.Id;
 
 public class DetailedSeat {
 
-
     private Integer row;
     private Integer seat;
 
-    public DetailedSeat(int row, int seat) {
+    public DetailedSeat(Integer row, Integer seat) {
         this.row = row;
         this.seat = seat;
+    }
+
+    public DetailedSeat() {
+
     }
 
     public Integer getRow() {

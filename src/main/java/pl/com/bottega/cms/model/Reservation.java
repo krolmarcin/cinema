@@ -11,17 +11,19 @@ import java.util.Set;
 @Entity
 public class Reservation {
 
+    @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
-    @EmbeddedId
+    @Embedded
     @AttributeOverride(name = "number", column = @Column(name = "reservation_number"))
     private ReservationNumber reservationNumber;
 
     private ReservationStatus reservationStatus;
 
-    @ElementCollection
-    private List<String> ticketTypeList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_id")
+    private Set<ReservationItem> reservationItems;
 
     @Transient
     private Set<DetailedSeat> detailedSeats;
@@ -29,11 +31,14 @@ public class Reservation {
     @Embedded
     private Customer customer;
 
-    public Integer getId() {
+    public Reservation() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,12 +58,12 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
-    public List<String> getTicketTypeList() {
-        return ticketTypeList;
+    public Set<ReservationItem> getReservationItems() {
+        return reservationItems;
     }
 
-    public void setTicketTypeList(List<String> ticketTypeList) {
-        this.ticketTypeList = ticketTypeList;
+    public void setReservationItems(Set<ReservationItem> reservationItems) {
+        this.reservationItems = reservationItems;
     }
 
     public Set<DetailedSeat> getDetailedSeats() {
@@ -76,4 +81,9 @@ public class Reservation {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+
+
+
+
 }
