@@ -31,7 +31,7 @@ public class Showing {
     private LocalDateTime beginsAt;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reservation_id")
+    @JoinColumn(name = "showing_id")
     private Set<Reservation> reservations;
 
     public Showing() {

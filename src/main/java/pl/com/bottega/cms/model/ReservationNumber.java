@@ -12,6 +12,22 @@ import java.io.Serializable;
 @Embeddable
 public class ReservationNumber implements Serializable{
 
-    @GeneratedValue
-    private int number;
+    private String number;
+
+    public ReservationNumber(String number) {
+        this.number = number;
+    }
+
+    public ReservationNumber() {
+
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
 }
