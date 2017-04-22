@@ -3,12 +3,14 @@ package pl.com.bottega.cms.infrastructure;
 import pl.com.bottega.cms.application.MovieCatalog;
 import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.application.ShowingDto;
+import pl.com.bottega.cms.model.InvalidActionException;
 import pl.com.bottega.cms.model.Movie;
 import pl.com.bottega.cms.model.Showing;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.text.Collator;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -58,6 +60,12 @@ public class JPAMovieCatalog implements MovieCatalog {
         List<ShowingDto> showingDtos = new LinkedList<>();
         for (Showing showing : movie.getShowings()) {
             showingDtos.add(getShowingDtos(showing));
+            showingDtos.sort(new Comparator<ShowingDto>() {
+                @Override
+                public int compare(ShowingDto o1, ShowingDto o2) {
+                    return o1.getTime().compareTo(o2.getTime());
+                }
+            });
         }
         return showingDtos;
     }
