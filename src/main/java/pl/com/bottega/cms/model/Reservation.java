@@ -21,7 +21,7 @@ public class Reservation {
     private ReservationStatus reservationStatus;
 
     @ElementCollection
-    private List<String> ticketTypeList;
+    private Set<ReservationItem> reservationItems;
 
     @Transient
     private Set<DetailedSeat> detailedSeats;
@@ -53,12 +53,12 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
-    public List<String> getTicketTypeList() {
-        return ticketTypeList;
+    public Set<ReservationItem> getTicketTypeList() {
+        return reservationItems;
     }
 
-    public void setTicketTypeList(List<String> ticketTypeList) {
-        this.ticketTypeList = ticketTypeList;
+    public void setTicketTypeList(Set<ReservationItem> reservationItems) {
+        this.reservationItems = reservationItems;
     }
 
     public Set<DetailedSeat> getDetailedSeats() {
