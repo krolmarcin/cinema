@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model.commands;
 
-import static pl.com.bottega.cms.model.commands.ValidationError.REQUIRED;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
 /**
  * Created by maciek on 09.04.2017.

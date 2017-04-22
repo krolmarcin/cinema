@@ -2,9 +2,8 @@ package pl.com.bottega.cms.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import static org.mockito.Mockito.*;
+import pl.com.bottega.cms.model.cinema.Cinema;
 
 import static org.junit.Assert.assertEquals;
 import static pl.com.bottega.cms.shared.Stubs.*;

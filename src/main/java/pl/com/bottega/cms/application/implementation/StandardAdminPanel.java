@@ -2,10 +2,18 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import pl.com.bottega.cms.application.AdminPanel;
+import pl.com.bottega.cms.infrastructure.AdminPanel;
+import pl.com.bottega.cms.infrastructure.repositories.CinemaRepository;
+import pl.com.bottega.cms.infrastructure.repositories.MovieRepository;
+import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
+import pl.com.bottega.cms.model.cinema.Cinema;
 import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
-import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.*;
+import pl.com.bottega.cms.model.movie.Movie;
+import pl.com.bottega.cms.model.reservation.Reservation;
+import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.model.showing.ShowingsArranger;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import java.util.HashSet;
 import java.util.List;

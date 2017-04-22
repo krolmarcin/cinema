@@ -1,8 +1,8 @@
 package pl.com.bottega.cms.model.commands;
 
-import java.util.Set;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
-import static pl.com.bottega.cms.model.commands.ValidationError.*;
+import java.util.Set;
 
 public class CreateMovieCommand implements Validatable {
 

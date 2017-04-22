@@ -3,6 +3,8 @@ package pl.com.bottega.cms.model;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.model.showing.ShowingsArranger;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model.commands;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
 import java.math.BigDecimal;
 import java.util.Map;

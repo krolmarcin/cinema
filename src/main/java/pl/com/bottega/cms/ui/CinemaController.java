@@ -2,7 +2,11 @@ package pl.com.bottega.cms.ui;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.application.*;
+import pl.com.bottega.cms.application.catalogs.CinemaCatalog;
+import pl.com.bottega.cms.application.catalogs.MovieCatalog;
+import pl.com.bottega.cms.application.dtos.CinemaDto;
+import pl.com.bottega.cms.application.dtos.MovieDto;
+import pl.com.bottega.cms.infrastructure.AdminPanel;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 
