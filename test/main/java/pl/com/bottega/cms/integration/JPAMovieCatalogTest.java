@@ -52,19 +52,4 @@ public class JPAMovieCatalogTest {
         movieCatalog.getShowings(cinemaId, date);
     }
 
-    @Test
-    @Sql("/fixtures/cinemaCatalog.sql")
-    public void shouldFindMoviesPrices() {
-        Long cinemaId = 1L;
-        LocalDate date = LocalDate.of(2017, 04, 20);
-
-        List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
-
-        assertThat(movies.size()).isEqualTo(2);
-        assertThat(movies.get(0).getPrices().get("regular")).isEqualTo(new BigDecimal(4.25));
-        assertThat(movies.get(0).getPrices().get("student")).isEqualTo(new BigDecimal(3.25));
-        assertThat(movies.get(0).getPrices().get("school")).isEqualTo(new BigDecimal(2.25));
-        assertThat(movies.get(0).getPrices().get("children")).isZero();
-        }
-
 }
