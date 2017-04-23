@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.application.catalogs;
 
-import pl.com.bottega.cms.application.dtos.MovieDto;
+import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.application.dtos.ShowingDto;
 import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.model.showing.Showing;
@@ -17,7 +17,7 @@ public class JPAMovieCatalog implements MovieCatalog {
     private EntityManager entityManager;
 
     @Override
-    public List<MovieDto> getShowings(Long cinemaId, LocalDate date) {
+    public List<MovieShowingsDto> getShowings(Long cinemaId, LocalDate date) {
 
         String queryMovie = "SELECT DISTINCT m FROM Movie m " +
                 "LEFT JOIN FETCH m.showings s " +
@@ -33,24 +33,24 @@ public class JPAMovieCatalog implements MovieCatalog {
 
         List<Movie> movies = query.getResultList();
 
-        List<MovieDto> movieDtos = new LinkedList<>();
+        List<MovieShowingsDto> movieShowingsDtos = new LinkedList<>();
         for (Movie movie : movies) {
-            movieDtos.add(getMovieDtos(movie));
+            movieShowingsDtos.add(getMovieDtos(movie));
         }
-        return movieDtos;
+        return movieShowingsDtos;
     }
 
-    private MovieDto getMovieDtos(Movie movie) {
-        MovieDto movieDto = new MovieDto();
-        movieDto.setTitle(movie.getTitle());
-        movieDto.setDescription(movie.getDescription());
-        movieDto.setActors(movie.getActors());
-        movieDto.setGenres(movie.getGenres());
-        movieDto.setMinAge(movie.getMinAge());
-        movieDto.setLength(movie.getLength());
+    private MovieShowingsDto getMovieDtos(Movie movie) {
+        MovieShowingsDto movieShowingsDto = new MovieShowingsDto();
+        movieShowingsDto.setTitle(movie.getTitle());
+        movieShowingsDto.setDescription(movie.getDescription());
+        movieShowingsDto.setActors(movie.getActors());
+        movieShowingsDto.setGenres(movie.getGenres());
+        movieShowingsDto.setMinAge(movie.getMinAge());
+        movieShowingsDto.setLength(movie.getLength());
         List<ShowingDto> showingDtos = createShowingDtos(movie);
-        movieDto.setShowings(showingDtos);
-        return movieDto;
+        movieShowingsDto.setShowings(showingDtos);
+        return movieShowingsDto;
     }
 
     private List<ShowingDto> createShowingDtos(Movie movie) {
