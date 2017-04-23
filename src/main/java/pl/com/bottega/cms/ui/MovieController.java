@@ -27,6 +27,7 @@ public class MovieController {
     @PutMapping("/{movieId}/prices")
     public void defineMoviePrices(@PathVariable Long movieId, @RequestBody Map<String, BigDecimal> prices){
         DefineMoviePricesCommand dmpc = new DefineMoviePricesCommand(prices);
-        adminPanel.defineMoviePrices(movieId, dmpc);
+        dmpc.setMovieId(movieId);
+        adminPanel.defineMoviePrices(dmpc);
     }
 }

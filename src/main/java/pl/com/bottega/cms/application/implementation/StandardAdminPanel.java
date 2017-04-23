@@ -70,8 +70,8 @@ public class StandardAdminPanel implements AdminPanel {
     }
 
     @Override
-    public void defineMoviePrices(Long movieId, DefineMoviePricesCommand prices) {
-        Movie movie = movieRepository.get(movieId);
+    public void defineMoviePrices(DefineMoviePricesCommand prices) {
+        Movie movie = movieRepository.get(prices.getMovieId());
         movie.definePrices(prices);
     }
 }
