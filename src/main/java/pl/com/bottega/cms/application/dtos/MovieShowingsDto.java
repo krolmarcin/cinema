@@ -3,7 +3,7 @@ package pl.com.bottega.cms.application.dtos;
 import java.util.List;
 import java.util.Set;
 
-public class MovieDto {
+public class MovieShowingsDto {
 
     private String title;
     private String description;

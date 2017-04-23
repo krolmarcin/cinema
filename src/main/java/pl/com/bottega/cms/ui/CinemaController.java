@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.catalogs.CinemaCatalog;
 import pl.com.bottega.cms.application.catalogs.MovieCatalog;
 import pl.com.bottega.cms.application.dtos.CinemaDto;
-import pl.com.bottega.cms.application.dtos.MovieDto;
+import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.infrastructure.AdminPanel;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
@@ -47,8 +47,8 @@ public class CinemaController {
     }
 
     @GetMapping("/{cinemaId}/movies")
-    public List<MovieDto> getShowings(@PathVariable Long cinemaId, @RequestParam("date") @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDate date) {
-        return movieCatalog.listAvailableMovies(cinemaId, date);
+    public List<MovieShowingsDto> getShowings(@PathVariable Long cinemaId, @RequestParam("date") @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDate date) {
+        return movieCatalog.getShowings(cinemaId, date);
     }
 
 }
