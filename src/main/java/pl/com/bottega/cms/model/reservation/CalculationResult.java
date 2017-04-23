@@ -1,6 +1,5 @@
 package pl.com.bottega.cms.model.reservation;
 
-import sun.security.krb5.internal.Ticket;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -11,7 +10,7 @@ import java.util.Collection;
 public class CalculationResult {
 
     private BigDecimal totalPrice;
-    private Collection<Ticket> tickets;
+    private Collection<ReservationItem> tickets;
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
@@ -21,11 +20,11 @@ public class CalculationResult {
         this.totalPrice = totalPrice;
     }
 
-    public Collection<Ticket> getTickets() {
+    public Collection<ReservationItem> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Collection<Ticket> tickets) {
+    public void setTickets(Collection<ReservationItem> tickets) {
         this.tickets = tickets;
     }
 }
