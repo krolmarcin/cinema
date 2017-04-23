@@ -25,8 +25,6 @@ public class JPAMovieCatalogTest {
     @Autowired
     private JPAMovieCatalog movieCatalog;
 
-    private GlobalParamsAndUtils globalParamsAndUtils;
-
     @Test
     @Sql("/fixtures/cinemaCatalog.sql")
     public void shouldFindMoviesInCinema() {

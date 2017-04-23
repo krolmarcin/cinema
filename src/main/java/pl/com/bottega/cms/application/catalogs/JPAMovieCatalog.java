@@ -4,6 +4,7 @@ import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.application.dtos.ShowingDto;
 import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,8 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @Override
     public List<MovieShowingsDto> getShowings(Long cinemaId, LocalDate date) {
+        if (date == null)
+            throw new InvalidActionException("Date is missing");
 
         String queryMovie = "SELECT DISTINCT m FROM Movie m " +
                 "LEFT JOIN FETCH m.showings s " +
