@@ -5,13 +5,9 @@ import pl.com.bottega.cms.model.reservation.DetailedSeat;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by ogurekk on 2017-04-22.
- */
 public class CinemaHallDto {
 
     List<DetailedSeat> free = new LinkedList<>();
-
     List<DetailedSeat> occupied = new LinkedList<>();
 
     public CinemaHallDto(boolean[][] seatConfiguration) {
@@ -44,4 +40,5 @@ public class CinemaHallDto {
     public void setOccupied(List<DetailedSeat> occupied) {
         this.occupied = occupied;
     }
+
 }
