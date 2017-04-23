@@ -3,7 +3,6 @@ package pl.com.bottega.cms.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.application.results.CalculationResult;
 import pl.com.bottega.cms.model.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import org.springframework.web.bind.annotation.*;
