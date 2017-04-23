@@ -14,7 +14,6 @@ public class MovieShowingsDto {
     private int minAge;
     private int length;
     private List<ShowingDto> showings;
-    private Map<String, BigDecimal> prices;
 
     public String getTitle() {
         return title;
@@ -70,14 +69,6 @@ public class MovieShowingsDto {
 
     public void setShowings(List<ShowingDto> showings) {
         this.showings = showings;
-    }
-
-    public Map<String, BigDecimal> getPrices() {
-        return prices;
-    }
-
-    public void setPrices(Map<String, BigDecimal> prices) {
-        this.prices = prices;
     }
 
 }
