@@ -88,6 +88,22 @@ public class Reservation {
         this.customer = customer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (this == null || o == null) {
+            return false;
+        }
+        if (!(o instanceof Reservation)) {
+            return false;
+        }
+        Reservation reservation = (Reservation) o;
+        return this.reservationNumber.equals(reservation.reservationNumber);
+    }
+
+
 
 
 

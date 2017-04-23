@@ -3,13 +3,14 @@ package pl.com.bottega.cms.model.showing;
 import javax.persistence.*;
 
 import pl.com.bottega.cms.model.cinema.Cinema;
-import pl.com.bottega.cms.model.reservation.CinemaHall;
-import pl.com.bottega.cms.model.reservation.Reservation;
+import pl.com.bottega.cms.model.commands.CreateReservationCommand;
+import pl.com.bottega.cms.model.reservation.*;
 import pl.com.bottega.cms.model.movie.Movie;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -83,4 +84,22 @@ public class Showing {
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
+
+    public ReservationNumber createReservation(CreateReservationCommand cmd, ReservationNumberGenerator reservationNumberGenerator) {
+        Set<ReservationItem> reservationItems = cmd.getTickets();
+        Set<DetailedSeat> detailedSeats = cmd.getSeats();
+        Customer customer = cmd.getCustomer();
+        Reservation reservation = new Reservation();
+        reservation.setReservationItems(reservationItems);
+        reservation.setDetailedSeats(detailedSeats);
+        reservation.setCustomer(customer);
+        ReservationNumber reservationNumber = new ReservationNumber(reservationNumberGenerator.generate(this));
+        reservation.setReservationNumber(reservationNumber);
+        CinemaHall cinemaHall = CinemaHall.STANDARD;
+        cinemaHall.updateSeatConfiguration(reservations);
+        cinemaHall.ensureReservationCompatible(detailedSeats);
+        reservations.add(reservation);
+        return reservationNumber;
+    }
+
 }

@@ -10,7 +10,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -48,14 +50,14 @@ public class JPAShowingRepository implements ShowingRepository {
     }
 
     @Override
-    public List<Reservation> getReservations(Long showingId) {
+    public Set<Reservation> getReservations(Long showingId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
         Root<Reservation> root = criteriaQuery.from(Reservation.class);
         //root.fetch("showing", JoinType.LEFT);
         criteriaQuery.where(criteriaBuilder.equal(root.get("showing"), showingId));
         TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
-        List<Reservation> reservations = query.getResultList();
+        Set<Reservation> reservations = new HashSet<Reservation>(query.getResultList());
         return reservations;
     }
 

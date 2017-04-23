@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.reservation;
 
+import pl.com.bottega.cms.model.showing.Showing;
+
 import java.time.LocalDateTime;
 
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.HASH_0;
@@ -12,11 +14,16 @@ import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.hash;
 public class StandardReservationNumberGenerator implements ReservationNumberGenerator {
 
     @Override
-    public String generate(Long cinemaId, Long movieId, LocalDateTime date, int id) {
-        String dateString = date.toString();
-        Long hourLong = Long.parseLong(dateString.substring(dateString.length()-5, dateString.length()-3)) * 100 +
-                Long.parseLong(dateString.substring(dateString.length()-2, dateString.length()));
-        return hash(cinemaId)+ "/" + hash(movieId) + "/" + hash(hourLong) + "/" + hash(Long.parseLong(id+""));
+    public String generate(Showing showing) {
+        Long cinemaId = showing.getCinema().getId();
+        Long movieId = showing.getMovie().getId();
+        LocalDateTime beginsAt = showing.getBeginsAt();
+        String beginsAtString = beginsAt.toString();
+        Long beginsAtLong = Long.parseLong(beginsAtString.substring(beginsAtString.length()-5, beginsAtString.length()-3)) * 100 +
+                Long.parseLong(beginsAtString.substring(beginsAtString.length()-2, beginsAtString.length()));
+        Long number = Long.parseLong(showing.getReservations().size()+"");
+
+        return hash(cinemaId)+ "/" + hash(movieId) + "/" + hash(beginsAtLong) + "/" + hash(number);
     }
 
 

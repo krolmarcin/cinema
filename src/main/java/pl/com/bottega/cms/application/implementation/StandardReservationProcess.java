@@ -32,19 +32,10 @@ public class StandardReservationProcess implements ReservationProcess {
 
     @Override
     public ReservationNumber create(CreateReservationCommand cmd) {
-        Long showingId = cmd.getShowId();
-        Set<ReservationItem> reservationItems = cmd.getTickets();
-        Set<DetailedSeat> detailedSeats = cmd.getSeats();
-        Customer customer = cmd.getCustomer();
-        Reservation reservation = new Reservation();
-        reservation.setReservationItems(reservationItems);
-        reservation.setDetailedSeats(detailedSeats);
-        reservation.setCustomer(customer);
         Showing showing = showingRepository.get(cmd.getShowId());
-        reservation.setReservationNumber(new ReservationNumber(reservationNumberGenerator.generate(showing.getCinema().getId(), showing.getMovie().getId(), showing.getBeginsAt(), showing.getReservations().size())));
-        showing.getReservations().add(reservation);
+        ReservationNumber reservationNumber = showing.createReservation(cmd, reservationNumberGenerator);
         showingRepository.put(showing);
-        return reservation.getReservationNumber();
+        return reservationNumber;
     }
 
     @Override

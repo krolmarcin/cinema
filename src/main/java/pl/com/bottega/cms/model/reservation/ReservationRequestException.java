@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.reservation;
 
+import pl.com.bottega.cms.model.commands.CommandInvalidException;
+
 /**
  * Created by ogurekk on 2017-04-23.
  */
