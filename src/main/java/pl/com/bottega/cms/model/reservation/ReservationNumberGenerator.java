@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.reservation;
 
+import pl.com.bottega.cms.model.showing.Showing;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,5 +9,5 @@ import java.time.LocalDateTime;
  */
 public interface ReservationNumberGenerator {
 
-    public String generate(Long cinemaId, Long movieId, LocalDateTime date, int id);
+    public String generate(Showing showing);
 }

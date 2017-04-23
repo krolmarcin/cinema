@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.reservation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -81,6 +83,22 @@ public class Reservation {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (this == null || o == null) {
+            return false;
+        }
+        if (!(o instanceof Reservation)) {
+            return false;
+        }
+        Reservation reservation = (Reservation) o;
+        return this.reservationNumber.equals(reservation.reservationNumber);
+    }
+
 
 
 

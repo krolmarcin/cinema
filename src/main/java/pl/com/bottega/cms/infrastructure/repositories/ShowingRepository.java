@@ -4,6 +4,7 @@ import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.showing.Showing;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maciek on 09.04.2017.
@@ -13,6 +14,6 @@ public interface ShowingRepository {
 
     Showing get(Long id);
 
-    List<Reservation> getReservations(Long showingId);
+    Set<Reservation> getReservations(Long showingId);
 
 }

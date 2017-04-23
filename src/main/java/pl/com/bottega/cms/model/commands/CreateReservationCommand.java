@@ -1,10 +1,7 @@
 package pl.com.bottega.cms.model.commands;
 
 import pl.com.bottega.cms.infrastructure.validation.Validatable;
-import pl.com.bottega.cms.model.reservation.CinemaHall;
-import pl.com.bottega.cms.model.reservation.Customer;
-import pl.com.bottega.cms.model.reservation.DetailedSeat;
-import pl.com.bottega.cms.model.reservation.ReservationItem;
+import pl.com.bottega.cms.model.reservation.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -65,14 +62,13 @@ public class CreateReservationCommand implements Validatable{
             ticketTypes.add(reservationItem.getKind());
         }
         ensureUniqueElements(ticketTypes, "tickets", errors);
-        CinemaHall cinemaHall = CinemaHall.STANDARD;
-        cinemaHall.ensureReservationCompatible(seats);
         ensureNotEmpty(seats, "seats", errors);
         ensureNotEmpty(customer, "customer", errors);
         if (!isEmpty(customer)) {
             ensureNotEmpty(customer.getFirstName(), "customer.firstName", errors);
             ensureNotEmpty(customer.getLastName(), "customer.lastName", errors);
             ensureNotEmpty(customer.getEmail(), "customer.email", errors);
+            ensureValidEmailAddress(customer.getEmail(), "customer.email", errors);
             ensureNotEmpty(customer.getPhone(), "customer.phone", errors);
         }
 

@@ -11,7 +11,8 @@ public enum ValidationError {
     GREATER_THAN_ZERO("should be greater than zero"),
     ONE_AND_ONLY_ONE("one and only one is required"),
     AT_LEAST_X("required at least "),
-    UNIQUE_ELEMENTS("should contain unique elements");
+    UNIQUE_ELEMENTS("should contain unique elements"),
+    VALID_EMAIL_ADDRESS("not recognized as valid email address");
 
     private String valMsg;
 
