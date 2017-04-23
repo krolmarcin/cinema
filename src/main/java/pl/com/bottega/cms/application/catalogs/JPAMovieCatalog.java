@@ -51,6 +51,7 @@ public class JPAMovieCatalog implements MovieCatalog {
         movieShowingsDto.setGenres(movie.getGenres());
         movieShowingsDto.setMinAge(movie.getMinAge());
         movieShowingsDto.setLength(movie.getLength());
+        movieShowingsDto.setPrices(movie.getPricing().getPriceMap());
         List<ShowingDto> showingDtos = createShowingDtos(movie);
         movieShowingsDto.setShowings(showingDtos);
         return movieShowingsDto;

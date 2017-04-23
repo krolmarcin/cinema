@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.model.reservation;
 
+import pl.com.bottega.cms.model.showing.Showing;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -27,6 +29,10 @@ public class Reservation {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id")
     private Set<DetailedSeat> detailedSeats;
+
+    @ManyToOne
+    @JoinColumn(name = "showing_id")
+    private Showing showing;
 
     @Embedded
     private Customer customer;

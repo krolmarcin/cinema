@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -51,7 +52,8 @@ public class JPAShowingRepository implements ShowingRepository {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
         Root<Reservation> root = criteriaQuery.from(Reservation.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("showing_id"), showingId));
+        //root.fetch("showing", JoinType.LEFT);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("showing"), showingId));
         TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
         List<Reservation> reservations = query.getResultList();
         return reservations;
