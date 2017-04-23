@@ -11,7 +11,6 @@ import pl.com.bottega.cms.infrastructure.validation.Validatable;
 public class ValidationAspect {
 
     @Before("execution(* pl.com.bottega.cms.application..*.*(..)) " +
-            "&& args(pl.com.bottega.cms.infrastructure.validation.Validatable)" +
             "&& args(validatable)")
     public void setCinemaId(Validatable validatable) {
         Validatable.ValidationErrors errors = new Validatable.ValidationErrors();
