@@ -28,24 +28,24 @@ public class DefineMoviePricesCommand implements Validatable {
 
 
     @Override
-    public void validate(Validatable.ValidationErrors priceMap) {
-        if (priceMap == null || getPriceMap().size() == 0)
-            priceMap.add("ticketPrices", "can't be empty");
-        if (!getPriceMap().containsKey("regular"))
-            priceMap.add("regular", "is required field");
-        else if (!Pattern.matches("\\d+\\.\\d{2}", getPriceMap().get("regular").toString()))
-            priceMap.add("regular", "must be number of structure 999.99 and can't be less than 0");
-        if (!getPriceMap().containsKey("student"))
-            priceMap.add("student", "is required field");
-        else if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", getPriceMap().get("student").toString()))
-            priceMap.add("student", "must be number of structure 999.99 and can't be less than 0");
-        if (getPriceMap().containsKey("school")) {
-            if (!Pattern.matches("\\d+\\.\\d{2}", getPriceMap().get("school").toString()))
-                priceMap.add("school", "must be number of structure 999.99 and can't be less than 0");
+    public void validate(Validatable.ValidationErrors errors) {
+        if (priceMap == null || priceMap.size() == 0)
+            errors.add("ticketPrices", "can't be empty");
+        if (!priceMap.containsKey("regular"))
+            errors.add("regular", "is required field");
+        else if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("regular").toString()))
+            errors.add("regular", "must be number of structure 999.99 and can't be less than 0");
+        if (!priceMap.containsKey("student"))
+            errors.add("student", "is required field");
+        else if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", priceMap.get("student").toString()))
+            errors.add("student", "must be number of structure 999.99 and can't be less than 0");
+        if (priceMap.containsKey("school")) {
+            if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("school").toString()))
+                errors.add("school", "must be number of structure 999.99 and can't be less than 0");
         }
-        if (getPriceMap().containsKey("children")) {
-            if (!Pattern.matches("\\d+\\.\\d{2}", getPriceMap().get("children").toString()))
-                priceMap.add("children", "must be number of structure 999.99 and can't be less than 0");
+        if (priceMap.containsKey("children")) {
+            if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("children").toString()))
+                errors.add("children", "must be number of structure 999.99 and can't be less than 0");
         }
     }
 }

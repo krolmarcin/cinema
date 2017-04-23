@@ -7,6 +7,7 @@ import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
 import pl.com.bottega.cms.model.*;
 import pl.com.bottega.cms.model.commands.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 import java.time.LocalDateTime;
