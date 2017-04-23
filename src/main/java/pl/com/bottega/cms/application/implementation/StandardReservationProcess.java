@@ -2,6 +2,7 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cms.model.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
@@ -23,9 +24,12 @@ public class StandardReservationProcess implements ReservationProcess {
     @Autowired
     private ReservationNumberGenerator reservationNumberGenerator;
 
+    @Autowired
+    private PriceCalculator priceCalculator;
+
     @Override
     public CalculationResult calculatePrices(CalculatePriceCommand cmd) {
-        return null;
+        return priceCalculator.calculatePrices(cmd);
     }
 
     @Override
