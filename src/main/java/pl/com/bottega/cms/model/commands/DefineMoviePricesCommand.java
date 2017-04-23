@@ -23,7 +23,6 @@ public class DefineMoviePricesCommand implements Validatable {
         return priceMap;
     }
 
-//    @JsonProperty
     public void setPriceMap(Map<String, BigDecimal> priceMap) {
         this.priceMap = priceMap;
     }

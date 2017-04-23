@@ -119,11 +119,7 @@ public class Movie {
     }
 
     public void definePrices(DefineMoviePricesCommand dmpc){
-        if (getPricing() == null){
-            pricing = new Pricing(dmpc);
-        }
-        else
-            pricing.updatePrices(dmpc);
+            pricing.definePrices(dmpc);
     }
 
 

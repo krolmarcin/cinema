@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
+import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.ui.InvalidActionException;
 
 import java.time.LocalDate;
@@ -48,6 +49,22 @@ public class JPAMovieCatalogTest {
         LocalDate date = null;
 
         movieCatalog.getShowings(cinemaId, date);
+    }
+
+    @Test
+    @Sql("/fixtures/cinemaCatalog.sql")
+    public void shouldFindMoviesPrices() {
+        Long cinemaId = 1L;
+        LocalDate date = LocalDate.of(2017, 04, 20);
+
+        List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
+
+        //Movie movie0 = movies.get(0).;
+        assertThat(movies.size()).isEqualTo(2);
+        //assertThat(movie0).isEqualTo("Pulp Fiction");
+        assertThat(movies.get(1).getTitle()).isEqualTo("Pulp Fiction 2");
+        assertThat(movies.get(0).getShowings().get(0).getTime().toString()).isEqualTo("07:15");
+        assertThat(movies.get(0).getShowings().get(1).getTime().toString()).isEqualTo("10:15");
     }
 
 }

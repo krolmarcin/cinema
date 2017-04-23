@@ -4,6 +4,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import pl.com.bottega.cms.model.movie.Movie;
+import pl.com.bottega.cms.model.movie.Pricing;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -63,6 +67,15 @@ public class MovieTest {
         Movie movie = TEST_MOVIE_0;
 
         assertEquals(TEST_INT_1, movie.getLength());
+    }
+
+    @Test
+    public void shouldRememberPriceOnDefine() {
+        Movie movie = TEST_MOVIE_0;
+
+        assertTrue(movie.getPricing().getPriceMap().containsKey(TEST_STRING_0));
+        assertEquals(TEST_BIGDECIMAL_0, movie.getPricing().getPriceMap().get(TEST_STRING_0));
+        assertEquals(TEST_BIGDECIMAL_1, movie.getPricing().getPriceMap().get(TEST_STRING_1));
     }
 
 }
