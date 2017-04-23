@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.com.bottega.cms.model.EntityNotFoundException;
-import pl.com.bottega.cms.model.InvalidActionException;
+import pl.com.bottega.cms.infrastructure.repositories.EntityNotFoundException;
 import pl.com.bottega.cms.model.commands.CommandInvalidException;
-import pl.com.bottega.cms.model.commands.Validatable;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
 @ControllerAdvice
 public class ErrorHandlers {

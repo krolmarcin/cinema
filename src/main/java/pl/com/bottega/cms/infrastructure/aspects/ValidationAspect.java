@@ -4,14 +4,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.model.commands.CommandInvalidException;
-import pl.com.bottega.cms.model.commands.Validatable;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
 @Component
 @Aspect
 public class ValidationAspect {
 
     @Before("execution(* pl.com.bottega.cms.application..*.*(..)) " +
-            "&& args(pl.com.bottega.cms.model.commands.Validatable)" +
+            "&& args(pl.com.bottega.cms.infrastructure.validation.Validatable)" +
             "&& args(validatable)")
     public void setCinemaId(Validatable validatable) {
         Validatable.ValidationErrors errors = new Validatable.ValidationErrors();

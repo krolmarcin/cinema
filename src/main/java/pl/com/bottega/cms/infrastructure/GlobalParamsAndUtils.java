@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class GlobalParamsAndUtils {
 
+    public static final int HASH_0 = 7907;
+    public static final int HASH_1 = 9973;
+
     public static final DateTimeFormatter LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
     public static final DateTimeFormatter STANDARD_LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -21,6 +24,10 @@ public class GlobalParamsAndUtils {
         s = s.replace("-", "/").replace("T", " ");
         LocalDateTime ldt = LocalDateTime.parse(s, LOCAL_DATE_TIME_FORMATTER);
         return ldt;
+    }
+
+    public static Long hash(Long l) {
+        return (l * HASH_0) % HASH_1;
     }
 
 }

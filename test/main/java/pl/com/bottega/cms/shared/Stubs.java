@@ -1,10 +1,9 @@
 package pl.com.bottega.cms.shared;
 
-import pl.com.bottega.cms.model.*;
+import pl.com.bottega.cms.model.cinema.Cinema;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,8 +11,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
+
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
+import pl.com.bottega.cms.model.movie.Movie;
+import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.model.showing.ShowingsArranger;
+import pl.com.bottega.cms.model.showing.ShowingsFactory;
 
 import static java.time.DayOfWeek.*;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_FORMATTER;

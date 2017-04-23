@@ -3,6 +3,7 @@ package pl.com.bottega.cms.model;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import pl.com.bottega.cms.model.showing.Showing;
 
 import static org.junit.Assert.assertEquals;
 import static pl.com.bottega.cms.shared.Stubs.*;

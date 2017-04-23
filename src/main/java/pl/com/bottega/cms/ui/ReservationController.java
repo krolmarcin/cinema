@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.com.bottega.cms.application.CreateReservationCommand;
-import pl.com.bottega.cms.application.ReservationProcess;
-import pl.com.bottega.cms.model.ReservationNumber;
+import pl.com.bottega.cms.model.commands.CreateReservationCommand;
+import pl.com.bottega.cms.infrastructure.ReservationProcess;
+import pl.com.bottega.cms.model.reservation.ReservationNumber;
 
 /**
  * Created by ogurekk on 2017-04-22.

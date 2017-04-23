@@ -1,24 +1,19 @@
 package pl.com.bottega.cms.model.commands;
 
 
-import pl.com.bottega.cms.model.Reservation;
-import pl.com.bottega.cms.model.ShowingsArranger;
+import pl.com.bottega.cms.model.showing.ShowingsArranger;
+import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.LOCAL_DATE_TIME_FORMATTER;
-import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.STANDARD_LOCAL_DATE_TIME_FORMATTER;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.parseStringToLocalDateTime;
-import static pl.com.bottega.cms.model.commands.ValidationError.ONE_AND_ONLY_ONE;
-import static pl.com.bottega.cms.model.commands.ValidationError.REQUIRED;
 
 /**
  * Created by maciek on 09.04.2017.
  */
-public class CreateShowingsCommand implements Validatable{
+public class CreateShowingsCommand implements Validatable {
 
     private List<LocalDateTime> dates;
 
