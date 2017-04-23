@@ -95,6 +95,7 @@ public class Showing {
         reservation.setCustomer(customer);
         ReservationNumber reservationNumber = new ReservationNumber(reservationNumberGenerator.generate(this));
         reservation.setReservationNumber(reservationNumber);
+        reservation.setReservationStatus(ReservationStatus.PENDING);
         CinemaHall cinemaHall = CinemaHall.STANDARD;
         cinemaHall.updateSeatConfiguration(reservations);
         cinemaHall.ensureReservationCompatible(detailedSeats);

@@ -20,6 +20,7 @@ public class Reservation {
     @AttributeOverride(name = "number", column = @Column(name = "reservation_number"))
     private ReservationNumber reservationNumber;
 
+    @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 
     @OneToMany(cascade = CascadeType.ALL)
