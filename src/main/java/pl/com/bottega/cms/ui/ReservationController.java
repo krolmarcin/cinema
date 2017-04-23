@@ -2,27 +2,31 @@ package pl.com.bottega.cms.ui;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.com.bottega.cms.application.CalculationResult;
+import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
+import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 
 /**
  * Created by ogurekk on 2017-04-22.
  */
 @RestController
-@RequestMapping("/reservations")
 public class ReservationController {
 
     @Autowired
     private ReservationProcess reservationProcess;
 
 
-    @PutMapping
+    @PutMapping("/reservations")
     public ReservationNumber create(@RequestBody CreateReservationCommand cmd) {
         return reservationProcess.create(cmd);
+    }
+
+    @PostMapping("/price_calculator")
+    public CalculationResult calculatePrices(@RequestBody CalculatePriceCommand cmd){
+        return reservationProcess.calculatePrices(cmd);
     }
 }
