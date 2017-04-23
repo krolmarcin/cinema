@@ -12,6 +12,7 @@ import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,6 +38,8 @@ public class JPAMovieCatalogTest {
         assertThat(movies.size()).isEqualTo(2);
         assertThat(movies.get(0).getTitle()).isEqualTo("Pulp Fiction");
         assertThat(movies.get(1).getTitle()).isEqualTo("Pulp Fiction 2");
+        assertThat(movies.get(0).getShowings().get(0).getTime().toString()).isEqualTo("07:15");
+        assertThat(movies.get(0).getShowings().get(1).getTime().toString()).isEqualTo("10:15");
     }
 
 }
