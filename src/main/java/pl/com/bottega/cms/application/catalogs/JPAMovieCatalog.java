@@ -17,7 +17,7 @@ public class JPAMovieCatalog implements MovieCatalog {
     private EntityManager entityManager;
 
     @Override
-    public List<MovieDto> listAvailableMovies(Long cinemaId, LocalDate date) {
+    public List<MovieDto> getShowings(Long cinemaId, LocalDate date) {
 
         String queryMovie = "SELECT DISTINCT m FROM Movie m " +
                 "LEFT JOIN FETCH m.showings s " +

@@ -32,7 +32,7 @@ public class JPAMovieCatalogTest {
         Long cinemaId = 1L;
         LocalDate date = LocalDate.of(2017, 04, 20);
 
-        List<MovieDto> movies = movieCatalog.listAvailableMovies(cinemaId, date);
+        List<MovieDto> movies = movieCatalog.getShowings(cinemaId, date);
 
         assertThat(movies.size()).isEqualTo(2);
         assertThat(movies.get(0).getTitle()).isEqualTo("Pulp Fiction");

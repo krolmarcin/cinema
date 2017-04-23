@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MovieCatalog {
 
-    List<MovieDto> listAvailableMovies(Long cinemaId, LocalDate date);
+    List<MovieDto> getShowings(Long cinemaId, LocalDate date);
 
 }
