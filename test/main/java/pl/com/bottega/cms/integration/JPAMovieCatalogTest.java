@@ -29,7 +29,7 @@ public class JPAMovieCatalogTest {
 
     @Test
     @Sql("/fixtures/cinemaCatalog.sql")
-    public void shouldFindMoviesInCinema() {
+    public void shouldListMoviesInCinemaWithShowings() {
         Long cinemaId = 1L;
         LocalDate date = LocalDate.of(2017, 04, 20);
 
