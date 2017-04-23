@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.infrastructure;
 
-import pl.com.bottega.cms.application.CalculationResult;
+import pl.com.bottega.cms.application.results.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;

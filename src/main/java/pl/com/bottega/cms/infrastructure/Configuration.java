@@ -2,10 +2,7 @@ package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
-import pl.com.bottega.cms.application.catalogs.CinemaCatalog;
-import pl.com.bottega.cms.application.catalogs.JPACinemaCatalog;
-import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
-import pl.com.bottega.cms.application.catalogs.MovieCatalog;
+import pl.com.bottega.cms.application.catalogs.*;
 import pl.com.bottega.cms.application.implementation.StandardReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
@@ -57,6 +54,11 @@ public class Configuration {
     @Bean
     public ReservationProcess reservationProcess() {
         return new StandardReservationProcess();
+    }
+
+    @Bean
+    public ReservationCatalog reservationCatalog() {
+        return new JPAReservationCatalog();
     }
 
 }

@@ -5,13 +5,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
-import pl.com.bottega.cms.application.CalculationResult;
+import pl.com.bottega.cms.application.results.CalculationResult;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
 import pl.com.bottega.cms.model.reservation.*;
 import pl.com.bottega.cms.model.showing.Showing;
-
-import java.util.Set;
 
 /**
  * Created by ogurekk on 2017-04-22.
