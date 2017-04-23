@@ -59,7 +59,7 @@ public class JPAMovieCatalogTest {
 
         List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
 
-        //Movie movie0 = movies.get(0).;
+        //Movie movie0 = movies.get(0);
         assertThat(movies.size()).isEqualTo(2);
         //assertThat(movie0).isEqualTo("Pulp Fiction");
         assertThat(movies.get(1).getTitle()).isEqualTo("Pulp Fiction 2");
