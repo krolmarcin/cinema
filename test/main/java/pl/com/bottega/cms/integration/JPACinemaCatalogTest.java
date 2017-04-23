@@ -33,4 +33,6 @@ public class JPACinemaCatalogTest {
         assertThat(cinemas.get(2).getName()).isEqualTo("Olimp");
     }
 
+
+
 }

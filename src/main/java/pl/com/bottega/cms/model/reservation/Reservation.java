@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model.reservation;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import pl.com.bottega.cms.model.showing.Showing;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -29,6 +29,10 @@ public class Reservation {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id")
     private Set<DetailedSeat> detailedSeats;
+
+    @ManyToOne
+    @JoinColumn(name = "showing_id")
+    private Showing showing;
 
     @Embedded
     private Customer customer;

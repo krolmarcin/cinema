@@ -16,5 +16,5 @@ public interface AdminPanel {
 
     void createShowings(CreateShowingsCommand cmd);
 
-    void defineMoviePrices(Long movieId, DefineMoviePricesCommand prices);
+    void defineMoviePrices(DefineMoviePricesCommand prices);
 }

@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
+import pl.com.bottega.cms.model.movie.Movie;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -27,7 +30,7 @@ public class JPAMovieCatalogTest {
 
     @Test
     @Sql("/fixtures/cinemaCatalog.sql")
-    public void shouldFindMoviesInCinema() {
+    public void shouldListMoviesInCinemaWithShowings() {
         Long cinemaId = 1L;
         LocalDate date = LocalDate.of(2017, 04, 20);
 
@@ -39,5 +42,29 @@ public class JPAMovieCatalogTest {
         assertThat(movies.get(0).getShowings().get(0).getTime().toString()).isEqualTo("07:15");
         assertThat(movies.get(0).getShowings().get(1).getTime().toString()).isEqualTo("10:15");
     }
+
+    @Test(expected = InvalidActionException.class)
+    @Sql("/fixtures/cinemaCatalog.sql")
+    public void shouldReturnErrorMessageIfDateIsMissing(){
+        Long cinemaId = 1L;
+        LocalDate date = null;
+
+        movieCatalog.getShowings(cinemaId, date);
+    }
+
+    @Test
+    @Sql("/fixtures/cinemaCatalog.sql")
+    public void shouldFindMoviesPrices() {
+        Long cinemaId = 1L;
+        LocalDate date = LocalDate.of(2017, 04, 20);
+
+        List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
+
+        assertThat(movies.size()).isEqualTo(2);
+        assertThat(movies.get(0).getPrices().get("regular")).isEqualTo(new BigDecimal(4.25));
+        assertThat(movies.get(0).getPrices().get("student")).isEqualTo(new BigDecimal(3.25));
+        assertThat(movies.get(0).getPrices().get("school")).isEqualTo(new BigDecimal(2.25));
+        assertThat(movies.get(0).getPrices().get("children")).isZero();
+        }
 
 }

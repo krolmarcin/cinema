@@ -41,7 +41,7 @@ public class Pricing {
         this.priceMap = priceMap;
     }
 
-    public void updatePrices(DefineMoviePricesCommand dmpc) {
+    public void definePrices(DefineMoviePricesCommand dmpc) {
         priceMap = dmpc.getPriceMap();
     }
 }

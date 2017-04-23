@@ -13,6 +13,8 @@ public class DefineMoviePricesCommand implements Validatable {
 
     Map<String, BigDecimal> priceMap;
 
+    Long movieId;
+
     public DefineMoviePricesCommand(Map<String, BigDecimal> priceMap) {
         this.priceMap = priceMap;
     }
@@ -21,31 +23,42 @@ public class DefineMoviePricesCommand implements Validatable {
         return priceMap;
     }
 
-//    @JsonProperty
     public void setPriceMap(Map<String, BigDecimal> priceMap) {
         this.priceMap = priceMap;
     }
 
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
 
     @Override
-    public void validate(Validatable.ValidationErrors errors) {
+    public void validate(ValidationErrors errors) {
         if (priceMap == null || priceMap.size() == 0)
             errors.add("ticketPrices", "can't be empty");
         if (!priceMap.containsKey("regular"))
             errors.add("regular", "is required field");
-        else if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("regular").toString()))
+        else if (isInvalidPriceStructure("regular"))
             errors.add("regular", "must be number of structure 999.99 and can't be less than 0");
         if (!priceMap.containsKey("student"))
             errors.add("student", "is required field");
-        else if (!Pattern.matches("^\\d{1,5}\\.\\d{2}$", priceMap.get("student").toString()))
+        else if (isInvalidPriceStructure("student"))
             errors.add("student", "must be number of structure 999.99 and can't be less than 0");
         if (priceMap.containsKey("school")) {
-            if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("school").toString()))
+            if (isInvalidPriceStructure("school"))
                 errors.add("school", "must be number of structure 999.99 and can't be less than 0");
         }
         if (priceMap.containsKey("children")) {
-            if (!Pattern.matches("\\d+\\.\\d{2}", priceMap.get("children").toString()))
+            if (isInvalidPriceStructure("children"))
                 errors.add("children", "must be number of structure 999.99 and can't be less than 0");
         }
+    }
+
+    Boolean isInvalidPriceStructure(String key){
+        return !Pattern.matches("^\\d+\\.\\d{2}$", priceMap.get(key).toString());
     }
 }

@@ -1,18 +1,18 @@
 package pl.com.bottega.cms.shared;
 
+import pl.com.bottega.cms.infrastructure.AdminPanel;
 import pl.com.bottega.cms.model.cinema.Cinema;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
+import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
 import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.model.showing.Showing;
 import pl.com.bottega.cms.model.showing.ShowingsArranger;
@@ -58,6 +58,10 @@ public class Stubs {
     public static final LocalTime TEST_LOCAL_TIME_1 = LocalTime.parse("13:20");
     public static final LocalTime TEST_LOCAL_TIME_2 = LocalTime.parse("18:47");
 
+    public static final BigDecimal TEST_BIGDECIMAL_0 = new BigDecimal(0.00);
+    public static final BigDecimal TEST_BIGDECIMAL_1 = new BigDecimal(2.00);
+    public static final BigDecimal TEST_BIGDECIMAL_2 = new BigDecimal(-2.00);
+
     public static final List<LocalDateTime> TEST_LOCAL_DATE_TIME_LIST_0 = Arrays.asList(new LocalDateTime[] {TEST_LOCAL_DATE_TIME_0, TEST_LOCAL_DATE_TIME_1, TEST_LOCAL_DATE_TIME_2});
 
     public static final List<LocalTime> TEST_LOCAL_TIME_LIST_0 = Arrays.asList(new LocalTime[] {TEST_LOCAL_TIME_0, TEST_LOCAL_TIME_1, TEST_LOCAL_TIME_2});
@@ -73,6 +77,8 @@ public class Stubs {
 
     public static final CreateMovieCommand TEST_CREATE_MOVIE_COMMAND_0 = initCreateMovieCommand0();
 
+    public static final DefineMoviePricesCommand TEST_DEFINE_MOVIE_PRICE_COMMAND_0 = initDefineMoviePriceCommand();
+
     public static final Movie TEST_MOVIE_0 = initTestMovie0();
 
     public static final CreateShowingsCommand TEST_CREATE_SHOWING_COMMAND_0 = initCreateShowingCommand();
@@ -80,7 +86,6 @@ public class Stubs {
     public static final List<Showing> TEST_SHOWING_LIST_0 = initShowings0();
 
     public static final Showing TEST_SHOWING_0 = TEST_SHOWING_LIST_0.get(0);
-
 
     public static CreateCinemaCommand initCreateCinemaCommand0() {
         CreateCinemaCommand createCinemaCommand = new CreateCinemaCommand();
@@ -109,6 +114,7 @@ public class Stubs {
     public static Movie initTestMovie0() {
         Movie movie = new Movie(TEST_CREATE_MOVIE_COMMAND_0);
         movie.setId(TEST_LONG_0);
+        movie.definePrices(TEST_DEFINE_MOVIE_PRICE_COMMAND_0);
         return movie;
     }
 
@@ -148,4 +154,12 @@ public class Stubs {
         return stringSet;
     }
 
+    public static DefineMoviePricesCommand initDefineMoviePriceCommand() {
+        Map<String, BigDecimal> priceMap = new HashMap<>();
+        priceMap.put(TEST_STRING_0, TEST_BIGDECIMAL_0);
+        priceMap.put(TEST_STRING_1, TEST_BIGDECIMAL_1);
+        DefineMoviePricesCommand dmpc = new DefineMoviePricesCommand(priceMap);
+        dmpc.setMovieId(TEST_LONG_0);
+        return dmpc;
+    }
 }
