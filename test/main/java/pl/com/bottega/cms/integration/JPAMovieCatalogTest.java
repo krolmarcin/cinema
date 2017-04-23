@@ -13,6 +13,7 @@ import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
 import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.ui.InvalidActionException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -60,10 +61,10 @@ public class JPAMovieCatalogTest {
         List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
 
         assertThat(movies.size()).isEqualTo(2);
-        assertThat(movies.get(0).getPrices().get("regular")).isEqualTo(4.25);
-        assertThat(movies.get(0).getPrices().get("student")).isEqualTo(3.25);
-        assertThat(movies.get(0).getPrices().get("school")).isEqualTo(2.25);
-        assertThat(movies.get(0).getPrices().get("children")).isEqualTo(0.00);
+        assertThat(movies.get(0).getPrices().get("regular")).isEqualTo(new BigDecimal(4.25));
+        assertThat(movies.get(0).getPrices().get("student")).isEqualTo(new BigDecimal(3.25));
+        assertThat(movies.get(0).getPrices().get("school")).isEqualTo(new BigDecimal(2.25));
+        assertThat(movies.get(0).getPrices().get("children")).isZero();
         }
 
 }
