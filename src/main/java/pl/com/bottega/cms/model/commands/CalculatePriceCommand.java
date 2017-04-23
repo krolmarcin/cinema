@@ -35,7 +35,7 @@ public class CalculatePriceCommand implements Validatable{
     public void validate(ValidationErrors errors) {
         ensureNotEmpty(showId, "showId", errors);
         ensureNotEmpty(tickets, "tickets", errors);
-        ensureAtLeastX(tickets, "tickets", 1, errors);
+        //ensureAtLeastX(tickets, "tickets", 1, errors);
         List<String> ticketTypes = new ArrayList<>();
         for (Ticket ticket : tickets) {
             ticketTypes.add(ticket.getKind());

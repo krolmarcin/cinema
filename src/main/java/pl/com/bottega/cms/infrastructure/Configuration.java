@@ -61,8 +61,7 @@ public class Configuration {
     public ReservationCatalog reservationCatalog() {
         return new JPAReservationCatalog();
     }
-
-}
+    
     @Bean
     public PriceCalculator priceCalculator(){
         return new PriceCalculator();
