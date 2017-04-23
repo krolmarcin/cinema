@@ -19,7 +19,7 @@ public class CinemaHallDto {
         int seats = seatConfiguration[0].length;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < seats; j++) {
-                DetailedSeat detailedSeat = new DetailedSeat(i, j);
+                DetailedSeat detailedSeat = new DetailedSeat(i + 1, j + 1);
                 if (seatConfiguration[i][j]) {
                     occupied.add(detailedSeat);
                 } else {
