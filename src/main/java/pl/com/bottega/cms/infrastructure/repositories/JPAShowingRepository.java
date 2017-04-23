@@ -54,7 +54,6 @@ public class JPAShowingRepository implements ShowingRepository {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
         Root<Reservation> root = criteriaQuery.from(Reservation.class);
-        //root.fetch("showing", JoinType.LEFT);
         criteriaQuery.where(criteriaBuilder.equal(root.get("showing"), showingId));
         TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
         Set<Reservation> reservations = new HashSet<Reservation>(query.getResultList());
