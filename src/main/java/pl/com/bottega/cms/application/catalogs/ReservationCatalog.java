@@ -1,7 +1,7 @@
 package pl.com.bottega.cms.application.catalogs;
 
 import pl.com.bottega.cms.application.queries.ReservationQuery;
-import pl.com.bottega.cms.application.results.ReservationSearchResult;
+import pl.com.bottega.cms.application.results.reservation.ReservationSearchResult;
 
 import java.util.List;
 
