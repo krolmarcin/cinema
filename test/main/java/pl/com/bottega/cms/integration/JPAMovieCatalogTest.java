@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils;
 import pl.com.bottega.cms.application.catalogs.JPAMovieCatalog;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,6 +39,15 @@ public class JPAMovieCatalogTest {
         assertThat(movies.get(1).getTitle()).isEqualTo("Pulp Fiction 2");
         assertThat(movies.get(0).getShowings().get(0).getTime().toString()).isEqualTo("07:15");
         assertThat(movies.get(0).getShowings().get(1).getTime().toString()).isEqualTo("10:15");
+    }
+
+    @Test(expected = InvalidActionException.class)
+    @Sql("/fixtures/cinemaCatalog.sql")
+    public void shouldReturnErrorMessageIfDateIsMissing(){
+        Long cinemaId = 1L;
+        LocalDate date = null;
+
+        movieCatalog.getShowings(cinemaId, date);
     }
 
 }
