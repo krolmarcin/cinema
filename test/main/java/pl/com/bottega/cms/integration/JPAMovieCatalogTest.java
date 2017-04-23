@@ -59,12 +59,11 @@ public class JPAMovieCatalogTest {
 
         List<MovieShowingsDto> movies = movieCatalog.getShowings(cinemaId, date);
 
-        //Movie movie0 = movies.get(0);
         assertThat(movies.size()).isEqualTo(2);
-        //assertThat(movie0).isEqualTo("Pulp Fiction");
-        assertThat(movies.get(1).getTitle()).isEqualTo("Pulp Fiction 2");
-        assertThat(movies.get(0).getShowings().get(0).getTime().toString()).isEqualTo("07:15");
-        assertThat(movies.get(0).getShowings().get(1).getTime().toString()).isEqualTo("10:15");
-    }
+        assertThat(movies.get(0).getPrices().get("regular")).isEqualTo(4.25);
+        assertThat(movies.get(0).getPrices().get("student")).isEqualTo(3.25);
+        assertThat(movies.get(0).getPrices().get("school")).isEqualTo(2.25);
+        assertThat(movies.get(0).getPrices().get("children")).isEqualTo(0.00);
+        }
 
 }
