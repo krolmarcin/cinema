@@ -3,11 +3,10 @@ package pl.com.bottega.cms.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.application.CalculationResult;
+import pl.com.bottega.cms.model.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
-import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 
 /**

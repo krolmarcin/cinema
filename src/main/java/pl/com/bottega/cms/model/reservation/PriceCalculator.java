@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model.reservation;
 
-import pl.com.bottega.cms.application.CalculationResult;
+import pl.com.bottega.cms.model.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 
 /**
@@ -9,6 +9,7 @@ import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 public class PriceCalculator {
 
     public CalculationResult calculatePrices(CalculatePriceCommand cmd){
+
         return null;
     }
 }

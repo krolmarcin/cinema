@@ -9,6 +9,7 @@ import pl.com.bottega.cms.application.catalogs.MovieCatalog;
 import pl.com.bottega.cms.application.implementation.StandardReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
+import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;
 import pl.com.bottega.cms.model.reservation.StandardReservationNumberGenerator;
 
@@ -59,4 +60,9 @@ public class Configuration {
         return new StandardReservationProcess();
     }
 
-}
+    @Bean
+    public PriceCalculator priceCalculator(){
+        return new PriceCalculator();
+    }
+
+    }

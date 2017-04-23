@@ -1,7 +1,6 @@
 package pl.com.bottega.cms.model.commands;
 
 import pl.com.bottega.cms.infrastructure.validation.Validatable;
-import pl.com.bottega.cms.model.reservation.ReservationItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.Set;
 public class CalculatePriceCommand implements Validatable{
 
     private Long showId;
-    private Set<ReservationItem> tickets;
+    private Set<Ticket> tickets;
 
 
     public Long getShowId() {
@@ -24,11 +23,11 @@ public class CalculatePriceCommand implements Validatable{
         this.showId = showId;
     }
 
-    public Set<ReservationItem> getTickets() {
+    public Set<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<ReservationItem> tickets) {
+    public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
     }
 
@@ -38,10 +37,36 @@ public class CalculatePriceCommand implements Validatable{
         ensureNotEmpty(tickets, "tickets", errors);
         ensureAtLeastX(tickets, "tickets", 1, errors);
         List<String> ticketTypes = new ArrayList<>();
-        for (ReservationItem reservationItem : tickets) {
-            ticketTypes.add(reservationItem.getKind());
+        for (Ticket ticket : tickets) {
+            ticketTypes.add(ticket.getKind());
         }
         ensureUniqueElements(ticketTypes, "tickets", errors);
 
+    }
+
+    private class Ticket{
+        private String kind;
+        private Integer count;
+
+        public Ticket(String kind, Integer count) {
+            this.kind = kind;
+            this.count = count;
+        }
+
+        public String getKind() {
+            return kind;
+        }
+
+        public void setKind(String kind) {
+            this.kind = kind;
+        }
+
+        public Integer getCount() {
+            return count;
+        }
+
+        public void setCount(Integer count) {
+            this.count = count;
+        }
     }
 }

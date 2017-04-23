@@ -1,5 +1,7 @@
-package pl.com.bottega.cms.model.reservation;
+package pl.com.bottega.cms.model;
 
+
+import pl.com.bottega.cms.model.reservation.ReservationItem;
 
 import java.math.BigDecimal;
 import java.util.Collection;
