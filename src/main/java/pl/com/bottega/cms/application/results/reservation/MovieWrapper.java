@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.application.results;
+package pl.com.bottega.cms.application.results.reservation;
 
 /**
  * Created by ogurekk on 2017-04-23.

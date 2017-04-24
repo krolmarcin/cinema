@@ -1,11 +1,10 @@
-package pl.com.bottega.cms.application.results;
+package pl.com.bottega.cms.application.results.reservation;
 
 import pl.com.bottega.cms.model.reservation.*;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by ogurekk on 2017-04-23.

@@ -89,6 +89,14 @@ public class Reservation {
         this.customer = customer;
     }
 
+    public Showing getShowing() {
+        return showing;
+    }
+
+    public void setShowing(Showing showing) {
+        this.showing = showing;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -103,10 +111,6 @@ public class Reservation {
         Reservation reservation = (Reservation) o;
         return this.reservationNumber.equals(reservation.reservationNumber);
     }
-
-
-
-
 
 
 }

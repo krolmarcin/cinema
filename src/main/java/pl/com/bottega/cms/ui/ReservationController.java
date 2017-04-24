@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.application.catalogs.ReservationCatalog;
-import pl.com.bottega.cms.application.results.ReservationSearchResult;
+import pl.com.bottega.cms.application.results.reservation.ReservationSearchResult;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
