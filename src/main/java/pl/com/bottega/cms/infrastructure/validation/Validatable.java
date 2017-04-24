@@ -22,7 +22,7 @@ public interface Validatable {
 
     default void ensureNotEmpty(Object o, String name, ValidationErrors errors) {
         if (isEmpty(o)) {
-            errors.add(name, ValidationError.VALID_EMAIL_ADDRESS.getValMsg());
+            errors.add(name, ValidationError.NOT_EMPTY.getValMsg());
         }
     }
 

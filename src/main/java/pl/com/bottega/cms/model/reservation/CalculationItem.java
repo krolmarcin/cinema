@@ -8,39 +8,31 @@ import java.math.BigDecimal;
 public class CalculationItem {
 
     private String kind;
-    private Integer count;
+    private Long count;
     private BigDecimal unitPrice;
     private BigDecimal totalPrice;
+
+    public CalculationItem(ReservationItem reservationItem, BigDecimal unitPrice) {
+        this.kind = reservationItem.getKind();
+        this.count = reservationItem.getNumber();
+        this.unitPrice = unitPrice;
+        this.totalPrice = unitPrice.multiply(BigDecimal.valueOf(count));
+    }
 
     public String getKind() {
         return kind;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public Integer getCount() {
+    public Long getCount() {
         return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }

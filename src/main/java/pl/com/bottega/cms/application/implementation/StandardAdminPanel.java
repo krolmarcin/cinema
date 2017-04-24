@@ -72,6 +72,8 @@ public class StandardAdminPanel implements AdminPanel {
     @Override
     public void defineMoviePrices(DefineMoviePricesCommand prices) {
         Movie movie = movieRepository.get(prices.getMovieId());
+        if (movie == null)
+            throw new CommandInvalidException("movieId", "Movie doesn't exist");
         movie.definePrices(prices);
     }
 }
