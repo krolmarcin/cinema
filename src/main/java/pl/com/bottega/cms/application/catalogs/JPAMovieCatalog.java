@@ -2,6 +2,8 @@ package pl.com.bottega.cms.application.catalogs;
 
 import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
 import pl.com.bottega.cms.application.dtos.ShowingDto;
+import pl.com.bottega.cms.infrastructure.repositories.EntityNotFoundException;
+import pl.com.bottega.cms.model.cinema.Cinema;
 import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.model.showing.Showing;
 import pl.com.bottega.cms.ui.InvalidActionException;
@@ -19,6 +21,7 @@ public class JPAMovieCatalog implements MovieCatalog {
 
     @Override
     public List<MovieShowingsDto> getShowings(Long cinemaId, LocalDate date) {
+        ensureCinemaExists(cinemaId);
         if (date == null)
             throw new InvalidActionException("Date is missing");
 
@@ -41,6 +44,11 @@ public class JPAMovieCatalog implements MovieCatalog {
             movieShowingsDtos.add(getMovieDtos(movie));
         }
         return movieShowingsDtos;
+    }
+
+    private void ensureCinemaExists(Long cinemaId) {
+        if (entityManager.find(Cinema.class, cinemaId) == null)
+            throw new EntityNotFoundException("Cinema", cinemaId);
     }
 
     private MovieShowingsDto getMovieDtos(Movie movie) {
