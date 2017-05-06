@@ -7,18 +7,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
-import pl.com.bottega.cms.model.reservation.PriceCalculator;
+import pl.com.bottega.cms.model.reservation.DetailedSeat;
 import pl.com.bottega.cms.model.reservation.ReservationItem;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -30,7 +32,22 @@ public class ReservationProcessTest {
 
     @Test
     public void shouldListAvailableSeatsForGivenShow() {
+        Long showingId = 1L;
 
+        CinemaHallDto cinemaHallDto = reservationProcess.getSeats(showingId);
+        List<DetailedSeat> detailedSeats = cinemaHallDto.getFree();
+
+        assertThat(cinemaHallDto.getFree()).isNotNull();
+        assertThat(cinemaHallDto.getOccupied()).isNotNull();
+
+        Boolean detailedFreeSeatFound = false;
+        for (DetailedSeat detailedSeat : detailedSeats) {
+            if (detailedSeat.getRow() == 1 && detailedSeat.getSeat() == 1) {
+                detailedFreeSeatFound = true;
+                break;
+            }
+        }
+        assertTrue(detailedFreeSeatFound);
     }
 
     @Test
