@@ -4,6 +4,7 @@ import pl.com.bottega.cms.infrastructure.validation.Validatable;
 import pl.com.bottega.cms.model.movie.Pricing;
 import pl.com.bottega.cms.model.reservation.ReservationItem;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -47,6 +48,8 @@ public class CalculatePriceCommand implements Validatable {
                     ticketTypes.add(ticket.getKind());
                 else
                     errors.add("tickets", String.format("not recognized kind of ticket: %s", ticket.getKind()));
+                if (ticket.getNumber() <= 0)
+                    errors.add("number", "number of ticket can't be less or equal 0");
             }
             ensureUniqueElements(ticketTypes, "tickets", errors);
         }
