@@ -15,6 +15,9 @@ public enum CinemaHall {
 
     STANDARD(initStandardSeatConfiguration());
 
+    private static final int ROWS = 10;
+    private static final int SEATS = 15;
+
     private boolean[][] seatConfiguration;
 
     CinemaHall(boolean[][] seatConfiguration) {
@@ -22,7 +25,7 @@ public enum CinemaHall {
     }
 
     private static boolean[][] initStandardSeatConfiguration() {
-        return new boolean[10][15];
+        return new boolean[ROWS][SEATS];
     }
 
     public boolean[][] getSeatConfiguration() {
