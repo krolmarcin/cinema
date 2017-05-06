@@ -38,7 +38,6 @@ public class ReservationProcessTest {
         List<DetailedSeat> detailedSeats = cinemaHallDto.getFree();
 
         assertThat(cinemaHallDto.getFree()).isNotNull();
-        assertThat(cinemaHallDto.getOccupied()).isNotNull();
 
         Boolean detailedFreeSeatFound = false;
         for (DetailedSeat detailedSeat : detailedSeats) {
@@ -48,6 +47,28 @@ public class ReservationProcessTest {
             }
         }
         assertTrue(detailedFreeSeatFound);
+    }
+
+    @Test
+    public void shouldListUnavailableSeatsForGivenShow() {
+        Long showingId = 2L;
+
+        CinemaHallDto cinemaHallDto = reservationProcess.getSeats(showingId);
+        List<DetailedSeat> detailedSeats = cinemaHallDto.getOccupied();
+
+        assertThat(cinemaHallDto.getOccupied()).isNotNull();
+
+        Boolean detailedOccupiedSeatFound = false;
+//        for (DetailedSeat detailedSeat : detailedSeats) {
+//            if (detailedSeat.getRow() == 9 && detailedSeat.getSeat() == 14) {
+//                detailedOccupiedSeatFound = true;
+//                break;
+//            }
+//        }
+//
+ //       assertTrue(detailedOccupiedSeatFound);
+
+        assertThat(detailedSeats.size()).isEqualTo(3);
     }
 
     @Test
