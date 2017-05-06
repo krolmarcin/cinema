@@ -17,6 +17,13 @@ public class CalculatePriceCommand implements Validatable {
     private Long showId;
     private Set<ReservationItem> tickets;
 
+    public void setShowId(Long showId) {
+        this.showId = showId;
+    }
+
+    public void setTickets(Set<ReservationItem> tickets) {
+        this.tickets = tickets;
+    }
 
     public Long getShowId() {
         return showId;

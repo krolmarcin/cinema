@@ -43,4 +43,5 @@ public class AdminPanelTest {
         }
         assertTrue(cinemaFound);
     }
+
 }
