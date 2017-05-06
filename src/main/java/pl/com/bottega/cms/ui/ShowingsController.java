@@ -15,9 +15,9 @@ public class ShowingsController {
     @Autowired
     private ReservationProcess reservationProcess;
 
-
     @GetMapping("/{showingId}/seats")
     public CinemaHallDto getSeats(@PathVariable Long showingId) {
         return reservationProcess.getSeats(showingId);
     }
+
 }

@@ -31,7 +31,7 @@ public class DetailedSeat {
     }
 
     public void setRow(Integer row) {
-        this.row = row-1;
+        this.row = row - 1;
     }
 
     public Integer getSeat() {
@@ -39,7 +39,7 @@ public class DetailedSeat {
     }
 
     public void setSeat(Integer seat) {
-        this.seat = seat-1;
+        this.seat = seat - 1;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DetailedSeat {
         if (this == null || o == null) {
             return false;
         }
-        if (! (o instanceof DetailedSeat)) {
+        if (!(o instanceof DetailedSeat)) {
             return false;
         }
         DetailedSeat detailedSeat = (DetailedSeat) o;

@@ -3,6 +3,7 @@ package pl.com.bottega.cms.infrastructure.repositories;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,12 +28,10 @@ public class JPAShowingRepository implements ShowingRepository {
             Showing showing = entityManager.find(Showing.class, s.getId());
             if (showing == null) {
                 entityManager.persist(s);
-            }
-            else {
+            } else {
                 entityManager.merge(s);
             }
-        }
-        else {
+        } else {
             entityManager.persist(s);
         }
 
@@ -55,8 +54,16 @@ public class JPAShowingRepository implements ShowingRepository {
         Root<Reservation> root = criteriaQuery.from(Reservation.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get("showing"), showingId));
         TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
-        Set<Reservation> reservations = new HashSet<Reservation>(query.getResultList());
+        Set<Reservation> reservations = queryReservation(query);
         return reservations;
+    }
+
+    private Set<Reservation> queryReservation(TypedQuery<Reservation> query) {
+        List<Reservation> reservations = query.getResultList();
+        if (reservations.size() == 0)
+            throw new InvalidActionException("No reservations for this show");
+        else
+            return new HashSet<Reservation>(reservations);
     }
 
 }
