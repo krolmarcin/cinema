@@ -7,7 +7,7 @@ import pl.com.bottega.cms.model.commands.CommandInvalidException;
  */
 public class ReservationRequestException extends RuntimeException {
     public ReservationRequestException(String msg, int row, int seat) {
-        super(String.format("%s row '%s', seat '%s'",msg, row, seat));
+        super(String.format("%s row '%s', seat '%s'",msg, row+1, seat+1));
     }
     public ReservationRequestException(String msg) {
         super(msg);

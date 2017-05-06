@@ -56,12 +56,16 @@ public class CreateReservationCommand implements Validatable{
     @Override
     public void validate(ValidationErrors errors) {
         ensureNotEmpty(tickets, "tickets", errors);
-        ensureAtLeastX(tickets, "tickets", 1, errors);
-        List<String> ticketTypes = new ArrayList<>();
-        for (ReservationItem reservationItem : tickets) {
-            ticketTypes.add(reservationItem.getKind());
+        if (!isEmpty(tickets)) {
+            ensureAtLeastX(tickets, "tickets", 1, errors);
+            List<String> ticketTypes = new ArrayList<>();
+            for (ReservationItem reservationItem : tickets) {
+                ticketTypes.add(reservationItem.getKind());
+            }
+            ensureUniqueElements(ticketTypes, "tickets", errors);
         }
-        ensureUniqueElements(ticketTypes, "tickets", errors);
+
+
         ensureNotEmpty(seats, "seats", errors);
         ensureNotEmpty(customer, "customer", errors);
         if (!isEmpty(customer)) {
