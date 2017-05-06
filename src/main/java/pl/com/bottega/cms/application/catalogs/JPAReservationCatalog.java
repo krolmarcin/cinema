@@ -40,10 +40,14 @@ public class JPAReservationCatalog implements ReservationCatalog {
         CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
         Root<Reservation> root = criteriaQuery.from(Reservation.class);
         Set<Predicate> predicates = new HashSet<>();
-        String personalQuery = reservationQuery.getQuery();
-        addPredicates(predicates, criteriaBuilder, root, new String[]{"customer", "lastName"}, personalQuery);
+        String personalDataQuery = reservationQuery.getQuery();
+        if (personalDataQuery != null) {
+            predicates.add(criteriaBuilder.like(root.get("customer").get("lastName"), personalDataQuery));
+        }
         ReservationStatus reservationStatus = reservationQuery.getStatus();
-        addPredicates(predicates, criteriaBuilder, root, new String[]{"reservationStatus"}, reservationStatus);
+        if (reservationStatus != null) {
+            predicates.add(criteriaBuilder.equal(root.get("reservationStatus"), reservationStatus));
+        }
         criteriaQuery.where(predicates.toArray(new Predicate[] {}));
         Query query = entityManager.createQuery(criteriaQuery);
         List<Reservation> resultList = query.getResultList();
@@ -51,15 +55,7 @@ public class JPAReservationCatalog implements ReservationCatalog {
         return reservationSearchResultList;
     }
 
-    private void addPredicates(Set<Predicate> predicates, CriteriaBuilder criteriaBuilder, Root root, String[] fields, Object value) {
-        if (value != null) {
-            Path path = root;
-            for (String field : fields) {
-                path = path.get(field);
-            }
-            predicates.add(criteriaBuilder.equal(path, value));
-        }
-    }
+
 
     private ReservationSearchResult reservationToReservationSearchResult(Reservation reservation) {
         ReservationSearchResult reservationSearchResult = new ReservationSearchResult();
@@ -87,9 +83,7 @@ public class JPAReservationCatalog implements ReservationCatalog {
     private List<ReservationSearchResult> reservationListToReservationSearchResultList(List<Reservation> reservationList) {
         List<ReservationSearchResult> reservationSearchResultList = new ArrayList<>();
         for (Reservation reservation : reservationList) {
-            System.out.println(reservation.getShowing().getBeginsAt());
             if (reservation.getShowing().getBeginsAt().plusMinutes(reservation.getShowing().getMovie().getLength()).compareTo(LocalDateTime.now()) >= 0) {
-                System.out.println(reservation.getShowing().getBeginsAt());
                 ReservationSearchResult reservationSearchResult = reservationToReservationSearchResult(reservation);
                 reservationSearchResultList.add(reservationSearchResult);
             }

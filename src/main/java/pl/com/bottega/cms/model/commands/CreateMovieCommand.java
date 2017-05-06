@@ -68,8 +68,8 @@ public class CreateMovieCommand implements Validatable {
         ensureNotEmpty(actors, "actors", errors);
         ensureNotEmpty(genres, "genres", errors);
         ensureNotEmpty(minAge, "minAge", errors);
-        ensureGreaterThanZero(minAge, "minAge", errors);
+        ensureGreaterThanX(minAge, "minAge", 0, errors);
         ensureNotEmpty(length, "length", errors);
-        ensureGreaterThanZero(length, "length", errors);
+        ensureGreaterThanX(length, "length", 0, errors);
     }
 }

@@ -22,7 +22,7 @@ public interface Validatable {
 
     default void ensureNotEmpty(Object o, String name, ValidationErrors errors) {
         if (isEmpty(o)) {
-            errors.add(name, ValidationError.NOT_EMPTY.getValMsg());
+            errors.add(name, ValidationError.REQUIRED.getValMsg());
         }
     }
 
@@ -37,10 +37,25 @@ public interface Validatable {
         }
     }
 
-    default void ensureGreaterThanZero(Object o, String name, ValidationErrors errors) {
-        if (!(o instanceof Integer && (Integer) o > 0)) {
-            errors.add(name, ValidationError.GREATER_THAN_ZERO.getValMsg());
+    default void ensureGreaterThanX(Object o, String name, int bound, ValidationErrors errors) {
+        if (!(o instanceof Integer && (Integer) o > bound)) {
+            errors.add(name, ValidationError.GREATER_THAN_X.getValMsg() + bound);
         }
+    }
+
+    default void ensureGreaterThanX(Object o, String name, Object bound, ValidationErrors errors) {
+        if (o.toString().compareTo(bound.toString()) <= 0) {
+            errors.add(name, ValidationError.GREATER_THAN_X.getValMsg() + bound);
+        }
+    }
+
+    default void ensureEachGreaterThanX(Collection c, String name, Object bound, ValidationErrors errors) {
+        for (Object o : c) {
+            if (o.toString().compareTo(bound.toString()) <= 0) {
+                errors.add(name + ".$value=" + o, ValidationError.GREATER_THAN_X.getValMsg() + bound);
+            }
+        }
+
     }
 
     default void ensureNotEmpty(Collection c, String name, ValidationErrors errors) {

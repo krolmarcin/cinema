@@ -8,7 +8,7 @@ public enum ValidationError {
     REQUIRED("is required"),
     NOT_EMPTY("should have at least one element"),
     NOT_NULL_VALUES("should not have null values"),
-    GREATER_THAN_ZERO("should be greater than zero"),
+    GREATER_THAN_X("should be greater than "),
     ONE_AND_ONLY_ONE("one and only one is required"),
     AT_LEAST_X("required at least "),
     UNIQUE_ELEMENTS("should contain unique elements"),

@@ -59,33 +59,14 @@ public class ShowingsArranger {
     }
 
     public List<LocalDateTime> getDates() {
-        if (dates == null) {
-            calculateDates();
-        }
         return dates;
     }
 
-    private void calculateDates() {
-        dates = new LinkedList<>();
-        LocalDateTime actualDate = fromDate;
-        while (actualDate.compareTo(untilDate) < 0) {
-            DayOfWeek dayOfWeek = actualDate.getDayOfWeek();
-            if (weekDays.contains(dayOfWeek)) {
-                for (LocalTime hour : hours) {
-                    dates.add(LocalDateTime.parse(actualDate.toString().substring(0,10) + " " + hour.toString(), STANDARD_LOCAL_DATE_TIME_FORMATTER));
-                }
-
-            }
-            actualDate = actualDate.plusDays(1);
-        }
-        if (actualDate.compareTo(untilDate) == 0) {
-            for (LocalTime hour : hours) {
-                if (("" + actualDate.getHour() + actualDate.getMinute()).compareTo("" + hour.getHour() + hour.getMinute()) >= 0) {
-                    dates.add(LocalDateTime.parse(actualDate.toString().substring(0,10) + " " + hour.toString(), STANDARD_LOCAL_DATE_TIME_FORMATTER));
-                }
-            }
-        }
+    public void setDates(List<LocalDateTime> dates) {
+        this.dates = dates;
     }
+
+
 
 
 }

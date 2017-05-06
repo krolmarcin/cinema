@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.model.commands;
 
 
+import pl.com.bottega.cms.infrastructure.validation.ValidationError;
 import pl.com.bottega.cms.model.showing.ShowingsArranger;
 import pl.com.bottega.cms.infrastructure.validation.Validatable;
 
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.now;
 import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.parseStringToLocalDateTime;
 
 /**
@@ -75,8 +77,14 @@ public class CreateShowingsCommand implements Validatable {
             ensureNotEmpty(calendar.getHours(), "calendar.hours", errors);
             ensureNotEmpty(calendar.getUntilDate(), "calendar.untilDate", errors);
             ensureNotEmpty(calendar.getWeekDays(), "calendar.weekDays", errors);
+            ensureGreaterThanX(calendar.getFromDate(), "calendar.fromDate", now(), errors);
+        }
+        else {
+            ensureEachGreaterThanX(dates, "dates", now(), errors);
         }
         ensureNotEmpty(cinemaId, "cinemaId", errors);
         ensureNotEmpty(movieId, "movieId", errors);
     }
+
+
 }

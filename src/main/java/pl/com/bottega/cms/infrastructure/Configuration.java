@@ -9,6 +9,7 @@ import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
 import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;
 import pl.com.bottega.cms.model.reservation.StandardReservationNumberGenerator;
+import pl.com.bottega.cms.model.showing.ShowingsFactory;
 
 /**
  * Created by ogurekk on 2017-04-09.
@@ -67,4 +68,12 @@ public class Configuration {
         return new PriceCalculator(showingRepository());
     }
 
+    @Bean
+    public ShowingsFactory showingsFactory() {
+        return new ShowingsFactory();
     }
+
+}
+
+
+

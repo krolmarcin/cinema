@@ -13,6 +13,7 @@ import pl.com.bottega.cms.model.movie.Movie;
 import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.showing.Showing;
 import pl.com.bottega.cms.model.showing.ShowingsArranger;
+import pl.com.bottega.cms.model.showing.ShowingsFactory;
 import pl.com.bottega.cms.ui.InvalidActionException;
 
 import java.util.HashSet;
@@ -35,6 +36,9 @@ public class StandardAdminPanel implements AdminPanel {
     @Autowired
     private ShowingRepository showingRepository;
 
+    @Autowired
+    private ShowingsFactory showingsFactory;
+
     @Override
     public void createCinema(CreateCinemaCommand cmd) {
         Cinema cinema = new Cinema(cmd);
@@ -52,19 +56,10 @@ public class StandardAdminPanel implements AdminPanel {
 
     @Override
     public void createShowings(CreateShowingsCommand cmd) {
-        ShowingsArranger calendar = cmd.getCalendar();
-        List<LocalDateTime> dates = cmd.getDates();
-        if (calendar != null) {
-            dates = calendar.getDates();
-        }
-        Long movieId = cmd.getMovieId();
-        Long cinemaId = cmd.getCinemaId();
-        for (LocalDateTime date : dates) {
-            Showing showing = new Showing();
-            showing.setBeginsAt(date);
-            showing.setMovie(movieRepository.get(movieId));
-            showing.setCinema(cinemaRepository.get(cinemaId));
-            showing.setReservations(new HashSet<Reservation>());
+        Movie movie = movieRepository.get(cmd.getMovieId());
+        Cinema cinema = cinemaRepository.get(cmd.getCinemaId());
+        List<Showing> showings = showingsFactory.createShowings(movie, cinema, cmd);
+        for (Showing showing : showings) {
             showingRepository.put(showing);
         }
     }
