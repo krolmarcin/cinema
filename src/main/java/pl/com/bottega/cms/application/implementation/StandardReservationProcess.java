@@ -2,6 +2,7 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cms.model.commands.CreatePaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
@@ -45,5 +46,10 @@ public class StandardReservationProcess implements ReservationProcess {
         cinemaHall.updateSeatConfiguration(showingRepository.getReservations(showingId));
         CinemaHallDto cinemaHallDto = new CinemaHallDto(cinemaHall.getSeatConfiguration());
         return cinemaHallDto;
+    }
+
+    @Override
+    public void createPayment(CreatePaymentCommand cmd) {
+
     }
 }

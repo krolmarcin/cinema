@@ -2,19 +2,21 @@ package pl.com.bottega.cms.application.catalogs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.com.bottega.cms.application.queries.ReservationQuery;
-import pl.com.bottega.cms.application.results.reservation.MovieWrapper;
+import pl.com.bottega.cms.application.dtos.MovieWrapper;
 import pl.com.bottega.cms.application.results.reservation.ReservationSearchResult;
-import pl.com.bottega.cms.application.results.reservation.ShowingWrapper;
+import pl.com.bottega.cms.application.dtos.ShowingWrapper;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
+import pl.com.bottega.cms.model.reservation.CalculationItem;
 import pl.com.bottega.cms.model.reservation.Reservation;
+import pl.com.bottega.cms.model.reservation.ReservationItem;
 import pl.com.bottega.cms.model.reservation.ReservationStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -73,12 +75,16 @@ public class JPAReservationCatalog implements ReservationCatalog {
         reservationSearchResult.setNumber(reservation.getReservationNumber());
         reservationSearchResult.setSeats(reservation.getDetailedSeats());
         reservationSearchResult.setCustomer(reservation.getCustomer());
-        //CalculatePriceCommand cmd = new CalculatePriceCommand();
-        //cmd.setShowId(reservation.getShowing().getId());
-        //cmd.setTickets()
-        //CalculationResult calculationResult = reservationProcess.calculatePrices(cmd);
-        //BigDecimal totalPrice = calculationResult.getTotalPrice();
-        //reservationSearchResult.setTotalPrice(totalPrice);
+        Set<ReservationItem> reservationItems = reservation.getReservationItems();
+        List<CalculationItem> calculationItems = new ArrayList<>();
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        for (ReservationItem reservationItem : reservationItems) {
+            CalculationItem calculationItem = new CalculationItem(reservationItem, reservation.getShowing().getMovie().getPricing().getPriceMap().get(reservationItem.getKind()));
+            calculationItems.add(calculationItem);
+            totalPrice = totalPrice.add(calculationItem.getTotalPrice());
+        }
+        reservationSearchResult.setTickets(calculationItems);
+        reservationSearchResult.setTotalPrice(totalPrice);
         reservationSearchResult.setStatus(reservation.getReservationStatus());
         return reservationSearchResult;
     }
@@ -86,10 +92,8 @@ public class JPAReservationCatalog implements ReservationCatalog {
     private List<ReservationSearchResult> reservationListToReservationSearchResultList(List<Reservation> reservationList) {
         List<ReservationSearchResult> reservationSearchResultList = new ArrayList<>();
         for (Reservation reservation : reservationList) {
-            if (reservation.getShowing().getBeginsAt().plusMinutes(reservation.getShowing().getMovie().getLength()).compareTo(LocalDateTime.now()) >= 0) {
-                ReservationSearchResult reservationSearchResult = reservationToReservationSearchResult(reservation);
-                reservationSearchResultList.add(reservationSearchResult);
-            }
+            ReservationSearchResult reservationSearchResult = reservationToReservationSearchResult(reservation);
+            reservationSearchResultList.add(reservationSearchResult);
         }
         return reservationSearchResultList;
     }

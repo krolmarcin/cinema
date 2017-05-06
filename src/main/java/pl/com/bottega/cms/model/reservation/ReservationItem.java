@@ -27,7 +27,7 @@ public class ReservationItem {
     }
 
     public String getKind() {
-        return kind;
+            return kind;
     }
 
     public void setKind(String kind) {

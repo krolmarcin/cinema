@@ -3,6 +3,7 @@ package pl.com.bottega.cms.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.com.bottega.cms.model.commands.CreatePaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.application.catalogs.ReservationCatalog;
@@ -40,5 +41,10 @@ public class ReservationController {
     @PostMapping("/price_calculator")
     public CalculationResult calculatePrices(@RequestBody CalculatePriceCommand cmd){
         return reservationProcess.calculatePrices(cmd);
+    }
+
+    @PutMapping("/reservations/{reservationNumber}/payments")
+    public void create(@RequestBody CreatePaymentCommand cmd) {
+        reservationProcess.createPayment(cmd);
     }
 }

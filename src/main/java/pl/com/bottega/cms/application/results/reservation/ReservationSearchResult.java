@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.application.results.reservation;
 
+import pl.com.bottega.cms.application.dtos.MovieWrapper;
+import pl.com.bottega.cms.application.dtos.ShowingWrapper;
 import pl.com.bottega.cms.model.reservation.*;
 
 import java.math.BigDecimal;

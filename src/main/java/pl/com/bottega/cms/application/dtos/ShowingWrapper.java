@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.application.results.reservation;
+package pl.com.bottega.cms.application.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
