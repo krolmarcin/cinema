@@ -31,6 +31,7 @@ public class ReservationProcessTest {
     private ReservationProcess reservationProcess;
 
     @Test
+    @Sql("/fixtures/cinemaCatalog.sql")
     public void shouldListAvailableSeatsForGivenShow() {
         Long showingId = 1L;
 
@@ -38,10 +39,11 @@ public class ReservationProcessTest {
         List<DetailedSeat> detailedSeats = cinemaHallDto.getFree();
 
         assertThat(cinemaHallDto.getFree()).isNotNull();
+//        assertThat(detailedSeats.size()).isEqualTo(147);
 
         Boolean detailedFreeSeatFound = false;
         for (DetailedSeat detailedSeat : detailedSeats) {
-            if (detailedSeat.getRow() == 1 && detailedSeat.getSeat() == 1) {
+            if (detailedSeat.getRow() == 2 && detailedSeat.getSeat() == 2) {
                 detailedFreeSeatFound = true;
                 break;
             }
@@ -50,6 +52,7 @@ public class ReservationProcessTest {
     }
 
     @Test
+    @Sql("/fixtures/cinemaCatalog.sql")
     public void shouldListUnavailableSeatsForGivenShow() {
         Long showingId = 2L;
 
@@ -59,21 +62,19 @@ public class ReservationProcessTest {
         assertThat(cinemaHallDto.getOccupied()).isNotNull();
 
         Boolean detailedOccupiedSeatFound = false;
-//        for (DetailedSeat detailedSeat : detailedSeats) {
-//            if (detailedSeat.getRow() == 9 && detailedSeat.getSeat() == 14) {
-//                detailedOccupiedSeatFound = true;
-//                break;
-//            }
-//        }
-//
- //       assertTrue(detailedOccupiedSeatFound);
-
+        for (DetailedSeat detailedSeat : detailedSeats) {
+            if (detailedSeat.getRow() == 10 && detailedSeat.getSeat() == 15) {
+                detailedOccupiedSeatFound = true;
+                break;
+            }
+        }
+        assertTrue(detailedOccupiedSeatFound);
         assertThat(detailedSeats.size()).isEqualTo(3);
     }
 
     @Test
     @Sql("/fixtures/cinemaCatalog.sql")
-    public void shouldCalculatePrice(){
+    public void shouldCalculatePrice() {
         CalculatePriceCommand cmd = new CalculatePriceCommand();
         cmd.setShowId(1L);
         ReservationItem reservationItem = new ReservationItem();
