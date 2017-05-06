@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.infrastructure.ReservationProcess;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
-import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationItem;
 
 import java.math.BigDecimal;
