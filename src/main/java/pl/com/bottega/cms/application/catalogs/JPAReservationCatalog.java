@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static pl.com.bottega.cms.infrastructure.GlobalParamsAndUtils.now;
+
 /**
  * Created by ogurekk on 2017-04-23.
  */
@@ -48,6 +50,7 @@ public class JPAReservationCatalog implements ReservationCatalog {
         if (reservationStatus != null) {
             predicates.add(criteriaBuilder.equal(root.get("reservationStatus"), reservationStatus));
         }
+        predicates.add(criteriaBuilder.greaterThan(root.get("showing").get("beginsAt"), now()));
         criteriaQuery.where(predicates.toArray(new Predicate[] {}));
         Query query = entityManager.createQuery(criteriaQuery);
         List<Reservation> resultList = query.getResultList();
