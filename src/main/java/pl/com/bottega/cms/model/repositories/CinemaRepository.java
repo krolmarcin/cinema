@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.infrastructure.repositories;
+package pl.com.bottega.cms.model.repositories;
 
 import pl.com.bottega.cms.model.cinema.Cinema;
 

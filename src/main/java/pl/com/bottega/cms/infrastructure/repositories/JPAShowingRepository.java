@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.infrastructure.repositories;
 
+import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.showing.Showing;
 
@@ -8,10 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

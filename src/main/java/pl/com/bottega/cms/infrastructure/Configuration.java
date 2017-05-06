@@ -2,10 +2,12 @@ package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
+import pl.com.bottega.cms.application.TicketPrinter;
 import pl.com.bottega.cms.application.catalogs.*;
 import pl.com.bottega.cms.application.implementation.StandardReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
+import pl.com.bottega.cms.model.repositories.*;
 import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;
 import pl.com.bottega.cms.model.reservation.StandardReservationNumberGenerator;
@@ -71,6 +73,16 @@ public class Configuration {
     @Bean
     public ShowingsFactory showingsFactory() {
         return new ShowingsFactory();
+    }
+
+    @Bean
+    public ReservationRepository reservationRepository(){
+        return new JPAReservationRepository();
+    }
+
+    @Bean
+    public TicketPrinter ticketPrinter(ReservationRepository reservationRepository){
+        return new ITextTicketPrinter(reservationRepository);
     }
 
 }

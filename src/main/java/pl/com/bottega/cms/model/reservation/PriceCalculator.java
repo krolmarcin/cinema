@@ -1,6 +1,6 @@
 package pl.com.bottega.cms.model.reservation;
 
-import pl.com.bottega.cms.infrastructure.repositories.ShowingRepository;
+import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.showing.Showing;
 

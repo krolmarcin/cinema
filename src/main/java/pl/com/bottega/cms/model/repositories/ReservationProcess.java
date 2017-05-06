@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.infrastructure;
+package pl.com.bottega.cms.model.repositories;
 
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.commands.CreatePaymentCommand;
@@ -6,6 +6,8 @@ import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by ogurekk on 2017-04-22.

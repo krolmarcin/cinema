@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.infrastructure.repositories;
 
+import pl.com.bottega.cms.model.repositories.CinemaRepository;
 import pl.com.bottega.cms.model.cinema.Cinema;
 
 import javax.persistence.EntityManager;
