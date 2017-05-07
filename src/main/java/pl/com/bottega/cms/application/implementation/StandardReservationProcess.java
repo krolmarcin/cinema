@@ -2,6 +2,8 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
+import pl.com.bottega.cms.model.repositories.ReservationRepository;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;
@@ -10,6 +12,7 @@ import pl.com.bottega.cms.model.commands.CreateReservationCommand;
 import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.model.reservation.*;
 import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 /**
  * Created by ogurekk on 2017-04-22.
@@ -49,18 +52,6 @@ public class StandardReservationProcess implements ReservationProcess {
         cinemaHall.updateSeatConfiguration(showingRepository.getReservations(showingId));
         CinemaHallDto cinemaHallDto = new CinemaHallDto(cinemaHall.getSeatConfiguration());
         return cinemaHallDto;
-    }
-
-    @Override
-    public void collectPayment(CollectPaymentCommand cmd) {
-        Reservation reservation = reservationRepository.get(cmd.getReservationNumber());
-        if (reservation == null)
-            throw new InvalidActionException("There is no reservation");
-        if (reservation.getReservationStatus().equals(ReservationStatus.PAID) || reservation.getReservationStatus().equals(ReservationStatus.CANCELLED))
-            ;
-        throw new InvalidActionException("Reservation was paid or cancelled");
-
-
     }
 
 
