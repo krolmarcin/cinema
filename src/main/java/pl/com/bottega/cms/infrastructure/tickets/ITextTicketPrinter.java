@@ -10,6 +10,8 @@ import pl.com.bottega.cms.model.repositories.ReservationRepository;
 import pl.com.bottega.cms.model.reservation.DetailedSeat;
 import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
+import pl.com.bottega.cms.model.reservation.ReservationStatus;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import java.io.*;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +34,9 @@ public class ITextTicketPrinter implements TicketPrinter {
     public byte[] printTicket(ReservationNumber reservationNumber) throws FileNotFoundException, DocumentException {
 
         Reservation reservation = reservationRepository.get(reservationNumber);
+        if (reservation.getReservationStatus() != ReservationStatus.PAID){
+            throw new InvalidActionException("You can't print tickets before paid");
+        }
         Document document = new Document(PageSize.A4, 36f, 36f, 50f, 50f);
         PdfWriter.getInstance(document, byteArrayOutputStream);
         document.open();
