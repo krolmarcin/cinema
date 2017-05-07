@@ -1,15 +1,26 @@
 package pl.com.bottega.cms.application;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.transaction.event.TransactionalEventListener;
+import pl.com.bottega.cms.infrastructure.tickets.TicketMailer;
+import pl.com.bottega.cms.model.repositories.ReservationRepository;
+import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 
 /**
  * Created by ogurekk on 2017-05-07.
  */
+
 public class PaymentListener {
 
-    @Async()
+    @Autowired
+    private TicketMailer ticketMailer;
+
+    @TransactionalEventListener
+    @Async
     public void reservationPaidByCC(ReservationNumber reservationNumber) {
+        ticketMailer.sendTickets(reservationNumber);
 
     }
 }
