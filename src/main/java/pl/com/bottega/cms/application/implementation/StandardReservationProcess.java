@@ -26,6 +26,9 @@ public class StandardReservationProcess implements ReservationProcess {
     @Autowired
     private PriceCalculator priceCalculator;
 
+    @Autowired
+    private ReservationRepository reservationRepository;
+
 
     @Override
     public CalculationResult calculatePrices(CalculatePriceCommand cmd) {
@@ -46,6 +49,18 @@ public class StandardReservationProcess implements ReservationProcess {
         cinemaHall.updateSeatConfiguration(showingRepository.getReservations(showingId));
         CinemaHallDto cinemaHallDto = new CinemaHallDto(cinemaHall.getSeatConfiguration());
         return cinemaHallDto;
+    }
+
+    @Override
+    public void collectPayment(CollectPaymentCommand cmd) {
+        Reservation reservation = reservationRepository.get(cmd.getReservationNumber());
+        if (reservation == null)
+            throw new InvalidActionException("There is no reservation");
+        if (reservation.getReservationStatus().equals(ReservationStatus.PAID) || reservation.getReservationStatus().equals(ReservationStatus.CANCELLED))
+            ;
+        throw new InvalidActionException("Reservation was paid or cancelled");
+
+
     }
 
 
