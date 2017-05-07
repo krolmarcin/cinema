@@ -63,8 +63,7 @@ public class StandardReservationProcess implements ReservationProcess {
         if (reservation == null)
             throw new InvalidActionException("There is no reservation");
         if (reservation.getReservationStatus().equals(ReservationStatus.PAID) || reservation.getReservationStatus().equals(ReservationStatus.CANCELLED))
-            ;
-        throw new InvalidActionException("Reservation was paid or cancelled");
+            throw new InvalidActionException("Reservation was paid or cancelled");
 
 
     }
