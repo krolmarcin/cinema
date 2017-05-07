@@ -39,7 +39,7 @@ public class ReservationProcessTest {
         List<DetailedSeat> detailedSeats = cinemaHallDto.getFree();
 
         assertThat(cinemaHallDto.getFree()).isNotNull();
-//        assertThat(detailedSeats.size()).isEqualTo(147);
+        assertThat(detailedSeats.size()).isEqualTo(147);
 
         Boolean detailedFreeSeatFound = false;
         for (DetailedSeat detailedSeat : detailedSeats) {
