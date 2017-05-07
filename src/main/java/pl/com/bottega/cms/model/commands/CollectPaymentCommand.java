@@ -2,6 +2,7 @@ package pl.com.bottega.cms.model.commands;
 
 import pl.com.bottega.cms.infrastructure.validation.Validatable;
 import pl.com.bottega.cms.infrastructure.validation.ValidationError;
+import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.model.transactions.CreditCard;
 import pl.com.bottega.cms.model.transactions.PaymentType;
 
@@ -15,6 +16,7 @@ public class CollectPaymentCommand implements Validatable{
     private PaymentType type;
     private CreditCard creditCard;
     private Integer cashierId;
+    private ReservationNumber reservationNumber;
 
     public PaymentType getType() {
         return type;
@@ -38,6 +40,14 @@ public class CollectPaymentCommand implements Validatable{
 
     public void setCashierId(Integer cashierId) {
         this.cashierId = cashierId;
+    }
+
+    public ReservationNumber getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(ReservationNumber reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 
     @Override
