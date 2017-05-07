@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.model.payment;
+package pl.com.bottega.cms.model.transactions;
 
 /**
  * Created by ogurekk on 2017-05-06.

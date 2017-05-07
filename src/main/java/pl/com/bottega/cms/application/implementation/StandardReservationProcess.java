@@ -3,7 +3,7 @@ package pl.com.bottega.cms.application.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.catalogs.ReservationCatalog;
-import pl.com.bottega.cms.model.commands.CreatePaymentCommand;
+import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;
@@ -53,7 +53,7 @@ public class StandardReservationProcess implements ReservationProcess {
     }
 
     @Override
-    public void createPayment(CreatePaymentCommand cmd) {
+    public void collectPayment(CollectPaymentCommand cmd) {
 
     }
 
