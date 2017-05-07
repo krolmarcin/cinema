@@ -8,7 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
-import pl.com.bottega.cms.model.repositories.ReservationProcess;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.reservation.DetailedSeat;

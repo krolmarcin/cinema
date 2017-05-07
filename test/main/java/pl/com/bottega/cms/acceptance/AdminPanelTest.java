@@ -12,7 +12,7 @@ import pl.com.bottega.cms.application.dtos.CinemaDto;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static pl.com.bottega.cms.shared.Stubs.*;
-import pl.com.bottega.cms.infrastructure.AdminPanel;
+import pl.com.bottega.cms.infrastructure.processes.AdminPanel;
 
 import java.util.List;
 

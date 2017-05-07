@@ -20,14 +20,10 @@ public class Transaction {
 
     private Integer cashierId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private CreditCard creditCard;
+    private String errorMessage;
 
     private LocalDateTime date;
-    private Integer reservationId;
 
-    @Enumerated(EnumType.STRING)
-    private ReservationStatus reservationStatus;
 
     public Integer getId() {
         return id;
@@ -53,14 +49,6 @@ public class Transaction {
         this.cashierId = cashierId;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
-
     public LocalDateTime getDate() {
         return date;
     }
@@ -69,11 +57,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public Integer getReservationId() {
-        return reservationId;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setReservationId(Integer reservationId) {
-        this.reservationId = reservationId;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

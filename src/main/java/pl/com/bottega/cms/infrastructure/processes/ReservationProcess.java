@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.model.repositories;
+package pl.com.bottega.cms.infrastructure.processes;
 
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
@@ -20,6 +20,6 @@ public interface ReservationProcess {
 
     CinemaHallDto getSeats(Long showingId);
 
-    void collectPayment(CollectPaymentCommand cmd);
+
 
 }

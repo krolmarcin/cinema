@@ -5,7 +5,7 @@ import pl.com.bottega.cms.application.queries.ReservationQuery;
 import pl.com.bottega.cms.application.dtos.MovieWrapper;
 import pl.com.bottega.cms.application.results.reservation.ReservationSearchResult;
 import pl.com.bottega.cms.application.dtos.ShowingWrapper;
-import pl.com.bottega.cms.model.repositories.ReservationProcess;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.reservation.CalculationItem;
 import pl.com.bottega.cms.model.reservation.Reservation;
@@ -52,7 +52,7 @@ public class JPAReservationCatalog implements ReservationCatalog {
         if (reservationStatus != null) {
             predicates.add(criteriaBuilder.equal(root.get("reservationStatus"), reservationStatus));
         }
-        predicates.add(criteriaBuilder.greaterThan(root.get("showing").get("beginsAt"), now()));
+        predicates.add(criteriaBuilder.greaterThan(root.get("showing").get("beginsAt"), now().minusHours(1)));
         criteriaQuery.where(predicates.toArray(new Predicate[] {}));
         Query query = entityManager.createQuery(criteriaQuery);
         List<Reservation> resultList = query.getResultList();

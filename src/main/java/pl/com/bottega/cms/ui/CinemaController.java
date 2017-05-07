@@ -6,7 +6,7 @@ import pl.com.bottega.cms.application.catalogs.CinemaCatalog;
 import pl.com.bottega.cms.application.catalogs.MovieCatalog;
 import pl.com.bottega.cms.application.dtos.CinemaDto;
 import pl.com.bottega.cms.application.dtos.MovieShowingsDto;
-import pl.com.bottega.cms.infrastructure.AdminPanel;
+import pl.com.bottega.cms.infrastructure.processes.AdminPanel;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateShowingsCommand;
 

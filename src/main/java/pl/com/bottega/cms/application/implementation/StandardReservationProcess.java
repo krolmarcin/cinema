@@ -2,14 +2,12 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import pl.com.bottega.cms.application.catalogs.ReservationCatalog;
-import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
-import pl.com.bottega.cms.model.repositories.ReservationProcess;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.model.reservation.*;
 import pl.com.bottega.cms.model.showing.Showing;
 
@@ -26,10 +24,8 @@ public class StandardReservationProcess implements ReservationProcess {
     private ReservationNumberGenerator reservationNumberGenerator;
 
     @Autowired
-    private ReservationCatalog reservationCatalog;
-
-    @Autowired
     private PriceCalculator priceCalculator;
+
 
     @Override
     public CalculationResult calculatePrices(CalculatePriceCommand cmd) {
@@ -51,12 +47,6 @@ public class StandardReservationProcess implements ReservationProcess {
         CinemaHallDto cinemaHallDto = new CinemaHallDto(cinemaHall.getSeatConfiguration());
         return cinemaHallDto;
     }
-
-    @Override
-    public void collectPayment(CollectPaymentCommand cmd) {
-
-    }
-
 
 
 }

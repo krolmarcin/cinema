@@ -1,6 +1,5 @@
 package pl.com.bottega.cms.shared;
 
-import pl.com.bottega.cms.infrastructure.AdminPanel;
 import pl.com.bottega.cms.model.cinema.Cinema;
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;

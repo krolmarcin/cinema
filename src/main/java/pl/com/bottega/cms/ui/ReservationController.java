@@ -4,13 +4,14 @@ package pl.com.bottega.cms.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.TicketPrinter;
+import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
 import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.application.catalogs.ReservationCatalog;
 import pl.com.bottega.cms.application.results.reservation.ReservationSearchResult;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
-import pl.com.bottega.cms.model.repositories.ReservationProcess;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.application.queries.ReservationQuery;
 
@@ -33,6 +34,9 @@ public class ReservationController {
     @Autowired
     private TicketPrinter ticketPrinter;
 
+    @Autowired
+    private PaymentCollector paymentCollector;
+
 
     @PutMapping("/reservations")
     public ReservationNumber create(@RequestBody CreateReservationCommand cmd) {
@@ -51,7 +55,7 @@ public class ReservationController {
 
     @PutMapping("/reservations/{reservationNumber}/payments")
     public void create(@RequestBody CollectPaymentCommand cmd) {
-        reservationProcess.collectPayment(cmd);
+        paymentCollector.collectPayment(cmd);
     }
 
     @GetMapping("/reservations/{reservationNumber}/tickets")
