@@ -31,9 +31,17 @@ public class ITextTicketPrinter implements TicketPrinter {
         PdfWriter.getInstance(document, byteArrayOutputStream);
 
         document.open();
-        document.add(new Paragraph("This is test"));
+        createPdf(document, reservation);
         document.close();
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return bytes;
+    }
+
+    private void createPdf(Document document, Reservation reservation) throws DocumentException {
+        String reservationNumber = reservation.getReservationNumber().getNumber();
+        Paragraph paragraph = new Paragraph();
+        paragraph.setAlignment(Element.ALIGN_JUSTIFIED);
+        paragraph.add("Numer rezerwacji: " + reservation.getReservationNumber().getNumber());
+        document.add(paragraph);
     }
 }
