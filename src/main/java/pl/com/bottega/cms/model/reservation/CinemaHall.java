@@ -11,18 +11,15 @@ import java.util.Set;
 /**
  * Created by ogurekk on 2017-04-22.
  */
-public enum CinemaHall {
+public class CinemaHall {
 
-    STANDARD(initStandardSeatConfiguration());
+    private static final int ROWS = 10;
+    private static final int SEATS = 15;
 
     private boolean[][] seatConfiguration;
 
-    CinemaHall(boolean[][] seatConfiguration) {
-        this.seatConfiguration = seatConfiguration;
-    }
-
-    private static boolean[][] initStandardSeatConfiguration() {
-        return new boolean[10][15];
+    public CinemaHall() {
+        this.seatConfiguration = new boolean[ROWS][SEATS];
     }
 
     public boolean[][] getSeatConfiguration() {

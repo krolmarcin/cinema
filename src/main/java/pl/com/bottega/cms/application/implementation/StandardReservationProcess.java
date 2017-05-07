@@ -46,7 +46,7 @@ public class StandardReservationProcess implements ReservationProcess {
 
     @Override
     public CinemaHallDto getSeats(Long showingId) {
-        CinemaHall cinemaHall = CinemaHall.STANDARD;
+        CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.updateSeatConfiguration(showingRepository.getReservations(showingId));
         CinemaHallDto cinemaHallDto = new CinemaHallDto(cinemaHall.getSeatConfiguration());
         return cinemaHallDto;
