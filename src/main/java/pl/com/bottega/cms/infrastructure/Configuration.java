@@ -4,9 +4,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import pl.com.bottega.cms.application.TicketPrinter;
 import pl.com.bottega.cms.application.catalogs.*;
+import pl.com.bottega.cms.application.implementation.StandardPaymentCollector;
 import pl.com.bottega.cms.application.implementation.StandardReservationProcess;
+import pl.com.bottega.cms.infrastructure.processes.AdminPanel;
+import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
+import pl.com.bottega.cms.infrastructure.tickets.ITextTicketPrinter;
 import pl.com.bottega.cms.model.repositories.*;
 import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;
@@ -83,6 +88,16 @@ public class Configuration {
     @Bean
     public TicketPrinter ticketPrinter(ReservationRepository reservationRepository){
         return new ITextTicketPrinter(reservationRepository);
+    }
+
+    @Bean
+    public TransactionRepository transactionRepository() {
+        return new JPATransactionRepository();
+    }
+
+    @Bean
+    public PaymentCollector paymentCollector() {
+        return new StandardPaymentCollector();
     }
 
 }

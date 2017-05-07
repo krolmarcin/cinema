@@ -2,7 +2,7 @@ package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import pl.com.bottega.cms.infrastructure.AdminPanel;
+import pl.com.bottega.cms.infrastructure.processes.AdminPanel;
 import pl.com.bottega.cms.model.repositories.CinemaRepository;
 import pl.com.bottega.cms.model.repositories.MovieRepository;
 import pl.com.bottega.cms.model.repositories.ShowingRepository;

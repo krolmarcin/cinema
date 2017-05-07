@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.infrastructure;
+package pl.com.bottega.cms.infrastructure.tickets;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;

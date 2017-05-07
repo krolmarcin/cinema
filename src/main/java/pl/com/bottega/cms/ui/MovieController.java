@@ -1,11 +1,10 @@
 package pl.com.bottega.cms.ui;
 
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.infrastructure.AdminPanel;
+import pl.com.bottega.cms.infrastructure.processes.AdminPanel;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;
 import pl.com.bottega.cms.model.commands.DefineMoviePricesCommand;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
 

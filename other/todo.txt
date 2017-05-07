@@ -1,3 +1,7 @@
+-tworzenie rezerwacji przekazac do konstruktora rezerwacji (komende)
+-identyfikacja rezerwacji po reservation_number
+
+
 - usunac w swoim czasie .gitkeep
 - mozna by zrobic enuma do gatunkow
 - mozliwe, ze showingsfactory trzeba bedzie zrobic singletonem

@@ -1,8 +1,10 @@
 package pl.com.bottega.cms.model.reservation;
 
 import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.model.transactions.Transaction;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +39,10 @@ public class Reservation {
 
     @Embedded
     private Customer customer;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_id")
+    private Set<Transaction> transactions;
 
     public Reservation() {
     }
@@ -95,6 +101,14 @@ public class Reservation {
 
     public void setShowing(Showing showing) {
         this.showing = showing;
+    }
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     @Override

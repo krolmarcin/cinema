@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.infrastructure;
+package pl.com.bottega.cms.infrastructure.processes;
 
 import pl.com.bottega.cms.model.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.model.commands.CreateMovieCommand;

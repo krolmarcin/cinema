@@ -23,7 +23,7 @@ public class StandardReservationNumberGenerator implements ReservationNumberGene
                 Long.parseLong(beginsAtString.substring(beginsAtString.length()-2, beginsAtString.length()));
         Long number = Long.parseLong(showing.getReservations().size()+"");
 
-        return hash(cinemaId)+ "/" + hash(movieId) + "/" + hash(beginsAtLong) + "/" + hash(number);
+        return hash(cinemaId)+ "-" + hash(movieId) + "-" + hash(beginsAtLong) + "-" + hash(number);
     }
 
 
