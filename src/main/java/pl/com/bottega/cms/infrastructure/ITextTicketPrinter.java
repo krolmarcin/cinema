@@ -22,7 +22,6 @@ public class ITextTicketPrinter implements TicketPrinter {
 
     @Override
     public byte[] printTicket(ReservationNumber reservationNumber) {
-
         Reservation reservation = reservationRepository.get(reservationNumber);
 
         return new byte[0];
