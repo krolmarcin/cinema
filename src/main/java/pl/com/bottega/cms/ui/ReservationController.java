@@ -55,7 +55,10 @@ public class ReservationController {
     }
 
     @PutMapping("/reservations/{reservationNumber}/payments")
-    public void create(@RequestBody CollectPaymentCommand cmd) {
+    public void collectPayment(@PathVariable String reservationNumber, @RequestBody CollectPaymentCommand cmd) {
+        ReservationNumber reservationNumberConv = new ReservationNumber();
+        reservationNumberConv.setNumber(reservationNumber);
+        cmd.setReservationNumber(reservationNumberConv);
         paymentCollector.collectPayment(cmd);
     }
 

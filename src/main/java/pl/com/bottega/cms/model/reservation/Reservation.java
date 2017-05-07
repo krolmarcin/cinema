@@ -44,6 +44,9 @@ public class Reservation {
     @JoinColumn(name = "reservation_id")
     private Set<Transaction> transactions;
 
+    @Transient
+    private PaymentFacade paymentFacade;
+
     public Reservation() {
     }
 
@@ -109,6 +112,10 @@ public class Reservation {
 
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public void setPaymentFacade(PaymentFacade paymentFacade) {
+        this.paymentFacade = paymentFacade;
     }
 
     @Override

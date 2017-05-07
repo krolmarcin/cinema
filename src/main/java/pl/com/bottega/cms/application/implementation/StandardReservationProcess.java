@@ -29,10 +29,6 @@ public class StandardReservationProcess implements ReservationProcess {
     @Autowired
     private PriceCalculator priceCalculator;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-
-
     @Override
     public CalculationResult calculatePrices(CalculatePriceCommand cmd) {
         return priceCalculator.calculatePrices(cmd);
