@@ -1,9 +1,11 @@
 package pl.com.bottega.cms.application.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
 import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
+import pl.com.bottega.cms.model.events.TransactionByCCSuccessfullEvent;
 import pl.com.bottega.cms.model.repositories.ReservationRepository;
 import pl.com.bottega.cms.model.repositories.TransactionRepository;
 import pl.com.bottega.cms.model.reservation.Reservation;
@@ -16,6 +18,9 @@ import pl.com.bottega.cms.ui.InvalidActionException;
  */
 @Transactional
 public class StandardPaymentCollector implements PaymentCollector{
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -35,5 +40,6 @@ public class StandardPaymentCollector implements PaymentCollector{
         transaction.setErrorMessage("put error message here"); //todo: error message z paymentu
         transaction.setPaymentType(cmd.getType());
         transactionRepository.put(transaction);
+        applicationEventPublisher.publishEvent(new TransactionByCCSuccessfullEvent(cmd.getReservationNumber()));
     }
 }

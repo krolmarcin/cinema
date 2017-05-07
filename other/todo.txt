@@ -1,5 +1,6 @@
 -tworzenie rezerwacji przekazac do konstruktora rezerwacji (komende)
 -identyfikacja rezerwacji po reservation_number
+-pozamieniac na componenty zamiast bean
 
 
 - usunac w swoim czasie .gitkeep
