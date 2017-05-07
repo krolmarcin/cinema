@@ -3,6 +3,7 @@ package pl.com.bottega.cms.model.transactions;
 import pl.com.bottega.cms.model.reservation.ReservationStatus;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -23,6 +24,16 @@ public class Transaction {
     private String errorMessage;
 
     private LocalDateTime date;
+
+    public Transaction() {
+    }
+
+    public Transaction(PaymentType type, Integer cashierId, String errorMessage) {
+        this.paymentType = type;
+        this.cashierId = cashierId;
+        this.errorMessage = errorMessage;
+        this.date = LocalDateTime.now();
+    }
 
 
     public Integer getId() {
