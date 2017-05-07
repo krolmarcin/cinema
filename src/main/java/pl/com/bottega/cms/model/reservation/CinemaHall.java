@@ -11,18 +11,15 @@ import java.util.Set;
 /**
  * Created by ogurekk on 2017-04-22.
  */
-public enum CinemaHall {
+public class CinemaHall {
 
-    STANDARD(initStandardSeatConfiguration());
+    private static final int ROWS = 10;
+    private static final int SEATS = 15;
 
     private boolean[][] seatConfiguration;
 
-    CinemaHall(boolean[][] seatConfiguration) {
-        this.seatConfiguration = seatConfiguration;
-    }
-
-    private static boolean[][] initStandardSeatConfiguration() {
-        return new boolean[10][15];
+    public CinemaHall() {
+        this.seatConfiguration = new boolean[ROWS][SEATS];
     }
 
     public boolean[][] getSeatConfiguration() {
@@ -57,7 +54,7 @@ public enum CinemaHall {
     }
 
     public void ensureReservationCompatible(Set<DetailedSeat> detailedSeats) {
-        boolean [][] testSeatConfiguration = new boolean[seatConfiguration.length][];
+        boolean[][] testSeatConfiguration = new boolean[seatConfiguration.length][];
         copySeatConfiguration(testSeatConfiguration);
         boolean canViolateOneSeatRule = validateForExistenceAndAvailability(detailedSeats, testSeatConfiguration);
         if (!canViolateOneSeatRule) {
@@ -71,7 +68,7 @@ public enum CinemaHall {
     }
 
     private void copySeatConfiguration(boolean[][] testSeatConfiguration) {
-        for (int i=0; i<testSeatConfiguration.length; i++) {
+        for (int i = 0; i < testSeatConfiguration.length; i++) {
             boolean[] testSeatSubConfiguration = Arrays.copyOf(seatConfiguration[i], seatConfiguration[i].length);
             testSeatConfiguration[i] = testSeatSubConfiguration;
         }
@@ -121,20 +118,20 @@ public enum CinemaHall {
     }
 
     private boolean testForCompatiblity(int row, int seat, boolean[][] testSeatConfiguration) {
-        boolean leftleft = seat <= 1 ? true : testSeatConfiguration[row][seat-2];
-        boolean left = seat == 0 ? true : testSeatConfiguration[row][seat-1] ;
+        boolean leftleft = seat <= 1 ? true : testSeatConfiguration[row][seat - 2];
+        boolean left = seat == 0 ? true : testSeatConfiguration[row][seat - 1];
         boolean current = testSeatConfiguration[row][seat];
-        boolean right = seat == testSeatConfiguration[row].length-1 ? true : testSeatConfiguration[row][seat+1];
-        boolean rightright = seat >= testSeatConfiguration[row].length-2 ? true : testSeatConfiguration[row][seat+2];
+        boolean right = seat == testSeatConfiguration[row].length - 1 ? true : testSeatConfiguration[row][seat + 1];
+        boolean rightright = seat >= testSeatConfiguration[row].length - 2 ? true : testSeatConfiguration[row][seat + 2];
         return (!((leftleft && !left && current) || (current && !right && rightright)));
     }
 
     private boolean canViolateOneSeatRule(boolean[][] testSeatConfiguration) {
-        for (int i=0; i<testSeatConfiguration.length; i++) {
-            for (int j=0; j<testSeatConfiguration[i].length-2; j++) {
+        for (int i = 0; i < testSeatConfiguration.length; i++) {
+            for (int j = 0; j < testSeatConfiguration[i].length - 2; j++) {
                 boolean leftleft = testSeatConfiguration[i][j];
-                boolean left = testSeatConfiguration[i][j+1];
-                boolean current = testSeatConfiguration[i][j+2];
+                boolean left = testSeatConfiguration[i][j + 1];
+                boolean current = testSeatConfiguration[i][j + 2];
                 if (!(leftleft || left || current)) {
                     return false;
                 }

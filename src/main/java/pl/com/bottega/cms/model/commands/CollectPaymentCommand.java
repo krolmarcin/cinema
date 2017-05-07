@@ -2,15 +2,15 @@ package pl.com.bottega.cms.model.commands;
 
 import pl.com.bottega.cms.infrastructure.validation.Validatable;
 import pl.com.bottega.cms.infrastructure.validation.ValidationError;
-import pl.com.bottega.cms.model.payment.CreditCard;
-import pl.com.bottega.cms.model.payment.PaymentType;
+import pl.com.bottega.cms.model.transactions.CreditCard;
+import pl.com.bottega.cms.model.transactions.PaymentType;
 
 import java.util.Arrays;
 
 /**
  * Created by ogurekk on 2017-05-06.
  */
-public class CreatePaymentCommand implements Validatable{
+public class CollectPaymentCommand implements Validatable{
 
     private PaymentType type;
     private CreditCard creditCard;

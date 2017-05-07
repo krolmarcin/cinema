@@ -1,7 +1,7 @@
 package pl.com.bottega.cms.model.repositories;
 
 import pl.com.bottega.cms.application.dtos.CinemaHallDto;
-import pl.com.bottega.cms.model.commands.CreatePaymentCommand;
+import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.reservation.CalculationResult;
 import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
@@ -20,6 +20,6 @@ public interface ReservationProcess {
 
     CinemaHallDto getSeats(Long showingId);
 
-    void createPayment(CreatePaymentCommand cmd);
+    void collectPayment(CollectPaymentCommand cmd);
 
 }

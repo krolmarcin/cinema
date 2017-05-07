@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.model.payment;
+package pl.com.bottega.cms.model.transactions;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

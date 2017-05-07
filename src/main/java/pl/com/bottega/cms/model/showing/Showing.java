@@ -41,7 +41,7 @@ public class Showing {
     private CinemaHall cinemaHall;
 
     public Showing() {
-        this.cinemaHall = CinemaHall.STANDARD;
+        this.cinemaHall = new CinemaHall();
     }
 
 
@@ -96,7 +96,7 @@ public class Showing {
         ReservationNumber reservationNumber = new ReservationNumber(reservationNumberGenerator.generate(this));
         reservation.setReservationNumber(reservationNumber);
         reservation.setReservationStatus(ReservationStatus.PENDING);
-        CinemaHall cinemaHall = CinemaHall.STANDARD;
+        CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.updateSeatConfiguration(reservations);
         cinemaHall.ensureReservationCompatible(detailedSeats);
         reservations.add(reservation);
