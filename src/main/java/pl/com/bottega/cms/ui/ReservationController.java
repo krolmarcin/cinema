@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.ui;
 
 
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.TicketPrinter;
@@ -55,7 +56,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations/{reservationNumber}/tickets")
-    public void print(@PathVariable String reservationNumber, HttpServletResponse response) throws IOException {
+    public void print(@PathVariable String reservationNumber, HttpServletResponse response) throws IOException, DocumentException {
         ReservationNumber number = new ReservationNumber(reservationNumber);
         byte[] tab = ticketPrinter.printTicket(number);
         response.getOutputStream().write(tab);

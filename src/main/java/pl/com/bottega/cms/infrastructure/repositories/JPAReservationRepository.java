@@ -6,6 +6,10 @@ import pl.com.bottega.cms.model.reservation.ReservationNumber;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  * Created by maciek on 06.05.2017.
@@ -17,9 +21,14 @@ public class JPAReservationRepository implements ReservationRepository {
 
     @Override
     public Reservation get(ReservationNumber number) {
-        Reservation reservation = entityManager.find(Reservation.class, number.getNumber());
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Reservation> criteriaQuery = criteriaBuilder.createQuery(Reservation.class);
+        Root<Reservation> root = criteriaQuery.from(Reservation.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("reservationNumber"), number));
+        TypedQuery<Reservation> query = entityManager.createQuery(criteriaQuery);
+        Reservation reservation = query.getSingleResult();
         if (reservation == null){
-            throw new EntityNotFoundException("Reservation", number.getNumber());
+            throw new EntityNotFoundException("reservationNumber", number);
         }
         return reservation;
     }
