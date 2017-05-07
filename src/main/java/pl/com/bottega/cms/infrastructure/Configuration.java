@@ -11,6 +11,7 @@ import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
 import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
 import pl.com.bottega.cms.infrastructure.repositories.*;
 import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
+import pl.com.bottega.cms.infrastructure.tickets.ITextTicketPrinter;
 import pl.com.bottega.cms.model.repositories.*;
 import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;

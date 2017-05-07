@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.infrastructure;
+package pl.com.bottega.cms.infrastructure.tickets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
