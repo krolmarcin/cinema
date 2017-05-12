@@ -2,16 +2,21 @@ package pl.com.bottega.cms.model.showing;
 
 import javax.persistence.*;
 
+import pl.com.bottega.cms.application.catalogs.JPAReservationCatalog;
+import pl.com.bottega.cms.infrastructure.processes.ReservationProcess;
+import pl.com.bottega.cms.infrastructure.repositories.JPAShowingRepository;
 import pl.com.bottega.cms.model.cinema.Cinema;
+import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CreateReservationCommand;
+import pl.com.bottega.cms.model.repositories.ShowingRepository;
 import pl.com.bottega.cms.model.reservation.*;
 import pl.com.bottega.cms.model.movie.Movie;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by maciek on 09.04.2017.

@@ -6,17 +6,16 @@ import pl.com.bottega.cms.model.reservation.ReservationNumber;
 import pl.com.bottega.cms.model.transactions.CreditCard;
 import pl.com.bottega.cms.model.transactions.PaymentType;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
-/**
- * Created by ogurekk on 2017-05-06.
- */
-public class CollectPaymentCommand implements Validatable{
+public class CollectPaymentCommand implements Validatable {
 
     private PaymentType type;
     private CreditCard creditCard;
     private Integer cashierId;
     private ReservationNumber reservationNumber;
+    private BigDecimal totalPriceForTransaction;
 
     public PaymentType getType() {
         return type;
@@ -50,11 +49,19 @@ public class CollectPaymentCommand implements Validatable{
         this.reservationNumber = reservationNumber;
     }
 
+    public BigDecimal getTotalPriceForTransaction() {
+        return totalPriceForTransaction;
+    }
+
+    public void setTotalPriceForTransaction(BigDecimal totalPriceForTransaction) {
+        this.totalPriceForTransaction = totalPriceForTransaction;
+    }
+
     @Override
     public void validate(ValidationErrors errors) {
         ensureNotEmpty(type, "type", errors);
         if (!errors.getErrors().containsKey("type")) {
-            switch(type) {
+            switch (type) {
                 case CREDIT_CARD:
                     ensureNotEmpty(creditCard, "creditCard", errors);
                     if (!errors.getErrors().containsKey("creditCard")) {
@@ -72,4 +79,5 @@ public class CollectPaymentCommand implements Validatable{
             }
         }
     }
+
 }

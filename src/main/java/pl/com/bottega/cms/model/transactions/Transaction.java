@@ -1,14 +1,13 @@
 package pl.com.bottega.cms.model.transactions;
 
+import pl.com.bottega.cms.model.reservation.ChargeResult;
+import pl.com.bottega.cms.model.reservation.Reservation;
 import pl.com.bottega.cms.model.reservation.ReservationStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Created by ogurekk on 2017-05-07.
- */
 @Entity
 public class Transaction {
 
@@ -21,20 +20,20 @@ public class Transaction {
 
     private Integer cashierId;
 
-    private String errorMessage;
+    @Embedded
+    private ChargeResult chargeResult;
 
     private LocalDateTime date;
 
     public Transaction() {
     }
 
-    public Transaction(PaymentType type, Integer cashierId, String errorMessage) {
-        this.paymentType = type;
+    public Transaction(PaymentType paymentType, Integer cashierId, ChargeResult chargeResult) {
+        this.paymentType = paymentType;
         this.cashierId = cashierId;
-        this.errorMessage = errorMessage;
+        this.chargeResult = chargeResult;
         this.date = LocalDateTime.now();
     }
-
 
     public Integer getId() {
         return id;
@@ -68,11 +67,8 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public ChargeResult getChargeResult() {
+        return chargeResult;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
 }

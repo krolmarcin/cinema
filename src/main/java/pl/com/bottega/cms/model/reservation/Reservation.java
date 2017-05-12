@@ -1,15 +1,20 @@
 package pl.com.bottega.cms.model.reservation;
 
+import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
+import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.showing.Showing;
+import pl.com.bottega.cms.model.transactions.PaymentType;
 import pl.com.bottega.cms.model.transactions.Transaction;
+import pl.com.bottega.cms.ui.InvalidActionException;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by ogurekk on 2017-04-21.
- */
+import static pl.com.bottega.cms.model.transactions.PaymentType.CASH;
+import static pl.com.bottega.cms.model.transactions.PaymentType.CREDIT_CARD;
 
 @Entity
 public class Reservation {
@@ -48,6 +53,35 @@ public class Reservation {
     private PaymentFacade paymentFacade;
 
     public Reservation() {
+    }
+
+    public Transaction collectPayment(CollectPaymentCommand cmd) {
+        checkStatus();
+        if (cmd.getType().equals(PaymentType.CREDIT_CARD)) {
+            return payByCreditCard(cmd);
+        } else {
+            return payByCash(cmd);
+        }
+    }
+
+    private void checkStatus() {
+        if (!(reservationStatus.equals(ReservationStatus.PENDING) || (reservationStatus.equals(ReservationStatus.PAYMENT_FAILED))))
+            throw new InvalidActionException("Reservation must be in PENDING or PAYMENT_FAILED status");
+    }
+
+    private Transaction payByCash(CollectPaymentCommand cmd) {
+        this.reservationStatus = ReservationStatus.PAID;
+        return new Transaction(CASH, cmd.getCashierId(), null);
+    }
+
+    private Transaction payByCreditCard(CollectPaymentCommand cmd) {
+        ChargeResult chargeResult = paymentFacade.charge(cmd.getCreditCard(), cmd.getTotalPriceForTransaction());
+        if (chargeResult.getStatus().equals("SUCCEEDED")) {
+            this.reservationStatus = ReservationStatus.PAID;
+        } else {
+            this.reservationStatus = ReservationStatus.PAYMENT_FAILED;
+        }
+        return new Transaction(CREDIT_CARD, null, chargeResult);
     }
 
     public Long getId() {
@@ -132,6 +166,5 @@ public class Reservation {
         Reservation reservation = (Reservation) o;
         return this.reservationNumber.equals(reservation.reservationNumber);
     }
-
 
 }

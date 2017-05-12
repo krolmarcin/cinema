@@ -2,7 +2,7 @@ package pl.com.bottega.cms.ui;
 
 
 import com.itextpdf.text.DocumentException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.stripe.exception.*;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.TicketPrinter;
 import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
@@ -26,18 +26,20 @@ import java.util.List;
 @RestController
 public class ReservationController {
 
-    @Autowired
     private ReservationProcess reservationProcess;
-
-    @Autowired
     private ReservationCatalog reservationCatalog;
-
-    @Autowired
     private TicketPrinter ticketPrinter;
-
-    @Autowired
     private PaymentCollector paymentCollector;
 
+    public ReservationController(ReservationProcess reservationProcess,
+                                 ReservationCatalog reservationCatalog,
+                                 TicketPrinter ticketPrinter,
+                                 PaymentCollector paymentCollector) {
+        this.reservationProcess = reservationProcess;
+        this.reservationCatalog = reservationCatalog;
+        this.ticketPrinter = ticketPrinter;
+        this.paymentCollector = paymentCollector;
+    }
 
     @PutMapping("/reservations")
     public ReservationNumber create(@RequestBody CreateReservationCommand cmd) {
@@ -50,7 +52,7 @@ public class ReservationController {
     }
 
     @PostMapping("/price_calculator")
-    public CalculationResult calculatePrices(@RequestBody CalculatePriceCommand cmd){
+    public CalculationResult calculatePrices(@RequestBody CalculatePriceCommand cmd) {
         return reservationProcess.calculatePrices(cmd);
     }
 

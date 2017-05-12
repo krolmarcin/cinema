@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.infrastructure;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
@@ -17,6 +18,7 @@ import pl.com.bottega.cms.application.implementation.StandardAdminPanel;
 import pl.com.bottega.cms.infrastructure.tickets.ITextTicketPrinter;
 import pl.com.bottega.cms.infrastructure.tickets.TicketMailer;
 import pl.com.bottega.cms.model.repositories.*;
+import pl.com.bottega.cms.model.reservation.PaymentFacade;
 import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.ReservationNumberGenerator;
 import pl.com.bottega.cms.model.reservation.StandardReservationNumberGenerator;
@@ -98,12 +100,12 @@ public class Configuration extends AsyncConfigurerSupport {
     }
 
     @Bean
-    public ReservationRepository reservationRepository(){
+    public ReservationRepository reservationRepository() {
         return new JPAReservationRepository();
     }
 
     @Bean
-    public TicketPrinter ticketPrinter(ReservationRepository reservationRepository){
+    public TicketPrinter ticketPrinter(ReservationRepository reservationRepository) {
         return new ITextTicketPrinter(reservationRepository);
     }
 
@@ -113,8 +115,17 @@ public class Configuration extends AsyncConfigurerSupport {
     }
 
     @Bean
-    public PaymentCollector paymentCollector() {
-        return new StandardPaymentCollector();
+    public PaymentCollector paymentCollector(ApplicationEventPublisher applicationEventPublisher,
+                                             TransactionRepository transactionRepository,
+                                             ReservationRepository reservationRepository,
+                                             PaymentFacade paymentFacade,
+                                             PriceCalculator priceCalculator) {
+        return new StandardPaymentCollector(applicationEventPublisher, transactionRepository, reservationRepository, paymentFacade, priceCalculator);
+    }
+
+    @Bean
+    public PaymentFacade paymentFacade() {
+        return new StripePaymentFacade();
     }
 
     @Bean

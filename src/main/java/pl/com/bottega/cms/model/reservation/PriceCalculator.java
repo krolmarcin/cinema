@@ -33,4 +33,5 @@ public class PriceCalculator {
         }
         return new CalculationResult(calculationItems);
     }
+
 }

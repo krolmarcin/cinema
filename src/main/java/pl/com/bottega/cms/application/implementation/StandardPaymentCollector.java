@@ -1,51 +1,84 @@
 package pl.com.bottega.cms.application.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.infrastructure.processes.PaymentCollector;
+import pl.com.bottega.cms.model.commands.CalculatePriceCommand;
 import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.events.TransactionByCCSuccessfullEvent;
 import pl.com.bottega.cms.model.repositories.ReservationRepository;
 import pl.com.bottega.cms.model.repositories.TransactionRepository;
-import pl.com.bottega.cms.model.reservation.ChargeResult;
+import pl.com.bottega.cms.model.reservation.PaymentFacade;
+import pl.com.bottega.cms.model.reservation.PriceCalculator;
 import pl.com.bottega.cms.model.reservation.Reservation;
-import pl.com.bottega.cms.model.reservation.ReservationStatus;
 import pl.com.bottega.cms.model.transactions.Transaction;
 import pl.com.bottega.cms.ui.InvalidActionException;
 
-/**
- * Created by ogurekk on 2017-05-07.
- */
-@Transactional
+import java.math.BigDecimal;
+
+import static pl.com.bottega.cms.model.transactions.PaymentType.CREDIT_CARD;
+
+@Transactional(noRollbackFor = RuntimeException.class)
 public class StandardPaymentCollector implements PaymentCollector {
 
-    @Autowired
+
     private ApplicationEventPublisher applicationEventPublisher;
-
-    @Autowired
     private TransactionRepository transactionRepository;
-
-    @Autowired
     private ReservationRepository reservationRepository;
+    private PaymentFacade paymentFacade;
+    private PriceCalculator priceCalculator;
+
+    public StandardPaymentCollector(ApplicationEventPublisher applicationEventPublisher,
+                                    TransactionRepository transactionRepository,
+                                    ReservationRepository reservationRepository,
+                                    PaymentFacade paymentFacade,
+                                    PriceCalculator priceCalculator) {
+        this.applicationEventPublisher = applicationEventPublisher;
+        this.transactionRepository = transactionRepository;
+        this.reservationRepository = reservationRepository;
+        this.paymentFacade = paymentFacade;
+        this.priceCalculator = priceCalculator;
+    }
 
     @Override
-    public ChargeResult collectPayment(CollectPaymentCommand cmd) {
-        Reservation reservation = reservationRepository.get(cmd.getReservationNumber());
-        if (reservation == null)
-            throw new InvalidActionException("There is no reservation");
-        if (reservation.getReservationStatus().equals(ReservationStatus.PAID) || reservation.getReservationStatus().equals(ReservationStatus.CANCELLED))
-            throw new InvalidActionException("Reservation was paid or cancelled");
-
-        Transaction transaction = new Transaction();
-        transaction.setCashierId(cmd.getCashierId());
-        transaction.setErrorMessage("put error message here"); //todo: error message z paymentu
-        transaction.setPaymentType(cmd.getType());
-
-
+    public void collectPayment(CollectPaymentCommand cmd) {
+        Reservation reservation = getExistingReservation(cmd);
+        reservation.setPaymentFacade(paymentFacade);
+        cmd.setTotalPriceForTransaction(getTotalPrice(reservation));
+        Transaction transaction = reservation.collectPayment(cmd);
         transactionRepository.put(transaction);
-        applicationEventPublisher.publishEvent(new TransactionByCCSuccessfullEvent(cmd.getReservationNumber()));
-        return new ChargeResult(reservation.getReservationStatus());
+        isSuccessful(transaction);
+
+        if (cmd.getType().equals(CREDIT_CARD)) {
+            applicationEventPublisher.publishEvent(new TransactionByCCSuccessfullEvent(cmd.getReservationNumber()));
+        }
+    }
+
+    private BigDecimal getTotalPrice(Reservation reservation) {
+        CalculatePriceCommand calculateCmd = new CalculatePriceCommand();
+        calculateCmd.setShowId(reservation.getShowing().getId());
+        calculateCmd.setTickets(reservation.getReservationItems());
+//        return priceCalculator.calculatePrices(calculateCmd).getTotalPrice();
+        return new BigDecimal(2);
+    }
+
+    private void isSuccessful(Transaction transaction) {
+        if (transaction.getChargeResult() != null) {
+            String errorMessage = transaction.getChargeResult().getErrorMessage();
+            if (errorMessage != null)
+                throw new InvalidActionException(errorMessage);
+        }
+    }
+
+    private Reservation getExistingReservation(CollectPaymentCommand cmd) {
+        Reservation reservation = reservationRepository.get(cmd.getReservationNumber());
+        isReservationExist(reservation);
+        return reservation;
+    }
+
+    private void isReservationExist(Reservation reservation) {
+        if (reservation == null)
+            throw new InvalidActionException("Reservation does not exists");
     }
 
 }

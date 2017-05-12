@@ -6,4 +6,5 @@ package pl.com.bottega.cms.model.reservation;
 public enum ReservationStatus {
 
     PENDING, PAYMENT_FAILED, PAID, CANCELLED;
+
 }

@@ -50,5 +50,4 @@ public class StandardReservationProcess implements ReservationProcess {
         return cinemaHallDto;
     }
 
-
 }

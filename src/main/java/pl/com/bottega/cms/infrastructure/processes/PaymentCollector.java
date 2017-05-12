@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.infrastructure.processes;
 
+import com.stripe.exception.*;
 import pl.com.bottega.cms.model.commands.CollectPaymentCommand;
 import pl.com.bottega.cms.model.reservation.ChargeResult;
 
@@ -8,6 +9,6 @@ import pl.com.bottega.cms.model.reservation.ChargeResult;
  */
 public interface PaymentCollector {
 
-    ChargeResult collectPayment(CollectPaymentCommand cmd);
+    void collectPayment(CollectPaymentCommand cmd);
 
 }
