@@ -55,11 +55,10 @@ public class StandardPaymentCollector implements PaymentCollector {
     }
 
     private BigDecimal getTotalPrice(Reservation reservation) {
-        CalculatePriceCommand calculateCmd = new CalculatePriceCommand();
-        calculateCmd.setShowId(reservation.getShowing().getId());
-        calculateCmd.setTickets(reservation.getReservationItems());
-//        return priceCalculator.calculatePrices(calculateCmd).getTotalPrice();
-        return new BigDecimal(2);
+        CalculatePriceCommand cmd = new CalculatePriceCommand();
+        cmd.setShowId(reservation.getShowing().getId());
+        cmd.setTickets(reservation.getReservationItems());
+        return priceCalculator.calculatePrices(cmd).getTotalPrice();
     }
 
     private void isSuccessful(Transaction transaction) {

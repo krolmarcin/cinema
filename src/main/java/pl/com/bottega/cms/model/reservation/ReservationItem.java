@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.model.reservation;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,13 +11,23 @@ import java.util.List;
  */
 @Entity
 public class ReservationItem {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String kind;
 
-    private Long number;
+    @Column(name = "number")
+    private Long count;
+
+    public ReservationItem() {
+    }
+
+    public ReservationItem(String kind, Long count) {
+        this.kind = kind;
+        this.count = count;
+    }
 
     public Long getId() {
         return id;
@@ -27,7 +38,7 @@ public class ReservationItem {
     }
 
     public String getKind() {
-            return kind;
+        return kind;
     }
 
     public void setKind(String kind) {
@@ -35,11 +46,15 @@ public class ReservationItem {
     }
 
     public Long getNumber() {
-        return number;
+        return count;
     }
 
     public void setNumber(Long number) {
-        this.number = number;
+        this.count = number;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 
     @Override
@@ -56,4 +71,5 @@ public class ReservationItem {
         ReservationItem reservationItem = (ReservationItem) o;
         return (this.kind.equals(reservationItem.kind));
     }
+
 }

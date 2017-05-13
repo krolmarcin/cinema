@@ -1,8 +1,8 @@
 package pl.com.bottega.cms.model.reservation;
 
 
-
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,9 +18,9 @@ public class CalculationResult {
         this.totalPrice = calculateTotalPrice(tickets);
     }
 
-    private BigDecimal calculateTotalPrice(Set<CalculationItem> tickets){
+    private BigDecimal calculateTotalPrice(Set<CalculationItem> tickets) {
         BigDecimal total = BigDecimal.ZERO;
-        for (CalculationItem ticket : tickets){
+        for (CalculationItem ticket : tickets) {
             total = total.add(ticket.getTotalPrice());
         }
         return total;
@@ -31,6 +31,9 @@ public class CalculationResult {
     }
 
     public Set<CalculationItem> getTickets() {
+        if (tickets == null) {
+            this.tickets = new HashSet<>();
+        }
         return tickets;
     }
 
